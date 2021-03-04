@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CAIO-ThePythons.iml" filepath="$PROJECT_DIR$/.idea/CAIO-ThePythons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CAIO.iml" filepath="$PROJECT_DIR$/.idea/CAIO.iml" />
     </modules>
   </component>
 </project>
