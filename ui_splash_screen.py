@@ -31,37 +31,34 @@ class Ui_SplashScreen(object):
         self.dropShadowFrame.setStyleSheet(u"QFrame {\n"
 "	\n"
 "	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(67, 67, 67, 255));\n"
+"	color: rgb(220, 220, 220);\n"
 "	border-radius: 7px\n"
 "}")
         self.dropShadowFrame.setFrameShape(QFrame.StyledPanel)
         self.dropShadowFrame.setFrameShadow(QFrame.Raised)
         self.label_title = QLabel(self.dropShadowFrame)
         self.label_title.setObjectName(u"label_title")
-        self.label_title.setGeometry(QRect(0, 80, 661, 101))
+        self.label_title.setGeometry(QRect(0, 70, 661, 150))
+        self.label_title.setMinimumSize(QSize(661, 150))
+        self.label_title.setMaximumSize(QSize(661, 150))
         font = QFont()
         font.setFamily(u"Gabriola")
-        font.setPointSize(40)
-        font.setBold(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
-        font.setStyleStrategy(QFont.PreferDefault)
+        font.setPointSize(60)
         self.label_title.setFont(font)
-        self.label_title.setTabletTracking(False)
         self.label_title.setStyleSheet(u"color: rgb(255, 255, 255);\n"
-"background-color: none;\n"
-"")
+"background-color: none;")
         self.label_title.setAlignment(Qt.AlignCenter)
-        self.label_title.setWordWrap(False)
         self.label_credits = QLabel(self.dropShadowFrame)
         self.label_credits.setObjectName(u"label_credits")
-        self.label_credits.setGeometry(QRect(20, 340, 621, 31))
+        self.label_credits.setGeometry(QRect(30, 330, 621, 50))
+        self.label_credits.setMinimumSize(QSize(621, 50))
+        self.label_credits.setMaximumSize(QSize(621, 50))
         font1 = QFont()
         font1.setFamily(u"Segoe UI")
-        font1.setPointSize(10)
+        font1.setPointSize(12)
         self.label_credits.setFont(font1)
         self.label_credits.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color:none;")
+"background-color: none;")
         self.label_credits.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.verticalLayout.addWidget(self.dropShadowFrame)
@@ -75,7 +72,7 @@ class Ui_SplashScreen(object):
 
     def retranslateUi(self, SplashScreen):
         SplashScreen.setWindowTitle(QCoreApplication.translate("SplashScreen", u"MainWindow", None))
-        self.label_title.setText(QCoreApplication.translate("SplashScreen", u"<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">CA</span><span style=\" text-decoration: underline;\">IO</span></p></body></html>", None))
+        self.label_title.setText(QCoreApplication.translate("SplashScreen", u"<strong>CA</strong>IO", None))
         self.label_credits.setText(QCoreApplication.translate("SplashScreen", u"<strong>Developed By: </strong> THE PYTHONS", None))
     # retranslateUi
 
