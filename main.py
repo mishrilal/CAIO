@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         # MAIN WINDOW LABEL
-        QtCore.QTimer.singleShot(1500, lambda: self.ui.label.setText("<strong>BSDK</strong> LOGO Banalo"))
+        # QtCore.QTimer.singleShot(1500, lambda: self.ui.label.setText("<strong>BSDK</strong> LOGO Banalo"))
 
 
 # SPLASH SCREEN
