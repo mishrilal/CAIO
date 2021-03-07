@@ -62,7 +62,7 @@ class SplashScreen(QMainWindow):
 
         # SET VALUE TO PROGRESS BAR
         # CLOSE SPLASH SCREE AND OPEN APP
-        if counter > 50:
+        if counter > 10:
             # STOP TIMER
             self.timer.stop()
 

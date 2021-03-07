@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(45, 45, 45);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_left_menu">
     <property name="geometry">
@@ -80,7 +83,76 @@ QPushButton:hover {
        </property>
       </widget>
      </item>
-     <item alignment="Qt::AlignTop">
+     <item>
+      <widget class="QPushButton" name="view_btn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(85, 170, 255);
+}</string>
+       </property>
+       <property name="text">
+        <string>View</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="add_btn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(85, 170, 255);
+}</string>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="remove_btn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(85, 170, 255);
+}</string>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QFrame" name="frame_top_menus">
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
@@ -104,75 +176,6 @@ QPushButton:hover {
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item>
-         <widget class="QPushButton" name="view_btn">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-	color: rgb(255, 255, 255);
-	background-color: rgb(35, 35, 35);
-	border: 0px solid;
-}
-QPushButton:hover {
-	background-color: rgb(85, 170, 255);
-}</string>
-          </property>
-          <property name="text">
-           <string>View</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="add_btn">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-	color: rgb(255, 255, 255);
-	background-color: rgb(35, 35, 35);
-	border: 0px solid;
-}
-QPushButton:hover {
-	background-color: rgb(85, 170, 255);
-}</string>
-          </property>
-          <property name="text">
-           <string>Add</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="remove_btn">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-	color: rgb(255, 255, 255);
-	background-color: rgb(35, 35, 35);
-	border: 0px solid;
-}
-QPushButton:hover {
-	background-color: rgb(85, 170, 255);
-}</string>
-          </property>
-          <property name="text">
-           <string>Remove</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
      </item>
@@ -204,10 +207,10 @@ QPushButton:hover {
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>79</x>
-      <y>9</y>
-      <width>711</width>
-      <height>581</height>
+      <x>69</x>
+      <y>-1</y>
+      <width>731</width>
+      <height>601</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -217,18 +220,102 @@ QPushButton:hover {
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>86</x>
-        <y>82</y>
-        <width>91</width>
-        <height>31</height>
+        <x>20</x>
+        <y>30</y>
+        <width>151</width>
+        <height>71</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>DashBoard</string>
+       <string>Dashboard</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_2"/>
+    <widget class="QWidget" name="view_page">
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>151</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>View Faces</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="add_page">
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>151</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Add Faces</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="remove_page">
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Remove Faces</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page">
+     <widget class="QLabel" name="setting_page">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>151</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Setting</string>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
  </widget>
