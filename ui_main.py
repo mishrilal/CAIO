@@ -181,19 +181,19 @@ class Ui_MainWindow(object):
         self.gridLayout_4.addWidget(self.label_4, 0, 0, 1, 1)
 
         self.stackedWidget.addWidget(self.remove_page)
-        self.page = QWidget()
-        self.page.setObjectName(u"page")
-        self.gridLayout_5 = QGridLayout(self.page)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.setting_page = QLabel(self.page)
+        self.setting_page = QWidget()
         self.setting_page.setObjectName(u"setting_page")
-        sizePolicy.setHeightForWidth(self.setting_page.sizePolicy().hasHeightForWidth())
-        self.setting_page.setSizePolicy(sizePolicy)
-        self.setting_page.setFont(font)
+        self.gridLayout_5 = QGridLayout(self.setting_page)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.label_5 = QLabel(self.setting_page)
+        self.label_5.setObjectName(u"label_5")
+        sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
+        self.label_5.setSizePolicy(sizePolicy)
+        self.label_5.setFont(font)
 
-        self.gridLayout_5.addWidget(self.setting_page, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.label_5, 0, 0, 1, 1)
 
-        self.stackedWidget.addWidget(self.page)
+        self.stackedWidget.addWidget(self.setting_page)
 
         self.horizontalLayout.addWidget(self.stackedWidget)
 
@@ -218,6 +218,6 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"View Faces", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Add Faces", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Remove Faces", None))
-        self.setting_page.setText(QCoreApplication.translate("MainWindow", u"Setting", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Setting", None))
     # retranslateUi
 
