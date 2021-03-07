@@ -36,11 +36,12 @@ class Ui_SplashScreen(object):
 "}")
         self.dropShadowFrame.setFrameShape(QFrame.StyledPanel)
         self.dropShadowFrame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.dropShadowFrame)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.label_title = QLabel(self.dropShadowFrame)
         self.label_title.setObjectName(u"label_title")
-        self.label_title.setGeometry(QRect(0, 70, 661, 150))
         self.label_title.setMinimumSize(QSize(661, 150))
-        self.label_title.setMaximumSize(QSize(661, 150))
+        self.label_title.setMaximumSize(QSize(1000, 1000))
         font = QFont()
         font.setFamily(u"Gabriola")
         font.setPointSize(60)
@@ -48,18 +49,29 @@ class Ui_SplashScreen(object):
         self.label_title.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "background-color: none;")
         self.label_title.setAlignment(Qt.AlignCenter)
+
+        self.verticalLayout_2.addWidget(self.label_title)
+
         self.label_credits = QLabel(self.dropShadowFrame)
         self.label_credits.setObjectName(u"label_credits")
-        self.label_credits.setGeometry(QRect(30, 330, 621, 50))
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_credits.sizePolicy().hasHeightForWidth())
+        self.label_credits.setSizePolicy(sizePolicy)
         self.label_credits.setMinimumSize(QSize(621, 50))
-        self.label_credits.setMaximumSize(QSize(621, 50))
+        self.label_credits.setMaximumSize(QSize(1000, 1000))
         font1 = QFont()
         font1.setFamily(u"Segoe UI")
         font1.setPointSize(12)
         self.label_credits.setFont(font1)
         self.label_credits.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "background-color: none;")
-        self.label_credits.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_credits.setAlignment(Qt.AlignBottom|Qt.AlignRight|Qt.AlignTrailing)
+        self.label_credits.setMargin(0)
+
+        self.verticalLayout_2.addWidget(self.label_credits)
+
 
         self.verticalLayout.addWidget(self.dropShadowFrame)
 
