@@ -21,9 +21,11 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"background-color: rgb(45, 45, 45);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.horizontalLayout = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, -1, 0)
         self.frame_left_menu = QFrame(self.centralwidget)
         self.frame_left_menu.setObjectName(u"frame_left_menu")
-        self.frame_left_menu.setGeometry(QRect(0, 0, 70, 601))
         self.frame_left_menu.setMinimumSize(QSize(70, 0))
         self.frame_left_menu.setMaximumSize(QSize(70, 16777215))
         self.frame_left_menu.setStyleSheet(u"background-color: rgb(35, 35, 35);")
@@ -113,17 +115,31 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.setting_btn)
 
+
+        self.horizontalLayout.addWidget(self.frame_left_menu)
+
         self.stackedWidget = QStackedWidget(self.centralwidget)
         self.stackedWidget.setObjectName(u"stackedWidget")
-        self.stackedWidget.setGeometry(QRect(69, -1, 731, 601))
         self.dashboard_page = QWidget()
         self.dashboard_page.setObjectName(u"dashboard_page")
+        self.gridLayout = QGridLayout(self.dashboard_page)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.label = QLabel(self.dashboard_page)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(20, 30, 151, 71))
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+        self.label.setMinimumSize(QSize(100, 30))
         font = QFont()
         font.setPointSize(20)
         self.label.setFont(font)
+        self.label.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.label.setWordWrap(False)
+
+        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
         self.stackedWidget.addWidget(self.dashboard_page)
         self.view_page = QWidget()
         self.view_page.setObjectName(u"view_page")
@@ -153,6 +169,9 @@ class Ui_MainWindow(object):
         self.setting_page.setGeometry(QRect(20, 30, 151, 71))
         self.setting_page.setFont(font)
         self.stackedWidget.addWidget(self.page)
+
+        self.horizontalLayout.addWidget(self.stackedWidget)
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
