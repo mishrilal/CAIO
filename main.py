@@ -21,8 +21,27 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # MAIN WINDOW LABEL
-        # QtCore.QTimer.singleShot(1500, lambda: self.ui.label.setText("<strong>BSDK</strong> LOGO Banalo"))
+
+        ## Switching Between Pages
+        ###########################################################################################################
+
+        # Dashboard Page
+        self.ui.dashboard_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.dashboard_page))
+
+        # View Page
+        self.ui.view_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.view_page))
+
+        # Add Page
+        self.ui.add_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.add_page))
+
+        # Remove Page
+        self.ui.remove_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.remove_page))
+
+        # Setting Page
+        self.ui.setting_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.setting_page))
+
+        # Show main Window
+        self.show()
 
 
 # SPLASH SCREEN
