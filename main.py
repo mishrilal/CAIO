@@ -10,17 +10,26 @@ from ui_main import Ui_MainWindow
 # SPLASH SCREEN
 from ui_splash_screen import Ui_SplashScreen
 
+# LOCK SCREEN
+from ui_lock_screen import Ui_LockScreen
+
 # GLOBALS
 counter = 0
 
 
 # YOUR APPLICATION
 class MainWindow(QMainWindow):
+
+    # Opens Lock Screen Window
+    def lockScreen(self):
+        self.lockui.setupUi(self)
+        self.showFullScreen()
+
     def __init__(self):
         QMainWindow.__init__(self)
+        self.lockui = Ui_LockScreen()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
 
         ## Switching Between Pages
         ###########################################################################################################
@@ -39,6 +48,9 @@ class MainWindow(QMainWindow):
 
         # Setting Page
         self.ui.setting_btn.clicked.connect(lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.setting_page))
+
+        # Lock Screen Button
+        self.ui.lockscreen_btn.clicked.connect(self.lockScreen)
 
         # Show main Window
         self.show()

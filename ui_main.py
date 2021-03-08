@@ -140,6 +140,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
 
+        self.lockscreen_btn = QPushButton(self.dashboard_page)
+        self.lockscreen_btn.setObjectName(u"lockscreen_btn")
+
+        self.gridLayout.addWidget(self.lockscreen_btn, 1, 0, 1, 1)
+
         self.stackedWidget.addWidget(self.dashboard_page)
         self.view_page = QWidget()
         self.view_page.setObjectName(u"view_page")
@@ -215,6 +220,7 @@ class Ui_MainWindow(object):
         self.remove_btn.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.setting_btn.setText(QCoreApplication.translate("MainWindow", u"Setting", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Dashboard", None))
+        self.lockscreen_btn.setText(QCoreApplication.translate("MainWindow", u"LOCK SCREEN", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"View Faces", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Add Faces", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Remove Faces", None))
