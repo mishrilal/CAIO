@@ -5,13 +5,13 @@ from PySide2.QtGui import (QColor)
 from PySide2.QtWidgets import *
 
 # MAIN WINDOW
-from ui_main import Ui_MainWindow
+from ui.ui_main import Ui_MainWindow
 
 # SPLASH SCREEN
-from ui_splash_screen import Ui_SplashScreen
+from ui.ui_splash_screen import Ui_SplashScreen
 
 # LOCK SCREEN
-from ui_lock_screen import Ui_LockScreen
+from ui.ui_lock_screen import Ui_LockScreen
 
 # GLOBALS
 counter = 0
