@@ -32,7 +32,7 @@ def turnOnCamera(self):
             if self.logic == 2:
                 imgName = string.ascii_letters
                 imgName = ''.join(random.choice(imgName) for i in range(10))
-                imgName = 'C:/Users/mishrilalchhaparia/Pictures/CAIO/IC_%s.png'%(imgName)
+                imgName = 'IC_%s.png'%(imgName)
                 print(imgName)
                 cv2.imwrite(imgName, frame)
 
