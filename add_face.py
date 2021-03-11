@@ -2,7 +2,7 @@ import cv2
 import string
 import random
 
-from PySide2.QtGui import QImage, QPixmap
+from PyQt5.QtGui import QImage, QPixmap
 
 from main import *
 

@@ -1,10 +1,10 @@
 import sys
 
-from PySide2 import QtCore
-from PySide2.QtGui import (QColor)
-from PySide2.QtWidgets import *
-
 # MAIN WINDOW
+from PyQt5 import QtCore
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication, QGraphicsDropShadowEffect, QMainWindow
+
 from ui.ui_main import Ui_MainWindow
 
 # SPLASH SCREEN
