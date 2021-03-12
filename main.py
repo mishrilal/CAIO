@@ -1,8 +1,10 @@
+import os
 import sys
 
 # MAIN WINDOW
 from PyQt5 import QtCore
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QGuiApplication
+from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtWidgets import QApplication, QGraphicsDropShadowEffect, QMainWindow
 
 from ui.ui_main import Ui_MainWindow
@@ -109,6 +111,11 @@ class SplashScreen(QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = SplashScreen()
+    app = QGuiApplication(sys.argv)
+    engine = QQmlApplicationEngine()
+    engine.load(os.path.join(os.path.dirname(__file__), "qml/main.qml"))
+
+    if not engine.rootObjects():
+        sys.exit(-1)
     sys.exit(app.exec_())
+
