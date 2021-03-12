@@ -1,0 +1,3 @@
+{
+    "files": ["qml/controls/ToggleButton.qml","main.py","main.qml","qml/controls/TopBarButton.qml"]
+}
