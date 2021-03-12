@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtGraphicalEffects 1.15
 import "controls"
 
 Window {
@@ -10,6 +11,9 @@ Window {
     visible: true
     color: "#00000000"
     title: qsTr("CAIO")
+
+    // Remove Title Bar
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     Rectangle {
         id: bg
@@ -46,7 +50,7 @@ Window {
                 anchors.topMargin: 0
 
                 ToggleButton{
-
+                    onClicked: animationMenu.running = true
                 }
 
                 Rectangle {
@@ -105,18 +109,33 @@ Window {
                     anchors.leftMargin: 70
                     anchors.topMargin: 0
 
+                    DragHandler{
+                        onActiveChanged: if(active){
+                                             mainWindow.startSystemMove()
+                                         }
+                    }
+
                     Image {
                         id: iconApp
-                        width: 28
+                        width: 22
+                        height: 22
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
-                        source: "qrc:/qtquickplugin/images/template_image.png"
+                        source: "../images/svg_images/logo_Icon.svg"
+                        autoTransform: true
                         anchors.leftMargin: 5
                         anchors.bottomMargin: 0
                         anchors.topMargin: 0
                         fillMode: Image.PreserveAspectFit
                     }
+
+                    ColorOverlay{
+                        anchors.fill: iconApp
+                        source: iconApp
+                        color: "#ffffff"
+                    }
+
 
                     Label {
                         id: label
@@ -185,6 +204,15 @@ Window {
                     anchors.leftMargin: 0
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
+
+                    PropertyAnimation {
+                        id: animationMenu
+                        target: leftMenu
+                        property: "width"
+                        to: if(leftMenu.width == 70) return 180; else return 70
+                        duration: 600
+                        easing.type: Easing.OutBack
+                    }
 
                     Column {
                         id: columnMenus
@@ -290,10 +318,21 @@ Window {
             }
         }
     }
+
+    DropShadow {
+        anchors.fill: bg
+        horizontalOffset: 0
+        verticalOffset: 0
+        radius: 10
+        samples: 16
+        color: "#80000000"
+        source: bg
+        z: 0
+    }
 }
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.25}D{i:19}D{i:20}D{i:21}D{i:22}
+    D{i:0;formeditorZoom:0.25}
 }
 ##^##*/
