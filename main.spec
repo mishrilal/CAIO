@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\mishrilalchhaparia\\Music\\CAIO'],
+             pathex=['/Users/mishrilal/Projects/CAIOwithQT'],
              binaries=[],
              datas=[],
              hiddenimports=[],

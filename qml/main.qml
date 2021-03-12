@@ -181,6 +181,7 @@ Window {
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
+                    clip: true
                     anchors.leftMargin: 0
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
@@ -196,25 +197,53 @@ Window {
                         anchors.bottomMargin: 90
                         anchors.topMargin: 0
 
-                        Button {
-                            id: button
-                            text: qsTr("Button")
+                        LeftMenuBtn {
+                            id: btnDashboard
+                            width: leftMenu.width
+                            text: qsTr("Dashboard")
+                            isActiveMenu: true
                         }
+
+                        LeftMenuBtn {
+                            id: btnView
+                            width: leftMenu.width
+                            text: qsTr("View Faces")
+                            iconWidth: 20
+                            iconHeight: 20
+                            btnIconSource: "../images/svg_images/view_icon.svg"
+                            isActiveMenu: false
+                        }
+
+                        LeftMenuBtn {
+                            id: btnAdd
+                            width: leftMenu.width
+                            text: qsTr("Add Faces")
+                            iconWidth: 18
+                            iconHeight: 18
+                            btnIconSource: "../images/svg_images/add_icon.svg"
+                            isActiveMenu: false
+                        }
+
+                        LeftMenuBtn {
+                            id: btnRemove
+                            width: leftMenu.width
+                            text: qsTr("Remove Faces")
+                            btnIconSource: "../images/svg_images/remove_icon.svg"
+                            isActiveMenu: false
+                        }
+                    }
+
+                    LeftMenuBtn {
+                        id: btnSettings
+                        width: leftMenu.width
+                        text: qsTr("Settings")
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: 25
+                        btnIconSource: "../images/svg_images/settings_icon.svg"
+                        isActiveMenu: false
                     }
                 }
 
-                Rectangle {
-                    id: contentPages
-                    color: "#00000000"
-                    anchors.left: leftMenu.right
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.topMargin: 0
-                    anchors.bottomMargin: 25
-                    anchors.leftMargin: 0
-                    anchors.rightMargin: 0
-                }
 
                 Rectangle {
                     id: rectangle
@@ -246,6 +275,18 @@ Window {
                 }
 
 
+                Rectangle {
+                    id: contentPages
+                    color: "#2c313c"
+                    anchors.left: leftMenu.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.topMargin: 0
+                    anchors.bottomMargin: 25
+                    anchors.leftMargin: 0
+                    anchors.rightMargin: 0
+                }
             }
         }
     }
@@ -253,6 +294,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.25}D{i:13}D{i:14}
+    D{i:0;formeditorZoom:0.25}D{i:19}D{i:20}D{i:21}D{i:22}
 }
 ##^##*/
