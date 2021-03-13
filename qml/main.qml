@@ -250,6 +250,30 @@ Window {
                         onClicked: mainWindow.close()
                     }
                 }
+
+                Row {
+                    id: row
+                    x: 801
+                    width: 172
+                    anchors.right: parent.right
+                    anchors.top: rowBtns.bottom
+                    anchors.bottom: parent.bottom
+                    layoutDirection: Qt.RightToLeft
+                    anchors.rightMargin: 5
+                    anchors.bottomMargin: 0
+                    anchors.topMargin: 0
+
+                    DescriptionButton {
+                        id: btnHelp
+                        text: "Help"
+                    }
+
+                    DescriptionButton{
+                        id: btnAbout
+                        text: "About"
+                    }
+
+                }
             }
 
             Rectangle {
@@ -275,6 +299,23 @@ Window {
                     anchors.leftMargin: 0
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
+
+                    Label {
+                        id: version
+                        y: 457
+                        height: 25
+                        color: "#ffffff"
+                        text: qsTr("v0.0.65")
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        wrapMode: Text.WordWrap
+                        anchors.rightMargin: 0
+                        anchors.leftMargin: 0
+                        anchors.bottomMargin: 0
+                    }
 
                     PropertyAnimation {
                         id: animationMenu
@@ -388,8 +429,8 @@ Window {
                         id: btnSettings
                         width: leftMenu.width
                         text: qsTr("Settings")
-                        anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 25
+                        anchors.bottom: version.top
+                        anchors.bottomMargin: 0
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
                         onClicked: {
@@ -406,6 +447,7 @@ Window {
                             pageSettings.visible = true
                         }
                     }
+
                 }
 
 
@@ -451,12 +493,12 @@ Window {
                     anchors.leftMargin: 0
                     anchors.rightMargin: 0
 
-//                    StackView {
-//                        id: stackView
-//                        anchors.fill: parent
-//                        clip: true
-//                        initialItem: Qt.resolvedUrl("pages/dashboardPage.qml")
-//                    }
+                    //                    StackView {
+                    //                        id: stackView
+                    //                        anchors.fill: parent
+                    //                        clip: true
+                    //                        initialItem: Qt.resolvedUrl("pages/dashboardPage.qml")
+                    //                    }
                     Loader{
                         id: pageDashboard
                         anchors.fill: parent
@@ -613,6 +655,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:6}D{i:9}
+    D{i:0;formeditorZoom:0.66}D{i:6;invisible:true}D{i:18}D{i:23}
 }
 ##^##*/

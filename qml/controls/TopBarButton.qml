@@ -24,6 +24,7 @@ Button{
 
     width: 35
     height: 35
+    focusPolicy: Qt.NoFocus
 
     background: Rectangle{
         id: bgBtn
