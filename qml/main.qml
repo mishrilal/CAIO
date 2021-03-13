@@ -302,10 +302,15 @@ Window {
                             isActiveMenu: true
                             onClicked: {
                                 btnDashboard.isActiveMenu = true
+                                btnView.isActiveMenu = false
+                                btnAdd.isActiveMenu = false
+                                btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
-                                //stackView.push(Qt.resolvedUrl("pages/dashboardPage.qml"))
-                                //pageView.setSource(Qt.resolvedUrl("pages/dashboardPage.qml"))
+
                                 pageDashboard.visible = true
+                                pageView.visible = false
+                                pageAdd.visible = false
+                                pageRemove.visible = false
                                 pageSettings.visible = false
                             }
                         }
@@ -318,6 +323,19 @@ Window {
                             iconHeight: 20
                             btnIconSource: "../images/svg_images/view_icon.svg"
                             isActiveMenu: false
+                            onClicked: {
+                                btnDashboard.isActiveMenu = false
+                                btnView.isActiveMenu = true
+                                btnAdd.isActiveMenu = false
+                                btnRemove.isActiveMenu = false
+                                btnSettings.isActiveMenu = false
+
+                                pageDashboard.visible = false
+                                pageView.visible = true
+                                pageAdd.visible = false
+                                pageRemove.visible = false
+                                pageSettings.visible = false
+                            }
                         }
 
                         LeftMenuBtn {
@@ -328,6 +346,19 @@ Window {
                             iconHeight: 18
                             btnIconSource: "../images/svg_images/add_icon.svg"
                             isActiveMenu: false
+                            onClicked: {
+                                btnDashboard.isActiveMenu = false
+                                btnView.isActiveMenu = false
+                                btnAdd.isActiveMenu = true
+                                btnRemove.isActiveMenu = false
+                                btnSettings.isActiveMenu = false
+
+                                pageDashboard.visible = false
+                                pageView.visible = false
+                                pageAdd.visible = true
+                                pageRemove.visible = false
+                                pageSettings.visible = false
+                            }
                         }
 
                         LeftMenuBtn {
@@ -336,6 +367,19 @@ Window {
                             text: qsTr("Remove Faces")
                             btnIconSource: "../images/svg_images/remove_icon.svg"
                             isActiveMenu: false
+                            onClicked: {
+                                btnDashboard.isActiveMenu = false
+                                btnView.isActiveMenu = false
+                                btnAdd.isActiveMenu = false
+                                btnRemove.isActiveMenu = true
+                                btnSettings.isActiveMenu = false
+
+                                pageDashboard.visible = false
+                                pageView.visible = false
+                                pageAdd.visible = false
+                                pageRemove.visible = true
+                                pageSettings.visible = false
+                            }
                         }
                     }
 
@@ -349,11 +393,16 @@ Window {
                         isActiveMenu: false
                         onClicked: {
                             btnDashboard.isActiveMenu = false
+                            btnView.isActiveMenu = false
+                            btnAdd.isActiveMenu = false
+                            btnRemove.isActiveMenu = false
                             btnSettings.isActiveMenu = true
-                            //stackView.push(Qt.resolvedUrl("pages/settingsPage.qml"))
-                            //pageView.setSource(Qt.resolvedUrl("pages/settingsPage.qml"))
-                            pageSettings.visible = true
+
                             pageDashboard.visible = false
+                            pageView.visible = false
+                            pageAdd.visible = false
+                            pageRemove.visible = false
+                            pageSettings.visible = true
                         }
                     }
                 }
@@ -411,6 +460,24 @@ Window {
                         id: pageDashboard
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/dashboardPage.qml")
+                        visible: true
+                    }
+                    Loader{
+                        id: pageView
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/viewPage.qml")
+                        visible: false
+                    }
+                    Loader{
+                        id: pageAdd
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/addPage.qml")
+                        visible: false
+                    }
+                    Loader{
+                        id: pageRemove
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/removePage.qml")
                         visible: false
                     }
                     Loader{
