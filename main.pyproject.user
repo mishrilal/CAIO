@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.1, 2021-03-12T17:46:48. -->
+<!-- Written by QtCreator 4.14.1, 2021-03-13T03:01:29. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -167,16 +167,16 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/mishrilal/Projects/CAIO copy/main.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/mishrilal/Projects/CAIO copy/main.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{0c5f3409-21f4-47c7-8fbb-8518bfd09910}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/mishrilal/Projects/CAIO copy/main.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">main</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./Users/mishrilal/Projects/CAIOwithQT/main.py</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/mishrilal/Projects/CAIOwithQT/main.py</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{fdf2e263-f7f8-40db-9ae3-5a0f04e08094}</value>
+    <value type="QString" key="PythonEditor.RunConfiguation.Script">/Users/mishrilal/Projects/CAIOwithQT/main.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/mishrilal/Projects/CAIO copy</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/mishrilal/Projects/CAIOwithQT</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

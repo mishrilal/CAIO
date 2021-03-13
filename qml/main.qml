@@ -300,6 +300,14 @@ Window {
                             width: leftMenu.width
                             text: qsTr("Dashboard")
                             isActiveMenu: true
+                            onClicked: {
+                                btnDashboard.isActiveMenu = true
+                                btnSettings.isActiveMenu = false
+                                //stackView.push(Qt.resolvedUrl("pages/dashboardPage.qml"))
+                                //pageView.setSource(Qt.resolvedUrl("pages/dashboardPage.qml"))
+                                pageDashboard.visible = true
+                                pageSettings.visible = false
+                            }
                         }
 
                         LeftMenuBtn {
@@ -339,6 +347,14 @@ Window {
                         anchors.bottomMargin: 25
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
+                        onClicked: {
+                            btnDashboard.isActiveMenu = false
+                            btnSettings.isActiveMenu = true
+                            //stackView.push(Qt.resolvedUrl("pages/settingsPage.qml"))
+                            //pageView.setSource(Qt.resolvedUrl("pages/settingsPage.qml"))
+                            pageSettings.visible = true
+                            pageDashboard.visible = false
+                        }
                     }
                 }
 
@@ -384,6 +400,26 @@ Window {
                     anchors.bottomMargin: 25
                     anchors.leftMargin: 0
                     anchors.rightMargin: 0
+
+//                    StackView {
+//                        id: stackView
+//                        anchors.fill: parent
+//                        clip: true
+//                        initialItem: Qt.resolvedUrl("pages/dashboardPage.qml")
+//                    }
+                    Loader{
+                        id: pageDashboard
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/dashboardPage.qml")
+                        visible: false
+                    }
+                    Loader{
+                        id: pageSettings
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/settingsPage.qml")
+                        visible: false
+                    }
+
                 }
 
                 MouseArea {
@@ -509,6 +545,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:31}D{i:38}D{i:40}
+    D{i:0;formeditorZoom:0.66}
 }
 ##^##*/
