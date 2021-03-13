@@ -212,7 +212,7 @@ Window {
                         anchors.bottom: parent.bottom
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
-                        font.pointSize: 20
+                        font.pointSize: 21
                         font.bold: false
                         font.family: "Verdana"
                         anchors.leftMargin: 10
@@ -389,7 +389,7 @@ Window {
                         width: leftMenu.width
                         text: qsTr("Settings")
                         anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 0
+                        anchors.bottomMargin: 25
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
                         onClicked: {
