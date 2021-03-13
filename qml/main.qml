@@ -121,7 +121,7 @@ Window {
                     id: topBarDescription
                     y: 33
                     height: 25
-                    color: "#282c34"
+                    color: "#1c1d20"
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
@@ -132,7 +132,6 @@ Window {
                     Label {
                         id: labelTopInfo
                         color: "#5f6a82"
-                        text: qsTr("Application Description")
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
@@ -148,7 +147,7 @@ Window {
                         id: labelRightInfo
                         width: 300
                         color: "#5f6a82"
-                        text: qsTr("| HOME")
+                        text: qsTr("")
                         anchors.left: labelTopInfo.right
                         anchors.right: parent.right
                         anchors.top: parent.top
@@ -164,11 +163,12 @@ Window {
 
                 Rectangle {
                     id: titleBar
-                    height: 35
                     color: "#00000000"
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: parent.top
+                    anchors.bottom: topBarDescription.bottom
+                    anchors.bottomMargin: 0
                     anchors.rightMargin: 105
                     anchors.leftMargin: 70
                     anchors.topMargin: 0
@@ -212,9 +212,10 @@ Window {
                         anchors.bottom: parent.bottom
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignVCenter
+                        font.pointSize: 20
                         font.bold: false
                         font.family: "Verdana"
-                        anchors.leftMargin: 5
+                        anchors.leftMargin: 10
                     }
                 }
 
@@ -388,7 +389,7 @@ Window {
                         width: leftMenu.width
                         text: qsTr("Settings")
                         anchors.bottom: parent.bottom
-                        anchors.bottomMargin: 25
+                        anchors.bottomMargin: 0
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
                         onClicked: {
@@ -424,7 +425,7 @@ Window {
                     Label {
                         id: labelTopInfo1
                         color: "#5f6a82"
-                        text: qsTr("Application Description")
+                        text: qsTr("Developed By - THE PYTHONS")
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
@@ -612,6 +613,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}
+    D{i:0;formeditorZoom:0.66}D{i:6}D{i:9}
 }
 ##^##*/
