@@ -258,6 +258,7 @@ Window {
                     anchors.right: parent.right
                     anchors.top: rowBtns.bottom
                     anchors.bottom: parent.bottom
+                    spacing: 5
                     layoutDirection: Qt.RightToLeft
                     anchors.rightMargin: 5
                     anchors.bottomMargin: 0
@@ -655,6 +656,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}D{i:6;invisible:true}D{i:18}D{i:23}
+    D{i:0;formeditorZoom:0.66}D{i:6;invisible:true}
 }
 ##^##*/

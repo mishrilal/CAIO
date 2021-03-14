@@ -5,7 +5,7 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtGui import QColor, QGuiApplication
 from PyQt5.QtQml import QQmlApplicationEngine
-from PyQt5.QtWidgets import QApplication, QGraphicsDropShadowEffect, QMainWindow
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow
 
 from ui.ui_main import Ui_MainWindow
 

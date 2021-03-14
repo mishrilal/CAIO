@@ -10,7 +10,7 @@ Item {
         anchors.fill: parent
 
         Label {
-            id: label
+            id: textAddFace
             color: "#ffffff"
             text: qsTr("Add a Face")
             anchors.left: parent.left
@@ -20,28 +20,47 @@ Item {
             verticalAlignment: Text.AlignVCenter
             anchors.rightMargin: 0
             anchors.leftMargin: 0
-            anchors.topMargin: 3
+            anchors.topMargin: 10
             font.pointSize: 16
         }
 
         Rectangle {
-            id: rectangle1
-            height: 200
+            id: cameraArea
             color: "#00000000"
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: label.bottom
+            anchors.top: textAddFace.bottom
+            anchors.bottom: captureBtnArea.top
+            anchors.bottomMargin: 100
             anchors.rightMargin: 0
             anchors.leftMargin: 0
             anchors.topMargin: 49
 
             CameraFeed {
                 x: 329
-                width: 250
+                width: cameraArea.height
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
+
+            }
+        }
+
+        Rectangle {
+            id: captureBtnArea
+            y: 333
+            height: 60
+            color: "#00000000"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: 0
+            anchors.leftMargin: 0
+            anchors.bottomMargin: 40
+
+            CaptureBtn {
                 anchors.horizontalCenter: parent.horizontalCenter
 
             }
@@ -54,6 +73,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:473;width:908}D{i:2}D{i:4}D{i:3}
+    D{i:0;autoSize:true;height:473;width:908}D{i:3}
 }
 ##^##*/
