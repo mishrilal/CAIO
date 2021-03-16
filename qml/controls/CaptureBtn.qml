@@ -77,6 +77,10 @@ Button{
             anchors.leftMargin: 75
         }
     }
+
+    onClicked: {
+        addFaceBackend.captureClicked()
+    }
 }
 
 

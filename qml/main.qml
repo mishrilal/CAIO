@@ -402,6 +402,8 @@ Window {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
 
+                                addFaceBackend.addFace()
+
                             }
                         }
 
@@ -423,6 +425,7 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = true
                                 pageSettings.visible = false
+
                             }
                         }
                     }
@@ -448,6 +451,10 @@ Window {
                             pageRemove.visible = false
                             pageSettings.visible = true
                         }
+                    }
+
+                    Connections {
+                        target: addFaceBackend;
                     }
 
                 }
