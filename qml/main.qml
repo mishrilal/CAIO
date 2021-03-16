@@ -455,6 +455,7 @@ Window {
 
                     Connections {
                         target: addFaceBackend;
+
                     }
 
                 }
