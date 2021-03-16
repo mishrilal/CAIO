@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
-    id: camerArea
+    id: cameraArea
     color: "#00000000"
     radius: 10
     border.width: 3

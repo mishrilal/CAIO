@@ -44,7 +44,6 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
-
             }
         }
 
@@ -62,9 +61,12 @@ Item {
 
             CaptureBtn {
                 anchors.horizontalCenter: parent.horizontalCenter
-
             }
         }
+
+//        Connections{
+//            target: backend
+//        }
 
 
     }
@@ -73,6 +75,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:473;width:908}D{i:3}
+    D{i:0;autoSize:true;height:473;width:908}
 }
 ##^##*/

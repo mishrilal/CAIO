@@ -401,6 +401,7 @@ Window {
                                 pageAdd.visible = true
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+
                             }
                         }
 
@@ -534,6 +535,7 @@ Window {
                 }
 
                 MouseArea {
+
                     id: resizeWindow
                     x: 884
                     y: 0
@@ -567,7 +569,10 @@ Window {
                                          }
                     }
 
+
                 }
+
+                
             }
         }
     }
