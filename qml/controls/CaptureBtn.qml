@@ -80,6 +80,7 @@ Button{
 
     onClicked: {
         addFaceBackend.captureClicked()
+
     }
 }
 

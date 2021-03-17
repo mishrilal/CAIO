@@ -4,6 +4,7 @@ import "../controls"
 
 
 Item {
+    id: item1
     Rectangle {
         id: rectangle
         color: "#2c313c"
@@ -36,15 +37,49 @@ Item {
             anchors.leftMargin: 0
             anchors.topMargin: 49
 
-            CameraFeed {
-                x: 329
+            Rectangle {
+                id: rectangle1
+                x: 357
                 width: cameraArea.height
+                color: "#00000000"
+                radius: 10
+                border.width: 3
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
+
+                Label {
+                    id: cameraLabel
+                    color: "#ffffff"
+                    text: qsTr("Camera is OFF or Not Working")
+                    anchors.fill: parent
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
             }
+
+
+
+//            CameraFeed {
+//                x: 329
+//                width: cameraArea.height
+//                anchors.top: parent.top
+//                anchors.bottom: parent.bottom
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                anchors.bottomMargin: 0
+//                anchors.topMargin: 0
+//            }
+
+        }
+
+        Connections {
+            target: addFaceBackend
+            function onSetCameraLabel(value) {
+                cameraLabel.text = value
+            }
+
         }
 
         Rectangle {
@@ -64,9 +99,9 @@ Item {
             }
         }
 
-//        Connections{
-//            target: backend
-//        }
+        //        Connections{
+        //            target: backend
+        //        }
 
 
     }
