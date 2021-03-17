@@ -14,7 +14,7 @@ class AddFace(QObject):
         print("Add Button Pressed")
         cam = cv2.VideoCapture(0)
 
-        #cv2.namedWindow("test")
+        cv2.namedWindow("test")
         self.logic = 0
         while True:
             ret, frame = cam.read()
@@ -23,9 +23,9 @@ class AddFace(QObject):
                 break
             #cv2.imshow("test", frame)
 
-            k = cv2.waitKey()
+            k = cv2.waitKey(1)
             #self.setCameraLabel.emit("Camera is On")
-            self.displayImage(frame, 1)
+            #self.displayImage(frame, 1)
             if k % 256 == 27:
                 # ESC pressed
                 print("Escape hit, closing...")
@@ -62,6 +62,7 @@ class AddFace(QObject):
         img = QImage(img, img.shape[1], img.shape[0], qformat)
         img = img.rgbSwapped()
         img = QPixmap.fromImage(img)
+        self.setCameraLabel.emit(img)
         #self.setCameraLabel.setPixmap(QPixmap.fromImage(img))
         #self.setCameraLabel.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
 

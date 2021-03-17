@@ -77,7 +77,7 @@ Item {
         Connections {
             target: addFaceBackend
             function onSetCameraLabel(value) {
-                cameraLabel.text = value
+                cameraLabel.setPixmap(value)
             }
 
         }
