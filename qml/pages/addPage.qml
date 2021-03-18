@@ -50,14 +50,6 @@ Item {
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
 
-//                Label {
-//                    id: cameraLabel
-//                    color: "#ffffff"
-//                    text: qsTr("Camera is OFF or Not Working")
-//                    anchors.fill: parent
-//                    horizontalAlignment: Text.AlignHCenter
-//                    verticalAlignment: Text.AlignVCenter
-//                }
 
                 CameraLive {
                     anchors.fill: parent
@@ -67,26 +59,8 @@ Item {
             }
 
 
-
-//            CameraFeed {
-//                x: 329
-//                width: cameraArea.height
-//                anchors.top: parent.top
-//                anchors.bottom: parent.bottom
-//                anchors.horizontalCenter: parent.horizontalCenter
-//                anchors.bottomMargin: 0
-//                anchors.topMargin: 0
-//            }
-
         }
 
-        Connections {
-            target: addFaceBackend
-            function onSetCameraLabel(value) {
-                cameraLabel.setPixmap(value)
-            }
-
-        }
 
         Rectangle {
             id: captureBtnArea
@@ -105,9 +79,6 @@ Item {
             }
         }
 
-        //        Connections{
-        //            target: backend
-        //        }
 
 
     }
