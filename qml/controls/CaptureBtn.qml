@@ -79,7 +79,7 @@ Button{
     }
 
     onClicked: {
-        addFaceBackend.captureClicked()
+//        Capture Image
 
     }
 }

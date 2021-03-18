@@ -52,6 +52,7 @@ Item {
 
 
                 CameraLive {
+
                     anchors.fill: parent
 
                 }
