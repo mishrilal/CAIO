@@ -50,14 +50,20 @@ Item {
                 anchors.bottomMargin: 0
                 anchors.topMargin: 0
 
-                Label {
-                    id: cameraLabel
-                    color: "#ffffff"
-                    text: qsTr("Camera is OFF or Not Working")
+//                Label {
+//                    id: cameraLabel
+//                    color: "#ffffff"
+//                    text: qsTr("Camera is OFF or Not Working")
+//                    anchors.fill: parent
+//                    horizontalAlignment: Text.AlignHCenter
+//                    verticalAlignment: Text.AlignVCenter
+//                }
+
+                CameraLive {
                     anchors.fill: parent
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
+
                 }
+
             }
 
 
