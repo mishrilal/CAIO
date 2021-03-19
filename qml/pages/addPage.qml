@@ -17,6 +17,7 @@ Item {
     property int iconHeight: 18
     property bool isActiveMenu: false
     property int n: 3
+    property bool isVisibile: false
 
     id: item1
     Rectangle {
@@ -177,11 +178,27 @@ Item {
 
                 onClicked: {
 
-                        addFaceBackend.captureClicked()
+                    addFaceBackend.captureClicked()
 
                 }
 
             }
+        }
+
+        Label {
+            id: cameraLabel
+            color: "#0068f1"
+            text: qsTr("Capturing")
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: cameraArea.top
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.bottomMargin: 7
+            font.pointSize: 16
+            anchors.rightMargin: 0
+            anchors.leftMargin: 0
+            visible: isVisibile
         }
 
 
@@ -191,12 +208,20 @@ Item {
     Connections {
         target: addFaceBackend;
 
+        function onSetCaptureDetails(value) {
+            isVisibile = true
+            cameraLabel.text = value
+        }
+
+
     }
 
 }
 
+
+
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:473;width:908}
+    D{i:0;autoSize:true;height:480;width:640}D{i:16}
 }
 ##^##*/

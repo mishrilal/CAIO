@@ -93,6 +93,7 @@ class AddFace(QObject):
         self.logic = 2
         n = 0
         while n < 100:
+            self.setCaptureDetails.emit("Captured %s of 100" % (n + 1))
             self.click_photo()
             time.sleep(0.001)
             print(n)
