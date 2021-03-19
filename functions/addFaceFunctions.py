@@ -30,8 +30,7 @@ class AddFace(QObject):
         # Set the default camera.
         self.select_camera(0)
 
-        # method to select camera
-
+    # method to select camera
     def select_camera(self, i):
         # getting the selected camera
         self.camera = QCamera(self.available_cameras[i])
@@ -39,18 +38,12 @@ class AddFace(QObject):
         # setting capture mode to the camera
         self.camera.setCaptureMode(QCamera.CaptureStillImage)
 
-        # if any error occur show the alert
-        self.camera.error.connect(lambda: self.alert(self.camera.errorString()))
-
         # start the camera
         self.camera.start()
 
         # creating a QCameraImageCapture object
         self.capture = QCameraImageCapture(self.camera)
 
-        # showing alert if error occur
-        self.capture.error.connect(lambda error_msg, error,
-                                          msg: self.alert(msg))
 
         # when image captured showing message
         self.capture.imageCaptured.connect(lambda d,
@@ -70,21 +63,13 @@ class AddFace(QObject):
 
         # capture the image and save it on the save path
         self.capture.capture(os.path.join(self.save_path,
-                                          "img_%s_%s.png" % (
+                                          "img_%s_%s.jpg" % (
                                               timestamp,
                                               self.save_seq
                                           )))
 
         # increment the sequence
         self.save_seq += 1
-
-    # method for alerts
-    def alert(self, msg):
-        # error message
-        error = QErrorMessage(self)
-
-        # setting text to the error message
-        error.showMessage(msg)
 
     @Slot()
     def captureClicked(self):
@@ -93,8 +78,8 @@ class AddFace(QObject):
         self.logic = 2
         n = 0
         while n < 100:
-            self.setCaptureDetails.emit("Captured %s of 100" % (n + 1))
             self.click_photo()
+            self.setCaptureDetails.emit("Captured %s of 100" % (n + 1))
             time.sleep(0.001)
             print(n)
             n += 1
