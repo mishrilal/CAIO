@@ -3,8 +3,6 @@ import QtMultimedia 5.15
 Rectangle {
     id: cameraRectangle
     color: "#00000000"
-    radius: 10
-    border.width: 6
 
     Camera {
         id: camera

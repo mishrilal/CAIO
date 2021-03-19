@@ -79,8 +79,8 @@ Button{
     }
 
     onClicked: {
-//        Capture Image
-
+        addFaceBackend.captureClicked()
+        camera.imageCapture.capture();
     }
 }
 
