@@ -402,7 +402,7 @@ Window {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
 
-                                addFaceBackend.addFace()
+
 
                             }
                         }

@@ -1,57 +1,99 @@
-import datetime
+import os
+import sys
+import time
 
-import cv2
-from PySide2.QtCore import QObject, Slot
+from PyQt5.QtWidgets import *
+from PyQt5.QtMultimedia import *
+
+from PySide2.QtCore import QObject, Slot, Signal
 
 
 class AddFace(QObject):
+    setCaptureDetails = Signal(str)
+    logic = 0
 
-    @Slot()
-    def addFace(self):
-        # initialize camera here
-        print("Add Button Pressed")
+    # constructor
+    def __init__(self):
+        super().__init__()
 
-        cam = cv2.VideoCapture(0)
+        # getting available cameras
+        self.available_cameras = QCameraInfo.availableCameras()
 
-        cv2.namedWindow("")
-        cv2.destroyAllWindows()
-        self.logic = 0
-        while True:
+        # if no camera found
+        if not self.available_cameras:
+            # exit the code
+            sys.exit()
 
-            # cv2.imshow("test", frame)
+        # path to save
+        self.save_path = "images/captured/"
 
-            k = cv2.waitKey(1)
-            # self.setCameraLabel.emit("Camera is On")
-            # self.displayImage(frame, 1)
-            if k % 256 == 27:
-                # ESC pressed
-                print("Escape hit, closing...")
-                break
-            elif self.logic == 2:
-                n = 0
+        # Set the default camera.
+        self.select_camera(0)
 
-                while n < 100:
-                    ret, frame = cam.read()
-                    if not ret:
-                        print("failed to grab frame")
-                        break
-                    # SPACE pressed
-                    date = datetime.datetime.now()
-                    img_name = 'images/captured/img_%s%s%sT%s%s%s_%s.png' % (
-                        date.year, date.month, date.day, date.hour, date.minute, date.second, n)
-                    cv2.imwrite(img_name, frame)
-                    print("{} written!".format(img_name))
-                    n += 1
+        # method to select camera
 
-                self.logic = 1
-                break
+    def select_camera(self, i):
+        # getting the selected camera
+        self.camera = QCamera(self.available_cameras[i])
 
-        cam.release()
+        # setting capture mode to the camera
+        self.camera.setCaptureMode(QCamera.CaptureStillImage)
 
-        cv2.destroyAllWindows()
+        # if any error occur show the alert
+        self.camera.error.connect(lambda: self.alert(self.camera.errorString()))
+
+        # start the camera
+        self.camera.start()
+
+        # creating a QCameraImageCapture object
+        self.capture = QCameraImageCapture(self.camera)
+
+        # showing alert if error occur
+        self.capture.error.connect(lambda error_msg, error,
+                                          msg: self.alert(msg))
+
+        # when image captured showing message
+        self.capture.imageCaptured.connect(lambda d,
+                                                  i: self.status.showMessage("Image captured : "
+                                                                             + str(self.save_seq)))
+
+        # getting current camera name
+        self.current_camera_name = self.available_cameras[i].description()
+
+        # inital save sequence
+        self.save_seq = 0
+
+    # method to take photo
+    def click_photo(self):
+        # time stamp
+        timestamp = time.strftime("%d-%b-%Y-%H_%M_%S")
+
+        # capture the image and save it on the save path
+        self.capture.capture(os.path.join(self.save_path,
+                                          "img_%s_%s.png" % (
+                                              timestamp,
+                                              self.save_seq
+                                          )))
+
+        # increment the sequence
+        self.save_seq += 1
+
+    # method for alerts
+    def alert(self, msg):
+        # error message
+        error = QErrorMessage(self)
+
+        # setting text to the error message
+        error.showMessage(msg)
 
     @Slot()
     def captureClicked(self):
         # Capture Function here
         print("Capture Btn Clicked")
         self.logic = 2
+        n = 0
+        while n < 100:
+            self.click_photo()
+            time.sleep(0.001)
+            print(n)
+            n += 1

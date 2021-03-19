@@ -180,6 +180,7 @@ Item {
                         addFaceBackend.captureClicked()
 
                 }
+
             }
         }
 
@@ -189,7 +190,6 @@ Item {
 
     Connections {
         target: addFaceBackend;
-
 
     }
 
