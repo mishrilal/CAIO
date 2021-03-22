@@ -433,7 +433,7 @@ Window {
                     LeftMenuBtn {
                         id: btnSettings
                         width: leftMenu.width
-                        text: qsTr("Settings")
+                        text: qsTr("Preferences")
                         anchors.bottom: version.top
                         anchors.bottomMargin: 0
                         btnIconSource: "../images/svg_images/settings_icon.svg"

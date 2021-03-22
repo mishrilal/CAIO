@@ -1,4 +1,5 @@
 build/
 venv/
 dist/
+images/captured/*.jpg
 images/captured/*.png
