@@ -1,9 +1,9 @@
 numpy==1.20.1
+opencv-contrib-python==4.5.1.48
 opencv-python==4.5.1.48
 PyQt5==5.15.4
 PyQt5-Qt5==5.15.2
 PyQt5-sip==12.8.1
 PyQt5-stubs==5.15.2.0
+PySide2==5.15.2
 shiboken2==5.15.2
-
-PySide2~=5.15.2
