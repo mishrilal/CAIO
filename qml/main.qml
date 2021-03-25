@@ -355,6 +355,8 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+
+                                backend.dashboardClicked()
                             }
                         }
 
@@ -378,6 +380,8 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+
+                                backend.viewClicked()
                             }
                         }
 
@@ -402,7 +406,7 @@ Window {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
 
-
+                                backend.addClicked()
 
                             }
                         }
@@ -425,6 +429,8 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = true
                                 pageSettings.visible = false
+
+                                backend.removeClicked()
 
                             }
                         }
@@ -450,6 +456,8 @@ Window {
                             pageAdd.visible = false
                             pageRemove.visible = false
                             pageSettings.visible = true
+
+                            backend.settingsClicked()
                         }
                     }
 
@@ -665,6 +673,10 @@ Window {
             target: null
             onActiveChanged: if(active) { mainWindow.startSystemResize(Qt.TopEdge) }
         }
+    }
+
+    Connections {
+        target: backend;
     }
 
 }

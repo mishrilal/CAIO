@@ -65,6 +65,11 @@ Item {
                 }
                 font.pointSize: 18
                 font.weight: Font.Medium
+
+                onClicked: {
+                    settingsBackend.startupClicked(checked)
+                    print("QML Startup")
+                }
             }
 
             Label {
@@ -121,6 +126,9 @@ Item {
 
                     }
                 }
+                onClicked: {
+                    settingsBackend.lockOther(checked)
+                }
             }
 
             Label {
@@ -153,21 +161,21 @@ Item {
             anchors.rightMargin: 20
             anchors.topMargin: 10
             CheckBox {
-                id: lockOtherPerson1
+                id: autoLock
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 spacing: 25
                 indicator: Rectangle {
-                    x: lockOtherPerson1.leftPadding
+                    x: autoLock.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: lockOtherPerson1.down ? "#17a81a" : "#21be2b"
+                    border.color: autoLock.down ? "#17a81a" : "#21be2b"
                     implicitHeight: 26
                     Text {
-                        visible: lockOtherPerson1.checked
-                        color: lockOtherPerson1.down ? "#17a81a" : "#21be2b"
+                        visible: autoLock.checked
+                        color: autoLock.down ? "#17a81a" : "#21be2b"
                         text: "\u2714"
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -178,13 +186,16 @@ Item {
                 }
                 font.pointSize: 18
                 font.weight: Font.Medium
+                onClicked: {
+                    settingsBackend.autoLock(checked)
+                }
             }
 
             Label {
                 id: label3
                 color: "#ffffff"
                 text: qsTr("Auto Lock when you are not there")
-                anchors.left: lockOtherPerson1.right
+                anchors.left: autoLock.right
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -207,21 +218,21 @@ Item {
             anchors.rightMargin: 20
             anchors.topMargin: 10
             CheckBox {
-                id: lockOtherPerson2
+                id: autoUnlock
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 spacing: 25
                 indicator: Rectangle {
-                    x: lockOtherPerson2.leftPadding
+                    x: autoUnlock.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: lockOtherPerson2.down ? "#17a81a" : "#21be2b"
+                    border.color: autoUnlock.down ? "#17a81a" : "#21be2b"
                     implicitHeight: 26
                     Text {
-                        visible: lockOtherPerson2.checked
-                        color: lockOtherPerson2.down ? "#17a81a" : "#21be2b"
+                        visible: autoUnlock.checked
+                        color: autoUnlock.down ? "#17a81a" : "#21be2b"
                         text: "\u2714"
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -232,13 +243,17 @@ Item {
                 }
                 font.pointSize: 18
                 font.weight: Font.Medium
+
+                onClicked: {
+                    settingsBackend.autoUnlock(checked)
+                }
             }
 
             Label {
                 id: label4
                 color: "#ffffff"
                 text: qsTr("Auto unlock when you are there")
-                anchors.left: lockOtherPerson2.right
+                anchors.left: autoUnlock.right
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -251,10 +266,21 @@ Item {
         }
     }
 
+    Connections {
+        target: settingsBackend;
+
+        function onSetStartup(value) {
+            unlockStartup.checked = value
+            print(value)
+        }
+
+
+    }
+
 }
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:800}D{i:2}D{i:6}D{i:3}D{i:11}D{i:8}D{i:13}D{i:18}
+    D{i:0;autoSize:true;height:480;width:800}
 }
 ##^##*/
