@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
+import Qt.labs.settings 1.0
 
 Item {
     Rectangle {
@@ -68,7 +69,6 @@ Item {
 
                 onClicked: {
                     settingsBackend.startupClicked(checked)
-                    print("QML Startup")
                 }
             }
 
@@ -269,11 +269,51 @@ Item {
     Connections {
         target: settingsBackend;
 
+//        function onSetStartup(value) {
+//            autoUnlock.checked = value
+//            print("function", value)
+//        }
+
+    }
+
+    Connections {
+        target: backend;
+
         function onSetStartup(value) {
-            unlockStartup.checked = value
-            print(value)
+            if (value === "true") {
+                unlockStartup.checked = true
+            }
+            else {
+                unlockStartup.checked = false
+            }
         }
 
+        function onSetLockOthers(value) {
+            if (value === "true") {
+                lockOtherPerson.checked = true
+            }
+            else {
+                lockOtherPerson.checked = false
+            }
+        }
+
+        function onSetAutoLock(value) {
+            if (value === "true") {
+                autoLock.checked = true
+            }
+            else {
+                autoLock.checked = false
+            }
+        }
+
+        function onSetAutoUnlock(value) {
+            if (value === "true") {
+                autoUnlock.checked = true
+            }
+            else {
+                autoUnlock.checked = false
+            }
+        }
 
     }
 

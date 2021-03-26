@@ -3,7 +3,7 @@
 
 import os
 import sys
-from PySide2.QtCore import QObject, Slot, Signal, QSettings
+from PySide2.QtCore import QObject, Slot, QSettings
 
 
 def convertBool(value):
@@ -12,19 +12,27 @@ def convertBool(value):
     return False
 
 
+# Called from main.py to set preference
+def setSettingsValue(self):
+    self.settings = QSettings('CAIO', 'Preferences')
+    self.setStartup.emit(self.settings.value('startup'))
+    self.setLockOthers.emit(self.settings.value('lockOther'))
+    self.setAutoLock.emit(self.settings.value('autoLock'))
+    self.setAutoUnlock.emit(self.settings.value('autoUnlock'))
+
+
+# def setSettingsValue():
+#     setStartup = Signal(str)
+#     settings = QSettings('CAIO', 'Preference')
+#     setStartup.emit(settings.value('startup'))
+
+
 class SettingsPage(QObject):
-    setStartup = Signal(str)
-    setLockOther = Signal(str)
-    setAutoLock = Signal(str)
-    setAutoUnlock = Signal(str)
 
     # constructor
     def __init__(self):
-        super(SettingsPage, self).__init__()
-        self.settings = QSettings('CAIO', 'CAIO')
-
-        self.setStartup.emit(str(self.settings.value('startup')))
-        print("STARTUP: " + self.settings.value('startup'))
+        QObject.__init__(self)
+        self.settings = QSettings('CAIO', 'Preferences')
 
     # When "Unlock at StartUp" Clicked
     @Slot('QString')
@@ -35,14 +43,14 @@ class SettingsPage(QObject):
     # When "Lock when other appears" Clicked
     @Slot('QString')
     def lockOther(self, isChecked):
-        self.settings.setValue('lockOther', convertBool(isChecked))
+        self.settings.setValue('lockOther', isChecked)
 
     # When "Lock when other appears" Clicked
     @Slot('QString')
     def autoLock(self, isChecked):
-        self.settings.setValue('autoLock', convertBool(isChecked))
+        self.settings.setValue('autoLock', isChecked)
 
     # When "Auto Unlock when you are there" Clicked
     @Slot('QString')
     def autoUnlock(self, isChecked):
-        self.settings.setValue('autoUnlock', convertBool(isChecked))
+        self.settings.setValue('autoUnlock', isChecked)
