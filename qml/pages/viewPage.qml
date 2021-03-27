@@ -52,7 +52,7 @@ Item {
 
                     Repeater {
                         anchors.fill: parent
-                        model: 10
+                        model: 1000
                         Image {
                             id: image
                             width: 150

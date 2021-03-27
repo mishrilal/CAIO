@@ -344,6 +344,12 @@ Window {
                             text: qsTr("Dashboard")
                             isActiveMenu: true
                             onClicked: {
+                                pageDashboard.active = true
+                                pageView.active = false
+                                pageAdd.active = false
+                                pageRemove.active = false
+                                pageSettings.active = false
+
                                 btnDashboard.isActiveMenu = true
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = false
@@ -369,6 +375,12 @@ Window {
                             btnIconSource: "../images/svg_images/view_icon.svg"
                             isActiveMenu: false
                             onClicked: {
+                                pageDashboard.active = false
+                                pageView.active = true
+                                pageAdd.active = false
+                                pageRemove.active = false
+                                pageSettings.active = false
+
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = true
                                 btnAdd.isActiveMenu = false
@@ -394,6 +406,12 @@ Window {
                             btnIconSource: "../images/svg_images/add_icon.svg"
                             isActiveMenu: false
                             onClicked: {
+                                pageDashboard.active = false
+                                pageView.active = false
+                                pageAdd.active = true
+                                pageRemove.active = false
+                                pageSettings.active = false
+
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = true
@@ -418,6 +436,12 @@ Window {
                             btnIconSource: "../images/svg_images/remove_icon.svg"
                             isActiveMenu: false
                             onClicked: {
+                                pageDashboard.active = false
+                                pageView.active = false
+                                pageAdd.active = false
+                                pageRemove.active = true
+                                pageSettings.active = false
+
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = false
@@ -445,6 +469,12 @@ Window {
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
                         onClicked: {
+                            pageDashboard.active = false
+                            pageView.active = false
+                            pageAdd.active = false
+                            pageRemove.active = false
+                            pageSettings.active = true
+
                             btnDashboard.isActiveMenu = false
                             btnView.isActiveMenu = false
                             btnAdd.isActiveMenu = false
@@ -523,30 +553,35 @@ Window {
                         id: pageDashboard
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/dashboardPage.qml")
+                        active: true
                         visible: true
                     }
                     Loader{
                         id: pageView
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/viewPage.qml")
+                        active: false
                         visible: false
                     }
                     Loader{
                         id: pageAdd
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/addPage.qml")
+                        active: false
                         visible: false
                     }
                     Loader{
                         id: pageRemove
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/removePage.qml")
+                        active: false
                         visible: false
                     }
                     Loader{
                         id: pageSettings
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/settingsPage.qml")
+                        active: false
                         visible: false
                     }
 
