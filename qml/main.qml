@@ -15,7 +15,7 @@ Window {
     title: qsTr("CAIO")
 
     // Remove Title Bar
-    flags: Qt.Window | Qt.FramelessWindowHint
+//  flags: Qt.Window | Qt.FramelessWindowHint
 
     // Properties
     property int windowStatus: 0
@@ -83,14 +83,7 @@ Window {
         color: "#2c313c"
         border.color: "#383e4c"
         border.width: 1
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: windowMargin
-        anchors.leftMargin: windowMargin
-        anchors.topMargin: windowMargin
-        anchors.bottomMargin: windowMargin
+        anchors.fill: parent
         z: 1
 
         Rectangle {
@@ -217,63 +210,36 @@ Window {
                         font.family: "Verdana"
                         anchors.leftMargin: 10
                     }
+
                 }
 
-                Row {
-                    id: rowBtns
-                    x: 879
-                    width: 105
-                    height: 35
+                AboutButton {
+                    id: btnAbout
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.topMargin: 0
-                    anchors.rightMargin: 0
-
-                    TopBarButton{
-                        id: btnMinimize
-                        onClicked: {
-                            mainWindow.showMinimized()
-                            internal.restoreMargins()
-                        }
-                    }
-
-                    TopBarButton {
-                        id: btnMaximizeRestore
-                        btnIconSource: "../images/svg_images/maximize_icon.svg"
-                        onClicked: internal.maximizeRestore()
-                    }
-
-                    TopBarButton {
-                        id: btnClose
-                        btnColorClicked: "#ff007f"
-                        btnIconSource: "../images/svg_images/close_icon.svg"
-                        onClicked: mainWindow.close()
-                    }
-                }
-
-                Row {
-                    id: row
-                    x: 801
-                    width: 172
-                    anchors.right: parent.right
-                    anchors.top: rowBtns.bottom
-                    anchors.bottom: parent.bottom
-                    spacing: 5
-                    layoutDirection: Qt.RightToLeft
+                    anchors.verticalCenterOffset: 0
                     anchors.rightMargin: 5
-                    anchors.bottomMargin: 0
-                    anchors.topMargin: 0
+                    onClicked: {
+                        pageDashboard.active = false
+                        pageView.active = false
+                        pageAdd.active = false
+                        pageRemove.active = false
+                        pageSettings.active = false
+                        pageAbout.active = true
 
-                    DescriptionButton {
-                        id: btnHelp
-                        text: "Help"
+                        btnDashboard.isActiveMenu = false
+                        btnView.isActiveMenu = false
+                        btnAdd.isActiveMenu = false
+                        btnRemove.isActiveMenu = false
+                        btnSettings.isActiveMenu = false
+
+                        pageDashboard.visible = false
+                        pageView.visible = false
+                        pageAdd.visible = false
+                        pageRemove.visible = false
+                        pageSettings.visible = false
+                        pageAbout.visible = true
                     }
-
-                    DescriptionButton{
-                        id: btnAbout
-                        text: "About"
-                    }
-
                 }
             }
 
@@ -349,6 +315,7 @@ Window {
                                 pageAdd.active = false
                                 pageRemove.active = false
                                 pageSettings.active = false
+                                pageAbout.active = false
 
                                 btnDashboard.isActiveMenu = true
                                 btnView.isActiveMenu = false
@@ -361,6 +328,7 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+                                pageAbout.visible = false
 
                                 backend.dashboardClicked()
                             }
@@ -380,6 +348,7 @@ Window {
                                 pageAdd.active = false
                                 pageRemove.active = false
                                 pageSettings.active = false
+                                pageAbout.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = true
@@ -392,6 +361,7 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+                                pageAbout.visible = false
 
                                 backend.viewClicked()
                             }
@@ -411,6 +381,7 @@ Window {
                                 pageAdd.active = true
                                 pageRemove.active = false
                                 pageSettings.active = false
+                                pageAbout.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
@@ -423,6 +394,7 @@ Window {
                                 pageAdd.visible = true
                                 pageRemove.visible = false
                                 pageSettings.visible = false
+                                pageAbout.visible = false
 
                                 backend.addClicked()
 
@@ -441,6 +413,7 @@ Window {
                                 pageAdd.active = false
                                 pageRemove.active = true
                                 pageSettings.active = false
+                                pageAbout.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
@@ -453,6 +426,7 @@ Window {
                                 pageAdd.visible = false
                                 pageRemove.visible = true
                                 pageSettings.visible = false
+                                pageAbout.visible = false
 
                                 backend.removeClicked()
 
@@ -474,6 +448,7 @@ Window {
                             pageAdd.active = false
                             pageRemove.active = false
                             pageSettings.active = true
+                            pageAbout.active = false
 
                             btnDashboard.isActiveMenu = false
                             btnView.isActiveMenu = false
@@ -486,6 +461,7 @@ Window {
                             pageAdd.visible = false
                             pageRemove.visible = false
                             pageSettings.visible = true
+                            pageAbout.visible = false
 
                             backend.settingsClicked()
                         }
@@ -585,128 +561,18 @@ Window {
                         visible: false
                     }
 
-                }
-
-                MouseArea {
-
-                    id: resizeWindow
-                    x: 884
-                    y: 0
-                    width: 25
-                    height: 25
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.rightMargin: 0
-                    anchors.bottomMargin: 0
-                    cursorShape: Qt.SizeFDiagCursor
-
-                    Image {
-                        id: resizeImage
-                        width: 16
-                        height: 16
-                        opacity: 0.5
+                    Loader{
+                        id: pageAbout
                         anchors.fill: parent
-                        source: "../images/svg_images/resize_icon.svg"
-                        anchors.leftMargin: 5
-                        anchors.topMargin: 5
-                        sourceSize.height: 16
-                        sourceSize.width: 16
-                        fillMode: Image.PreserveAspectFit
-                        antialiasing: false
+                        source: Qt.resolvedUrl("pages/aboutPage.qml")
+                        active: false
+                        visible: false
                     }
-
-                    DragHandler {
-                        target: null
-                        onActiveChanged: if(active){
-                                             mainWindow.startSystemResize(Qt.RightEdge | Qt.BottomEdge)
-                                         }
-                    }
-
 
                 }
 
                 
             }
-        }
-    }
-
-    DropShadow {
-        anchors.fill: bg
-        horizontalOffset: 0
-        verticalOffset: 0
-        radius: 10
-        samples: 16
-        color: "#80000000"
-        source: bg
-        z: 0
-    }
-
-    MouseArea {
-        id: resizeLeft
-        width: 10
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 0
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
-        cursorShape: Qt.SizeHorCursor
-
-        DragHandler{
-            target: null
-            onActiveChanged: if(active) { mainWindow.startSystemResize(Qt.LeftEdge) }
-        }
-    }
-
-    MouseArea {
-        id: resizeRight
-        width: 10
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: 0
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
-        cursorShape: Qt.SizeHorCursor
-
-        DragHandler{
-            target: null
-            onActiveChanged: if(active) { mainWindow.startSystemResize(Qt.RightEdge) }
-        }
-    }
-
-    MouseArea {
-        id: resizeBottom
-        height: 10
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 10
-        anchors.rightMargin: 10
-        anchors.bottomMargin: 0
-        cursorShape: Qt.SizeVerCursor
-
-        DragHandler{
-            target: null
-            onActiveChanged: if(active) { mainWindow.startSystemResize(Qt.BottomEdge) }
-        }
-    }
-
-    MouseArea {
-        id: resizeTop
-        width: 0
-        height: 10
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.leftMargin: 10
-        anchors.rightMargin: 10
-        anchors.topMargin: 0
-        cursorShape: Qt.SizeVerCursor
-
-        DragHandler{
-            target: null
-            onActiveChanged: if(active) { mainWindow.startSystemResize(Qt.TopEdge) }
         }
     }
 

@@ -12,7 +12,7 @@ Item {
         Label {
             id: label
             color: "#ffffff"
-            text: qsTr("View Page")
+            text: qsTr("Faces")
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
