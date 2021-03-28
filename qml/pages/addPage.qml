@@ -57,8 +57,9 @@ Item {
                 x: 357
                 width: cameraArea.height
                 color: "#00000000"
-                radius: 10
-                border.width: 3
+                radius: 0
+                border.color: "#00000000"
+                border.width: 0
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -69,6 +70,8 @@ Item {
                 Rectangle {
                     id: cameraRectangle
                     color: "#00000000"
+                    border.color: "#00000000"
+                    border.width: 0
                     anchors.fill: parent
 
                     Camera {
@@ -222,6 +225,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:16}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/

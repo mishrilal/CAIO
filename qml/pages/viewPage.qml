@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
 import '../controls'
 
 Item {
@@ -51,14 +50,21 @@ Item {
                     spacing: 10
 
                     Repeater {
+                        id: repeater
                         anchors.fill: parent
-                        model: 1000
+                        model: n
                         Image {
                             id: image
                             width: 150
                             height: 150
-                            source: "../../images/captured/img_person"+index+"_14.jpg"
+                            source: '../../images/captured/*.jpg'
                             fillMode: Image.PreserveAspectFit
+
+                            Button {
+                                id: button
+                                visible: false
+                                text: qsTr("Button")
+                            }
                         }
 
                     }
@@ -74,6 +80,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:680}D{i:2}D{i:5}D{i:4}D{i:3}
+    D{i:0;autoSize:true;height:480;width:680}
 }
 ##^##*/
