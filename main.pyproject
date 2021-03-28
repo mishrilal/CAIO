@@ -1,3 +1,3 @@
 {
-    "files": ["qml/controls/ToggleButton.qml","qml/controls/CameraLive.qml","qml/controls/TopBarButton.qml","qml/controls/LeftMenuBtn.qml","qml/pages/addPageAlternative.ui","qml/pages/dashboardPage.qml","main.py","main.qml","qml/pages/settingsPage.qml"]
+    "files": ["qml/controls/ToggleButton.qml","main.qml","main.py","qml/pages/settingsPage.qml","qml/controls/LeftMenuBtn.qml","qml/pages/addPageAlternative.ui","qml/pages/SplashScreen.qml","qml/controls/TopBarButton.qml","qml/controls/CameraLive.qml","qml/pages/dashboardPage.qml"]
 }

@@ -54,7 +54,7 @@ if __name__ == "__main__":
     engine.rootContext().setContextProperty("addFaceBackend", addFace)
     engine.rootContext().setContextProperty("settingsBackend", settingsPage)
 
-    engine.load(os.path.join(os.path.dirname(__file__), "qml/main.qml"))
+    engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))
 
     if not engine.rootObjects():
         sys.exit(-1)

@@ -17,7 +17,6 @@ Item {
     property int iconHeight: 18
     property bool isActiveMenu: false
     property int n: 3
-    property bool isVisibile: false
 
     id: item1
     Rectangle {
@@ -123,6 +122,7 @@ Item {
 
                     // Mouse Hover and Click Change Color
                     property var dynamicColor: if(captureBtn.down){
+                                                   cameraLabel.visible = true
                                                    captureBtn.down ? btnColorClicked : btnColorDefault
                                                } else {
                                                    captureBtn.hovered ? btnColorMouseOver : btnColorDefault
@@ -191,7 +191,7 @@ Item {
         Label {
             id: cameraLabel
             color: "#0068f1"
-            text: qsTr("Capturing")
+            text: qsTr("Collecting Samples, Please Wait...")
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: cameraArea.top
@@ -201,7 +201,7 @@ Item {
             font.pointSize: 16
             anchors.rightMargin: 0
             anchors.leftMargin: 0
-            visible: isVisibile
+            visible: false
         }
 
 
@@ -212,7 +212,6 @@ Item {
         target: addFaceBackend;
 
         function onSetCaptureDetails(value) {
-            isVisibile = true
             cameraLabel.text = value
         }
 

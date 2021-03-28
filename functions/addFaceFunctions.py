@@ -128,7 +128,7 @@ class AddFace(QObject):
                     cv2.imwrite('images/faces/'+str(self.person)+'.jpg', face)
 
                 # Put count on images and display live count
-                cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
+                # cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
                 # cv2.imshow('Face Cropper', face)
             else:
                 print("Face not found")

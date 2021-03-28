@@ -51,13 +51,15 @@ Item {
 
                     Repeater {
                         id: repeater
+                        width: rectangle1.width
                         anchors.fill: parent
-                        model: n
+                        clip: true
+                        model: 100
                         Image {
                             id: image
                             width: 150
                             height: 150
-                            source: '../../images/captured/*.jpg'
+                            source: "../../images/faces/"+index+".jpg"
                             fillMode: Image.PreserveAspectFit
 
                             Button {
