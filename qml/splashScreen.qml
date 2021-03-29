@@ -33,11 +33,26 @@ Window {
 
     Rectangle {
         id: bg
-        color: "#151515"
         radius: 20
         anchors.fill: parent
+        gradient: Gradient {
+            GradientStop {
+                position: 0
+                color: "#000000"
+            }
 
-         Text {
+            GradientStop {
+                position: 0.5
+                color: "#292727"
+            }
+
+            GradientStop {
+                position: 1
+                color: "#000000"
+            }
+        }
+
+        Text {
              id: text1
              color: "#d5d5d5"
              text: qsTr("CAIO")
@@ -61,6 +76,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}D{i:3}
+    D{i:0;formeditorZoom:0.75}
 }
 ##^##*/

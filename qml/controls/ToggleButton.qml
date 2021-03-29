@@ -7,7 +7,7 @@ Button{
 
     //Custom properties
     property url btnIconSource: "../../images/svg_images/menu_icon.svg"
-    property color btnColorDefault: "#1c1d20"
+    property color btnColorDefault: "#0f1013"
     property color btnColorMouseOver: "#23272E"
     property color btnColorClicked: "#00a1f1"
 

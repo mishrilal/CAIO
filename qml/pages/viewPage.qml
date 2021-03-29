@@ -6,7 +6,7 @@ Item {
     property int n: 100
     Rectangle {
         id: rectangle
-        color: "#2c313c"
+        color: "#16181d"
         anchors.fill: parent
 
         Label {

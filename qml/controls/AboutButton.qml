@@ -7,7 +7,7 @@ Button{
 
     //Custom properties
     property url btnIconSource: "../../images/svg_images/about_icon.svg"
-    property color btnColorDefault: "#ffffff"
+    property color btnColorDefault: "#5e64e5"
     property color btnColorMouseOver: "#767BF8"
     property color btnColorClicked: "#00a1f1"
     width: 30
@@ -30,7 +30,7 @@ Button{
     background: Rectangle{
         id: bgBtn
         color: "#00000000"
-//        color: internal.dynamicColor
+        //        color: internal.dynamicColor
 
         Image {
             id: iconBtn

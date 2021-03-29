@@ -80,7 +80,8 @@ Window {
 
     Rectangle {
         id: bg
-        color: "#2c313c"
+        color: "#16181d"
+        radius: 0
         border.color: "#383e4c"
         border.width: 1
         anchors.fill: parent
@@ -98,7 +99,7 @@ Window {
             Rectangle {
                 id: topBar
                 height: 60
-                color: "#1c1d20"
+                color: "#0f1013"
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
@@ -114,7 +115,7 @@ Window {
                     id: topBarDescription
                     y: 33
                     height: 25
-                    color: "#1c1d20"
+                    color: "#0f1013"
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
@@ -258,7 +259,7 @@ Window {
                 Rectangle {
                     id: leftMenu
                     width: 70
-                    color: "#1c1d20"
+                    color: "#0f1013"
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
@@ -480,7 +481,7 @@ Window {
                 Rectangle {
                     id: rectangle
                     height: 25
-                    color: "#282c34"
+                    color: "#191c22"
                     anchors.left: leftMenu.right
                     anchors.right: parent.right
                     anchors.top: contentPages.bottom
@@ -492,24 +493,26 @@ Window {
 
                     Label {
                         id: labelTopInfo1
-                        color: "#5f6a82"
+                        color: "#5e64e5"
                         text: qsTr("Developed By - THE PYTHONS")
                         anchors.left: parent.left
                         anchors.right: parent.right
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
+                        horizontalAlignment: Text.AlignRight
                         verticalAlignment: Text.AlignVCenter
+                        font.bold: true
+                        anchors.leftMargin: 0
                         anchors.topMargin: 0
                         anchors.bottomMargin: 0
-                        anchors.leftMargin: 8
-                        anchors.rightMargin: 30
+                        anchors.rightMargin: 2
                     }
                 }
 
 
                 Rectangle {
                     id: contentPages
-                    color: "#2c313c"
+                    color: "#00000000"
                     anchors.left: leftMenu.right
                     anchors.right: parent.right
                     anchors.top: parent.top
