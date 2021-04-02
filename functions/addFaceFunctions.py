@@ -1,7 +1,3 @@
-import glob
-import os
-import shutil
-
 import cv2
 
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
@@ -32,8 +28,6 @@ class AddFace(QObject):
     setCaptureDetails = Signal(str)
     person = 0
 
-    # logic = 0
-    #
     # constructor
     def __init__(self):
         super().__init__()
@@ -111,6 +105,7 @@ class AddFace(QObject):
         cap = cv2.VideoCapture(0)
         count = 0
         # Collect 100 samples of your face from webcam input
+
         while True:
 
             ret, frame = cap.read()
@@ -125,7 +120,7 @@ class AddFace(QObject):
                 cv2.imwrite(file_name_path, face)
 
                 if count == 45:
-                    cv2.imwrite('images/faces/'+str(self.person)+'.jpg', face)
+                    cv2.imwrite('images/faces/' + str(self.person) + '.jpg', face)
 
                 # Put count on images and display live count
                 # cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
@@ -142,4 +137,3 @@ class AddFace(QObject):
         cv2.destroyAllWindows()
         print("Collecting Samples Complete")
         self.setCaptureDetails.emit("Collected Samples Successfully")
-
