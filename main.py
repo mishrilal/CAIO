@@ -9,7 +9,6 @@ from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
 from functions.dashboardFunctions import DashboardPage
-from functions.detectFace import detectFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
 
 
