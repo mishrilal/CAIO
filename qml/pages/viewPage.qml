@@ -37,43 +37,54 @@ Item {
             anchors.bottomMargin: 0
             anchors.topMargin: 10
 
-            ScrollView {
-                id: scrollView
-                anchors.fill: parent
-
-                Grid {
-                    id: grid
-                    anchors.fill: parent
-                    columns: 5
-                    clip: true
-                    flow: Grid.LeftToRight
-                    spacing: 10
-
-                    Repeater {
-                        id: repeater
-                        width: rectangle1.width
-                        anchors.fill: parent
-                        clip: true
-                        model: 100
-                        Image {
-                            id: image
-                            width: 150
-                            height: 150
-                            source: "../../images/faces/"+index+".jpg"
-                            fillMode: Image.PreserveAspectFit
-
-                            Button {
-                                id: button
-                                visible: false
-                                text: qsTr("Button")
-                            }
-                        }
-
-                    }
-
-
-                }
+            Image {
+                id: image
+//                visible: false
+                x: 8
+                y: 0
+                width: 250
+                source: "../../images/captured/img_1.jpg"
+                fillMode: Image.PreserveAspectFit
             }
+
+//            ScrollView {
+//                id: scrollView
+//                anchors.fill: parent
+
+//                Grid {
+//                    id: grid
+//                    anchors.fill: parent
+//                    columns: 5
+//                    clip: true
+//                    flow: Grid.LeftToRight
+//                    spacing: 10
+
+//                    Repeater {
+//                        id: repeater
+//                        width: rectangle1.width
+//                        anchors.fill: parent
+//                        clip: true
+//                        model: 100
+//                        Image {
+//                            id: image
+//                            width: 150
+//                            height: 150
+//                            source: "../../images/faces/"+index+".jpg"
+//                            fillMode: Image.PreserveAspectFit
+
+//                            Button {
+//                                id: button
+//                                visible: false
+//                                text: qsTr("Button")
+//                            }
+//                        }
+
+//                    }
+
+
+//                }
+//            }
+
         }
     }
 
