@@ -1,6 +1,9 @@
+import platform
+import re
 import time
 from pathlib import Path
 from os import path
+import ctypes
 
 import numpy as np
 import face_recognition as fr
@@ -15,8 +18,14 @@ class detectFace:
 
     # Lock Function for MacOS and Windows
     def lock(self):
-        loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
-        loginPF.SACLockScreenImmediate()
+        osName = platform.platform()
+        if re.search("macOS", osName):
+            loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
+            loginPF.SACLockScreenImmediate()
+        elif re.search("Windows", osName):
+            ctypes.windll.user32.LockWorkStation()
+        else:
+            pass
 
     # keeps unlock until you in frame and someone else with you
     def keepUnlocked(self):
