@@ -127,6 +127,67 @@ class detectFace:
         video_capture.release()
         cv2.destroyAllWindows()
 
+    # keep Unlocked when someone else appears in the frame with admin
+    def someoneAppears(self):
+        video_capture = cv2.VideoCapture(0)
+
+        if path.isfile(self.imgPath):
+            user_image = fr.load_image_file(self.imgPath)
+            user_face_encoding = fr.face_encodings(user_image)[0]
+
+            known_face_encodings = [user_face_encoding]
+            known_face_names = ["ADMIN"]
+
+            while True:
+                ret, frame = video_capture.read()
+
+                rgb_frame = frame[:, :, ::-1]
+
+                face_locations = fr.face_locations(rgb_frame)
+                face_encodings = fr.face_encodings(rgb_frame, face_locations)
+
+                print("FaceEncodings ", len(face_encodings))
+                faces = len(face_encodings)
+
+                for face_encodings in face_encodings:
+                    matches = fr.compare_faces(known_face_encodings, face_encodings)
+
+                    face_distances = fr.face_distance(known_face_encodings, face_encodings)
+
+                    best_match_index = np.argmin(face_distances)
+                    if faces == 1:
+                        if matches[best_match_index]:
+                            print("Face Found")
+                            self.name = known_face_names[best_match_index]
+                            self.showLockScreen = 0
+                            print(self.name)
+                        else:
+                            print("Not found")
+                            self.showLockScreen = 1
+                            self.name = "unknown"
+                            print(self.name)
+                            self.lock()
+                    else:
+                        if matches[best_match_index]:
+                            print("Face Found in else")
+                            print("Face Found")
+                            self.name = known_face_names[best_match_index]
+                            self.showLockScreen = 0
+                            print(self.name)
+
+                if self.showLockScreen == 1:
+                    print("lock")
+                    self.lock()
+
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+                # time.sleep(3)
+                print("time")
+
+        video_capture.release()
+        cv2.destroyAllWindows()
+
 
 lock = detectFace()
-lock.keepUnlocked()
+lock.someoneAppears()
