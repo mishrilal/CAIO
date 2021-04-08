@@ -15,6 +15,7 @@ class detectFace:
     def __init__(self):
         self.imgPath = str(Path.home()) + '/CAIO/img_1.jpg'
         self.showLockScreen = True
+        self.captureTime = 3    # in seconds
 
     # Lock Function for MacOS and Windows
     def lock(self):
@@ -72,7 +73,7 @@ class detectFace:
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-                time.sleep(3)
+                time.sleep(self.captureTime)
                 print("time")
 
         video_capture.release()
@@ -121,7 +122,7 @@ class detectFace:
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-                time.sleep(3)
+                time.sleep(self.captureTime)
                 print("time")
 
         video_capture.release()
@@ -202,7 +203,7 @@ class detectFace:
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-                # time.sleep(3)
+                # time.sleep(self.captureTime)
                 print("time")
 
         video_capture.release()
@@ -285,7 +286,7 @@ class detectFace:
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-                # time.sleep(3)
+                # time.sleep(self.captureTime)
                 print("time")
 
         video_capture.release()
