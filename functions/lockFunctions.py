@@ -17,13 +17,19 @@ class LockSystem:
         self.showLockScreen = True
         self.captureTime = 3    # in seconds
 
+        # Checking OS for Lock() function
+        self.osName = platform.platform()
+        if re.search("macOS", self.osName):
+            self.osName = "macOS"
+        elif re.search("Windows", self.osName):
+            self.osName = "Windows"
+
     # Lock Function for MacOS and Windows
     def lock(self):
-        osName = platform.platform()
-        if re.search("macOS", osName):
+        if self.osName == "macOS":
             loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
             loginPF.SACLockScreenImmediate()
-        elif re.search("Windows", osName):
+        elif self.osName == "Windows":
             ctypes.windll.user32.LockWorkStation()
         else:
             pass
