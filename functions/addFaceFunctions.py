@@ -11,7 +11,7 @@ from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtMultimedia import QCameraInfo, QCamera, QCameraImageCapture
 
 # Load HAAR face classifier
-face_classifier = cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
+# face_classifier = cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
 
 
 # Load functions
@@ -34,6 +34,7 @@ face_classifier = cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_de
 
 class AddFace(QObject):
     setCaptureDetails = Signal(str)
+    # setCaptureBtn = Signal(str)
     person = 0
 
     # constructor
@@ -41,15 +42,21 @@ class AddFace(QObject):
         super().__init__()
         self.settings = QSettings('CAIO', 'Preferences')
         # self.person = self.settings.value('person')
-        self.person = 1
+        self.person = self.settings.value('person')
         print(self.settings.value('person'))
 
         if self.person is None:
-            self.settings.setValue('person', 1)
+            self.settings.setValue('person', 0)
             # self.person = self.settings.value('person')
-            self.person = 1
+            self.person = 0
             print(self.person)
 
+        # self.captureBtn(self.person)
+
+        # if self.person == 0:
+        #     self.setCaptureBtn.emit("true")
+        # else:
+        #     self.setCaptureBtn.emit("false")
         # # getting available cameras
         # self.available_cameras = QCameraInfo.availableCameras()
         #
@@ -156,3 +163,12 @@ class AddFace(QObject):
         self.person = 1
         self.settings.setValue('person', self.person)
         self.setCaptureDetails.emit("Captured Successfully")
+        self.setCaptureBtn.emit("false")
+
+    # def captureBtn(self):
+    #     if self.person == 0:
+    #         self.setCaptureBtn.emit("true")
+    #         print("true")
+    #     else:
+    #         self.setCaptureBtn.emit("false")
+    #         print("false")

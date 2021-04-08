@@ -112,6 +112,7 @@ Item {
             Button{
                 id: captureBtn
                 text: qsTr("Capture")
+                enabled: true
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 18
 
@@ -214,8 +215,20 @@ Item {
         function onSetCaptureDetails(value) {
             cameraLabel.text = value
         }
+    }
 
-
+    Connections {
+        target: backend;
+        function onSetCaptureBtn(value) {
+            if (value === "true") {
+                captureBtn.enabled = true
+            }
+            else {
+                captureBtn.enabled = false
+                cameraLabel.text = "Remove Face first to Capture Add New Face"
+                cameraLabel.visible = true
+            }
+        }
     }
 
 }
