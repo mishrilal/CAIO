@@ -299,5 +299,5 @@ class LockSystem:
         cv2.destroyAllWindows()
 
 
-lock = LockSystem()
-lock.onlyAdminStrict()
+# lock = LockSystem()
+# lock.onlyAdminStrict()
