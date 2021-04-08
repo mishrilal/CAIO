@@ -215,6 +215,15 @@ Item {
         function onSetCaptureDetails(value) {
             cameraLabel.text = value
         }
+
+        function onSetCaptureBtn(value) {
+            if (value === "true") {
+                captureBtn.enabled = true
+            }
+            else {
+                captureBtn.enabled = false
+            }
+        }
     }
 
     Connections {
@@ -225,7 +234,7 @@ Item {
             }
             else {
                 captureBtn.enabled = false
-                cameraLabel.text = "Remove Face first to Capture Add New Face"
+                cameraLabel.text = "Remove Face first to Capture New Face"
                 cameraLabel.visible = true
             }
         }

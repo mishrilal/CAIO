@@ -34,7 +34,7 @@ from PySide2.QtMultimedia import QCameraInfo, QCamera, QCameraImageCapture
 
 class AddFace(QObject):
     setCaptureDetails = Signal(str)
-    # setCaptureBtn = Signal(str)
+    setCaptureBtn = Signal(str)
     person = 0
 
     # constructor
@@ -43,6 +43,7 @@ class AddFace(QObject):
         self.settings = QSettings('CAIO', 'Preferences')
         # self.person = self.settings.value('person')
         self.person = self.settings.value('person')
+        # self.settings.setValue('person', 0)
         print(self.settings.value('person'))
 
         if self.person is None:
@@ -164,7 +165,6 @@ class AddFace(QObject):
         self.settings.setValue('person', self.person)
         self.setCaptureDetails.emit("Captured Successfully")
         self.setCaptureBtn.emit("false")
-
     # def captureBtn(self):
     #     if self.person == 0:
     #         self.setCaptureBtn.emit("true")

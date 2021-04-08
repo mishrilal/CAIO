@@ -22,8 +22,6 @@ class MainWindow(QObject):
 
     def __init__(self):
         super().__init__()
-        self.settings = QSettings('CAIO', 'Preferences')
-        self.person = self.settings.value('person')
     #     try:
     #         print("load")
     #         self.resize(self.settings.value('window size'))
@@ -47,7 +45,9 @@ class MainWindow(QObject):
     @Slot()
     def addClicked(self):
         print("AddClicked")
-        if self.person == 0:
+        settings = QSettings('CAIO', 'Preferences')
+        person = settings.value('person')
+        if person == 0:
             self.setCaptureBtn.emit("true")
             print("true")
         else:
