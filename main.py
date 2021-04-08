@@ -13,10 +13,11 @@ from functions.settingsFunctions import SettingsPage, setSettingsValue
 
 
 class MainWindow(QObject):
-    setStartup = Signal(str)
-    setLockOthers = Signal(str)
-    setAutoLock = Signal(str)
     setAutoUnlock = Signal(str)
+    setOnlyAdmin = Signal(str)
+    setOnlyAdminStrict = Signal(str)
+    setSomeoneAppears = Signal(str)
+    setSomeoneAppearsStrict = Signal(str)
 
     def __init__(self):
         super().__init__()

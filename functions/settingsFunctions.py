@@ -10,10 +10,11 @@ def convertBool(value):
 # Called from main.py to set preference
 def setSettingsValue(self):
     self.settings = QSettings('CAIO', 'Preferences')
-    self.setStartup.emit(self.settings.value('startup'))
-    self.setLockOthers.emit(self.settings.value('lockOther'))
-    self.setAutoLock.emit(self.settings.value('autoLock'))
     self.setAutoUnlock.emit(self.settings.value('autoUnlock'))
+    self.setOnlyAdmin.emit(self.settings.value('onlyAdmin'))
+    self.setOnlyAdminStrict.emit(self.settings.value('onlyAdminStrict'))
+    self.setSomeoneAppears.emit(self.settings.value('someoneAppears'))
+    self.setSomeoneAppearsStrict.emit(self.settings.value('someoneAppearsStrict'))
 
 
 # def setSettingsValue():
@@ -31,21 +32,41 @@ class SettingsPage(QObject):
 
     # When "Unlock at StartUp" Clicked
     @Slot('QString')
-    def startupClicked(self, isChecked):
-        self.settings.setValue('startup', isChecked)
+    def autoUnlockClicked(self, isChecked):
+        self.settings.setValue('autoUnlock', isChecked)
         # print(isChecked)
 
     # When "Lock when other appears" Clicked
     @Slot('QString')
-    def lockOther(self, isChecked):
-        self.settings.setValue('lockOther', isChecked)
+    def onlyAdminClicked(self, isChecked):
+        self.settings.setValue('onlyAdmin', isChecked)
+        if isChecked == "true":
+            self.settings.setValue('onlyAdminStrict', "false")
+            self.settings.setValue('someoneAppears', "false")
+            self.settings.setValue('someoneAppearsStrict', "false")
 
     # When "Lock when other appears" Clicked
     @Slot('QString')
-    def autoLock(self, isChecked):
-        self.settings.setValue('autoLock', isChecked)
+    def onlyAdminStrictClicked(self, isChecked):
+        self.settings.setValue('onlyAdminStrict', isChecked)
+        if isChecked == "true":
+            self.settings.setValue('onlyAdmin', "false")
+            self.settings.setValue('someoneAppears', "false")
+            self.settings.setValue('someoneAppearsStrict', "false")
 
     # When "Auto Unlock when you are there" Clicked
     @Slot('QString')
-    def autoUnlock(self, isChecked):
-        self.settings.setValue('autoUnlock', isChecked)
+    def someoneAppearsClicked(self, isChecked):
+        self.settings.setValue('someoneAppears', isChecked)
+        if isChecked == "true":
+            self.settings.setValue('onlyAdminStrict', "false")
+            self.settings.setValue('onlyAdmin', "false")
+            self.settings.setValue('someoneAppearsStrict', "false")
+
+    @Slot('QString')
+    def someoneAppearsStrictClicked(self, isChecked):
+        self.settings.setValue('someoneAppearsStrict', isChecked)
+        if isChecked == "true":
+            self.settings.setValue('onlyAdminStrict', "false")
+            self.settings.setValue('someoneAppears', "false")
+            self.settings.setValue('onlyAdmin', "false")

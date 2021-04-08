@@ -40,21 +40,23 @@ Item {
             anchors.topMargin: 50
 
             CheckBox {
-                id: unlockStartup
+                id: autoUnlock
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                enabled: false
+                checkable: true
                 spacing: 25
                 indicator: Rectangle {
-                    x: unlockStartup.leftPadding
+                    x: autoUnlock.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: unlockStartup.down ? "#17a81a" : "#21be2b"
+                    border.color: autoUnlock.down ? "#17a81a" : "#21be2b"
                     implicitHeight: 26
                     Text {
-                        visible: unlockStartup.checked
-                        color: unlockStartup.down ? "#17a81a" : "#21be2b"
+                        visible: autoUnlock.checked
+                        color: autoUnlock.down ? "#17a81a" : "#21be2b"
                         text: "\u2714"
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -68,15 +70,15 @@ Item {
                 font.weight: Font.Medium
 
                 onClicked: {
-                    settingsBackend.startupClicked(checked)
+                    settingsBackend.autoUnlockClicked(checked)
                 }
             }
 
             Label {
                 id: label2
                 color: "#ffffff"
-                text: qsTr("Unlock at startup")
-                anchors.left: unlockStartup.right
+                text: qsTr("Auto Unlock")
+                anchors.left: autoUnlock.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 horizontalAlignment: Text.AlignLeft
@@ -99,21 +101,22 @@ Item {
             anchors.topMargin: 10
 
             CheckBox {
-                id: lockOtherPerson
+                id: onlyAdminStrict
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                autoRepeat: true
                 spacing: 25
                 font.pointSize: 18
                 font.weight: Font.Medium
                 indicator: Rectangle {
                     implicitWidth: 26
                     implicitHeight: 26
-                    x: lockOtherPerson.leftPadding
+                    x: onlyAdminStrict.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: lockOtherPerson.down ? "#17a81a" : "#21be2b"
+                    border.color: onlyAdminStrict.down ? "#17a81a" : "#21be2b"
 
                     Text {
                         text: "✔"
@@ -121,21 +124,24 @@ Item {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         font.pointSize: 18
-                        color: lockOtherPerson.down ? "#17a81a" : "#21be2b"
-                        visible: lockOtherPerson.checked
+                        color: onlyAdminStrict.down ? "#17a81a" : "#21be2b"
+                        visible: onlyAdminStrict.checked
 
                     }
                 }
                 onClicked: {
-                    settingsBackend.lockOther(checked)
+                    settingsBackend.onlyAdminStrictClicked(checked)
+                    onlyAdmin.checked = false
+                    someoneAppears.checked = false
+                    someoneAppearsStrict.checked = false
                 }
             }
 
             Label {
                 id: label1
                 color: "#ffffff"
-                text: qsTr("Lock when other person appears")
-                anchors.left: lockOtherPerson.right
+                text: qsTr("Only Admin Strict")
+                anchors.left: onlyAdminStrict.right
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -161,21 +167,21 @@ Item {
             anchors.rightMargin: 20
             anchors.topMargin: 10
             CheckBox {
-                id: autoLock
+                id: onlyAdmin
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 spacing: 25
                 indicator: Rectangle {
-                    x: autoLock.leftPadding
+                    x: onlyAdmin.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: autoLock.down ? "#17a81a" : "#21be2b"
+                    border.color: onlyAdmin.down ? "#17a81a" : "#21be2b"
                     implicitHeight: 26
                     Text {
-                        visible: autoLock.checked
-                        color: autoLock.down ? "#17a81a" : "#21be2b"
+                        visible: onlyAdmin.checked
+                        color: onlyAdmin.down ? "#17a81a" : "#21be2b"
                         text: "\u2714"
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -187,15 +193,18 @@ Item {
                 font.pointSize: 18
                 font.weight: Font.Medium
                 onClicked: {
-                    settingsBackend.autoLock(checked)
+                    settingsBackend.onlyAdminClicked(checked)
+                    onlyAdminStrict.checked = false
+                    someoneAppears.checked = false
+                    someoneAppearsStrict.checked = false
                 }
             }
 
             Label {
                 id: label3
                 color: "#ffffff"
-                text: qsTr("Auto Lock when you are not there")
-                anchors.left: autoLock.right
+                text: qsTr("Only Admin or No one")
+                anchors.left: onlyAdmin.right
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -218,21 +227,21 @@ Item {
             anchors.rightMargin: 20
             anchors.topMargin: 10
             CheckBox {
-                id: autoUnlock
+                id: someoneAppearsStrict
                 width: 47
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 spacing: 25
                 indicator: Rectangle {
-                    x: autoUnlock.leftPadding
+                    x: someoneAppearsStrict.leftPadding
                     y: parent.height / 2 - height / 2
                     radius: 3
-                    border.color: autoUnlock.down ? "#17a81a" : "#21be2b"
+                    border.color: someoneAppearsStrict.down ? "#17a81a" : "#21be2b"
                     implicitHeight: 26
                     Text {
-                        visible: autoUnlock.checked
-                        color: autoUnlock.down ? "#17a81a" : "#21be2b"
+                        visible: someoneAppearsStrict.checked
+                        color: someoneAppearsStrict.down ? "#17a81a" : "#21be2b"
                         text: "\u2714"
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -245,15 +254,18 @@ Item {
                 font.weight: Font.Medium
 
                 onClicked: {
-                    settingsBackend.autoUnlock(checked)
+                    settingsBackend.someoneAppearsStrictClicked(checked)
+                    onlyAdmin.checked = false
+                    onlyAdminStrict.checked = false
+                    someoneAppears.checked = false
                 }
             }
 
             Label {
                 id: label4
                 color: "#ffffff"
-                text: qsTr("Auto unlock when you are there")
-                anchors.left: autoUnlock.right
+                text: qsTr("Someone Appears Strict")
+                anchors.left: someoneAppearsStrict.right
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
@@ -263,6 +275,66 @@ Item {
                 anchors.leftMargin: 0
                 font.pointSize: 18
             }
+        }
+
+        Rectangle {
+            id: rectangle5
+            height: 38
+            color: "#00000000"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: rectangle4.bottom
+            CheckBox {
+                id: someoneAppears
+                width: 47
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                spacing: 25
+                font.weight: Font.Medium
+                indicator: Rectangle {
+                    x: someoneAppears.leftPadding
+                    y: parent.height / 2 - height / 2
+                    radius: 3
+                    border.color: someoneAppears.down ? "#17a81a" : "#21be2b"
+                    Text {
+                        visible: someoneAppears.checked
+                        color: someoneAppears.down ? "#17a81a" : "#21be2b"
+                        text: "\u2714"
+                        anchors.fill: parent
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        font.pointSize: 18
+                    }
+                    implicitWidth: 26
+                    implicitHeight: 26
+                }
+                onClicked: {
+                    settingsBackend.someoneAppearsClicked(checked)
+                    onlyAdmin.checked = false
+                    onlyAdminStrict.checked = false
+                    someoneAppearsStrict.checked = false
+                }
+                font.pointSize: 18
+            }
+
+            Label {
+                id: label5
+                color: "#ffffff"
+                text: qsTr("Someone appears or no one")
+                anchors.left: someoneAppears.right
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Times New Roman"
+                anchors.leftMargin: 0
+                font.pointSize: 18
+            }
+            anchors.rightMargin: 20
+            anchors.leftMargin: 50
+            anchors.topMargin: 10
         }
     }
 
@@ -279,33 +351,6 @@ Item {
     Connections {
         target: backend;
 
-        function onSetStartup(value) {
-            if (value === "true") {
-                unlockStartup.checked = true
-            }
-            else {
-                unlockStartup.checked = false
-            }
-        }
-
-        function onSetLockOthers(value) {
-            if (value === "true") {
-                lockOtherPerson.checked = true
-            }
-            else {
-                lockOtherPerson.checked = false
-            }
-        }
-
-        function onSetAutoLock(value) {
-            if (value === "true") {
-                autoLock.checked = true
-            }
-            else {
-                autoLock.checked = false
-            }
-        }
-
         function onSetAutoUnlock(value) {
             if (value === "true") {
                 autoUnlock.checked = true
@@ -315,12 +360,47 @@ Item {
             }
         }
 
+        function onSetOnlyAdminStrict(value) {
+            if (value === "true") {
+                onlyAdminStrict.checked = true
+            }
+            else {
+                onlyAdminStrict.checked = false
+            }
+        }
+
+        function onSetOnlyAdmin(value) {
+            if (value === "true") {
+                onlyAdmin.checked = true
+            }
+            else {
+                onlyAdmin.checked = false
+            }
+        }
+
+        function onSetSomeoneAppearsStrict(value) {
+            if (value === "true") {
+                someoneAppearsStrict.checked = true
+            }
+            else {
+                someoneAppearsStrict.checked = false
+            }
+        }
+
+        function onSetSomeoneAppears(value) {
+            if (value === "true") {
+                someoneAppears.checked = true
+            }
+            else {
+                someoneAppears.checked = false
+            }
+        }
     }
 
 }
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:800}
+    D{i:0;autoSize:true;height:480;width:800}D{i:23}
 }
 ##^##*/

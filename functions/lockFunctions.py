@@ -11,7 +11,7 @@ import cv2
 from ctypes import CDLL
 
 
-class detectFace:
+class LockSystem:
     def __init__(self):
         self.imgPath = str(Path.home()) + '/CAIO/img_1.jpg'
         self.showLockScreen = True
@@ -29,7 +29,7 @@ class detectFace:
             pass
 
     # keeps unlock until you in frame
-    def youNoOneStrict(self):
+    def onlyAdminStrict(self):
         video_capture = cv2.VideoCapture(0)
 
         if path.isfile(self.imgPath):
@@ -80,7 +80,7 @@ class detectFace:
         cv2.destroyAllWindows()
 
     # Keeps unlocked if you or no one in frame
-    def youNoOne(self):
+    def onlyAdmin(self):
         video_capture = cv2.VideoCapture(0)
 
         if path.isfile(self.imgPath):
@@ -293,5 +293,5 @@ class detectFace:
         cv2.destroyAllWindows()
 
 
-lock = detectFace()
-lock.youNoOneStrict()
+lock = LockSystem()
+lock.onlyAdminStrict()
