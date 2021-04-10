@@ -4,6 +4,7 @@ import time
 from pathlib import Path
 from os import path
 import ctypes
+import getpass
 
 import numpy as np
 import face_recognition as fr
@@ -16,6 +17,9 @@ class LockSystem:
         self.imgPath = str(Path.home()) + '/CAIO/img_1.jpg'
         self.showLockScreen = True
         self.captureTime = 3    # in seconds
+
+        self.userName = getpass.getuser()
+        self.userName = self.userName.capitalize()
 
         # Checking OS for Lock() function
         self.osName = platform.platform()
@@ -43,7 +47,7 @@ class LockSystem:
             user_face_encoding = fr.face_encodings(user_image)[0]
 
             known_face_encodings = [user_face_encoding]
-            known_face_names = ["ADMIN"]
+            known_face_names = [self.userName]
 
             while True:
                 ret, frame = video_capture.read()
@@ -94,7 +98,7 @@ class LockSystem:
             user_face_encoding = fr.face_encodings(user_image)[0]
 
             known_face_encodings = [user_face_encoding]
-            known_face_names = ["ADMIN"]
+            known_face_names = [self.userName]
 
             while True:
                 ret, frame = video_capture.read()
@@ -143,7 +147,7 @@ class LockSystem:
             user_face_encoding = fr.face_encodings(user_image)[0]
 
             known_face_encodings = [user_face_encoding]
-            known_face_names = ["ADMIN"]
+            known_face_names = [self.userName]
 
             while True:
                 ret, frame = video_capture.read()
@@ -224,7 +228,7 @@ class LockSystem:
             user_face_encoding = fr.face_encodings(user_image)[0]
 
             known_face_encodings = [user_face_encoding]
-            known_face_names = ["ADMIN"]
+            known_face_names = [self.userName]
 
             while True:
                 ret, frame = video_capture.read()
