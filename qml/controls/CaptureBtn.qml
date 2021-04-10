@@ -73,7 +73,7 @@ Button{
             anchors.left: parent.left
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            minimumPixelSize: 20
+            minimumPixelSize: 14
             anchors.leftMargin: 75
         }
     }

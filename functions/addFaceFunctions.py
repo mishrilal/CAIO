@@ -125,7 +125,9 @@ class AddFace(QObject):
         # Initialize Webcam
         cap = cv2.VideoCapture(0)
         count = 0
-        # Collect 100 samples of your face from webcam input
+
+        self.person = 1
+        self.settings.setValue('person', self.person)
 
         while True:
 
@@ -161,8 +163,7 @@ class AddFace(QObject):
         # print("Collecting Samples Complete")
         # self.click_photo()
         # self.person += 1
-        self.person = 1
-        self.settings.setValue('person', self.person)
+
         self.setCaptureDetails.emit("Captured Successfully")
         self.setCaptureBtn.emit("false")
     # def captureBtn(self):

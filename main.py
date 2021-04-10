@@ -9,6 +9,7 @@ from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
 from functions.dashboardFunctions import DashboardPage
+from functions.removeFaceFunctions import RemoveFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
 
 
@@ -19,6 +20,8 @@ class MainWindow(QObject):
     setSomeoneAppears = Signal(str)
     setSomeoneAppearsStrict = Signal(str)
     setCaptureBtn = Signal(str)
+    removeImage = Signal(str)
+    checkImage = Signal(str)
 
     def __init__(self):
         super().__init__()
@@ -41,12 +44,20 @@ class MainWindow(QObject):
     @Slot()
     def viewClicked(self):
         print("ViewClicked")
+        settings = QSettings('CAIO', 'Preferences')
+        person = settings.value('person')
+        print("Check ", person)
+        if person == 1:
+            self.checkImage.emit("true")
+        else:
+            self.checkImage.emit("false")
 
     @Slot()
     def addClicked(self):
         print("AddClicked")
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
+        print("ads", person)
         if person == 0:
             self.setCaptureBtn.emit("true")
             print("true")
@@ -57,6 +68,11 @@ class MainWindow(QObject):
     @Slot()
     def removeClicked(self):
         print("RemoveClicked")
+        settings = QSettings('CAIO', 'Preferences')
+        person = settings.value('person')
+        print("Rm ", person)
+        if person == 0:
+            self.removeImage.emit("true")
 
     @Slot()
     def settingsClicked(self):
@@ -74,11 +90,13 @@ if __name__ == "__main__":
     addFace = AddFace()
     settingsPage = SettingsPage()
     dashboardPage = DashboardPage()
+    removePage = RemoveFace()
 
     engine.rootContext().setContextProperty("backend", main)
     engine.rootContext().setContextProperty("addFaceBackend", addFace)
     engine.rootContext().setContextProperty("settingsBackend", settingsPage)
     engine.rootContext().setContextProperty("dashboardBackend", dashboardPage)
+    engine.rootContext().setContextProperty("removeBackend", removePage)
 
     engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))
 

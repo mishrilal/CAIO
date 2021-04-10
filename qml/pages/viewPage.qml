@@ -23,6 +23,15 @@ Item {
             anchors.topMargin: 10
             font.pointSize: 16
         }
+        Label {
+            id: label1
+            color: "#ffffff"
+            text: qsTr("No Face Found")
+            anchors.verticalCenter: parent.verticalCenter
+            font.pointSize: 18
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: true
+        }
 
         Rectangle {
             id: rectangle1
@@ -36,6 +45,7 @@ Item {
             anchors.leftMargin: 10
             anchors.bottomMargin: 0
             anchors.topMargin: 10
+            visible: true
 
             Image {
                 id: image
@@ -46,6 +56,8 @@ Item {
                 source: "../../images/captured/img_1.jpg"
                 fillMode: Image.PreserveAspectFit
             }
+
+
 
 //            ScrollView {
 //                id: scrollView
@@ -88,6 +100,20 @@ Item {
         }
     }
 
+    Connections{
+        target: backend
+
+        function onCheckImage(value){
+            if (value === "true"){
+                rectangle1.visible = true
+                label1.visible = false
+            }
+            else {
+                rectangle1.visible = false
+                label1.visible = true
+            }
+        }
+    }
 
 }
 
