@@ -62,7 +62,7 @@ Item {
                 Image {
                     id: image
                     anchors.fill: parent
-                    source: "../../images/captured/img_1.jpg"
+                    source: ""
                     fillMode: Image.PreserveAspectFit
 
                     Button {
@@ -143,8 +143,11 @@ Item {
             }
             else {
                 rectangle1.visible = true
-//                label1.visible = false
             }
+        }
+        function onSetImagePath(value){
+            image.source = value
+            print("path ", value)
         }
     }
 

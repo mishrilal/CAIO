@@ -140,7 +140,7 @@ class AddFace(QObject):
                 # Save file in specified directory with unique name
                 # imgName = 'img_person' + str(self.person) + '_' + str(count)
                 file_name_path = self.save_path + 'img_' + str(self.person) + '.jpg'
-                cv2.imwrite(file_name_path, frame)
+                # cv2.imwrite(file_name_path, frame)
 
                 cv2.imwrite(os.path.join(self.save_path2, "img_%s.jpg" % (str(self.person))), frame)
 

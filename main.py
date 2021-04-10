@@ -2,6 +2,8 @@ import os
 import sys
 
 # MAIN WINDOW
+from pathlib import Path
+
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtGui import QIcon
 from PySide2.QtQml import QQmlApplicationEngine
@@ -22,9 +24,11 @@ class MainWindow(QObject):
     setCaptureBtn = Signal(str)
     removeImage = Signal(str)
     checkImage = Signal(str)
+    setImagePath = Signal(str)
 
     def __init__(self):
         super().__init__()
+
     #     try:
     #         print("load")
     #         self.resize(self.settings.value('window size'))
@@ -44,11 +48,16 @@ class MainWindow(QObject):
     @Slot()
     def viewClicked(self):
         print("ViewClicked")
+
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
+
+        path = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+
         print("Check ", person)
         if person == 1:
             self.checkImage.emit("true")
+            self.setImagePath.emit(path)
         else:
             self.checkImage.emit("false")
 
@@ -70,9 +79,13 @@ class MainWindow(QObject):
         print("RemoveClicked")
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
+
+        path = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
         print("Rm ", person)
         if person == 0:
             self.removeImage.emit("true")
+        else:
+            self.setImagePath.emit(path)
 
     @Slot()
     def settingsClicked(self):

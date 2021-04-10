@@ -53,7 +53,7 @@ Item {
                 x: 8
                 y: 0
                 width: 250
-                source: "../../images/captured/img_1.jpg"
+                source: ""
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -112,6 +112,11 @@ Item {
                 rectangle1.visible = false
                 label1.visible = true
             }
+        }
+
+        function onSetImagePath(value){
+            image.source = value
+            print("path ", value)
         }
     }
 
