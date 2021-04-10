@@ -2,6 +2,7 @@ import os
 import pathlib
 import sys
 from pathlib import Path
+from os import path
 import time
 
 import cv2
@@ -9,6 +10,7 @@ import cv2
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 
 from PySide2.QtMultimedia import QCameraInfo, QCamera, QCameraImageCapture
+
 
 # Load HAAR face classifier
 # face_classifier = cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
@@ -44,7 +46,13 @@ class AddFace(QObject):
         # self.person = self.settings.value('person')
         self.person = self.settings.value('person')
         # self.settings.setValue('person', 0)
+
         print(self.settings.value('person'))
+        pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(self.person)
+
+        if not path.isfile(pathImage):
+            self.settings.setValue('person', 0)
+            self.person = 0
 
         if self.person is None:
             self.settings.setValue('person', 0)

@@ -3,6 +3,7 @@ import sys
 
 # MAIN WINDOW
 from pathlib import Path
+from os import path
 
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtGui import QIcon
@@ -52,13 +53,16 @@ class MainWindow(QObject):
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
 
-        path = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+        pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
 
         print("Check ", person)
-        if person == 1:
+        if path.isfile(pathImage):
+            print("Image Found")
+        # if person == 1:
             self.checkImage.emit("true")
-            self.setImagePath.emit(path)
+            self.setImagePath.emit(pathImage)
         else:
+            settings.setValue('person', 0)
             self.checkImage.emit("false")
 
     @Slot()
@@ -80,12 +84,14 @@ class MainWindow(QObject):
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
 
-        path = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+        pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
         print("Rm ", person)
-        if person == 0:
+        # if person == 0:
+        if not path.isfile(pathImage):
+            settings.setValue('person', 0)
             self.removeImage.emit("true")
         else:
-            self.setImagePath.emit(path)
+            self.setImagePath.emit(pathImage)
 
     @Slot()
     def settingsClicked(self):
