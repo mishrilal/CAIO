@@ -73,7 +73,9 @@ Button{
             anchors.left: parent.left
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            minimumPixelSize: 14
+            font.pointSize: 16
+            font.family: "Times New Roman"
+            minimumPixelSize: 10
             anchors.leftMargin: 75
         }
     }
