@@ -104,6 +104,8 @@ if __name__ == "__main__":
     app.setWindowIcon(QIcon("images/svg_images/logo_icon.svg"))
     engine = QQmlApplicationEngine()
 
+
+
     # Get Context
     main = MainWindow()
     addFace = AddFace()

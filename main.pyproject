@@ -1,3 +1,3 @@
 {
-    "files": ["qml/controls/ToggleButton.qml","qml/controls/LeftMenuBtn.qml","qml/pages/addPageAlternative.ui","qml/pages/dashboardPage.qml","qml/pages/settingsPage.qml","qml/controls/TopBarButton.qml","main.py","qml/controls/CameraLive.qml","main.qml"]
+    "files": ["qml/pages/dashboardPage.qml","qml/controls/CameraLive.qml","qml/pages/settingsPage.qml","qml/controls/CircularProgress.qml","qml/controls/LeftMenuBtn.qml","main.py","qml/pages/addPageAlternative.ui","qml/controls/ToggleButton.qml","qml/controls/TopBarButton.qml","main.qml","qml/controls/CircularProgress.qml","qml/controls/CircularProgressForm.ui.qml"]
 }
