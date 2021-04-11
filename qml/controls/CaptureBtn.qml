@@ -9,8 +9,8 @@ Button{
 
     //Custom properties
     property url btnIconSource: "../../images/svg_images/capture_icon.svg"
-    property color btnColorDefault: "#1c1d20"
-    property color btnColorMouseOver: "#23272E"
+    property color btnColorDefault: "#5e64e5"
+    property color btnColorMouseOver: "#767BF8"
     property color btnColorClicked: "#00a1f1"
     property int iconWidth: 18
     property int iconHeight: 18
@@ -66,14 +66,15 @@ Button{
         }
 
         Text{
-            color: "#7f5fac"
+            color: "#a184cb"
             text: "Capture"
             font: captureBtn.font
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.pointSize: 16
+            minimumPointSize: 6
+            font.pointSize: 21
             font.family: "Times New Roman"
             minimumPixelSize: 10
             anchors.leftMargin: 75

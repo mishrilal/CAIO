@@ -9,8 +9,8 @@ import "../controls"
 Item {
     //Custom properties
     property url btnIconSource: "../../images/svg_images/capture_icon.svg"
-    property color btnColorDefault: "#1c1d20"
-    property color btnColorMouseOver: "#23272E"
+    property color btnColorDefault: "#5e64e5"
+    property color btnColorMouseOver: "#767BF8"
     property color btnColorClicked: "#00a1f1"
     property int iconWidth: 18
     property int iconHeight: 18
@@ -111,6 +111,8 @@ Item {
             Button{
                 id: captureBtn
                 text: qsTr("Capture")
+                font.bold: true
+                font.family: "Times New Roman"
                 enabled: true
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 18
@@ -159,7 +161,7 @@ Item {
                     ColorOverlay{
                         anchors.fill: iconBtn
                         source: iconBtn
-                        color: "#7f5fac"
+                        color: "#000000"
                         anchors.verticalCenter: parent.verticalCenter
                         antialiasing: true
                         width: iconWidth
@@ -167,14 +169,13 @@ Item {
                     }
 
                     Text{
-                        color: "#7f5fac"
+                        color: "#000000"
                         text: "Capture"
                         font: captureBtn.font
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        minimumPixelSize: 20
                         anchors.leftMargin: 75
                     }
                 }

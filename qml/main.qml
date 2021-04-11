@@ -8,7 +8,7 @@ Window {
     id: mainWindow
     width: 1000
     height: 580
-    minimumWidth: 800
+    minimumWidth: 1000
     minimumHeight: 500
     visible: true
     color: "#00000000"
