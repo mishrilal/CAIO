@@ -11,15 +11,29 @@ import face_recognition as fr
 import cv2
 from ctypes import CDLL
 
+from PySide2.QtCore import QSettings
+
 
 class LockSystem:
     def __init__(self):
         self.imgPath = str(Path.home()) + '/CAIO/img_1.jpg'
         self.showLockScreen = True
-        self.captureTime = 3    # in seconds
+        self.captureTime = 3  # in seconds
 
         self.userName = getpass.getuser()
         self.userName = self.userName.capitalize()
+
+        self.settings = QSettings('CAIO', 'Preferences')
+        self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
+        self.totalLocks = self.settings.value('totalLocks')
+
+        if self.noOfLocksAdmin is None:
+            self.noOfLocksAdmin = 0
+            self.settings.setValue('noOfLocksAdmin', self.noOfLocksAdmin)
+
+        if self.totalLocks is None:
+            self.totalLocks = 0
+            self.settings.setValue('totalLocks', self.totalLocks)
 
         # Checking OS for Lock() function
         self.osName = platform.platform()
@@ -28,15 +42,19 @@ class LockSystem:
         elif re.search("Windows", self.osName):
             self.osName = "Windows"
 
+        self.isLocked = False
+        self.isUnlocked = True
+
     # Lock Function for MacOS and Windows
     def lock(self):
-        if self.osName == "macOS":
-            loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
-            loginPF.SACLockScreenImmediate()
-        elif self.osName == "Windows":
-            ctypes.windll.user32.LockWorkStation()
-        else:
-            pass
+        self.isLocked = True
+        # if self.osName == "macOS":
+        #     loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
+        #     loginPF.SACLockScreenImmediate()
+        # elif self.osName == "Windows":
+        #     ctypes.windll.user32.LockWorkStation()
+        # else:
+        #     pass
 
     # keeps unlock until you in frame
     def onlyAdminStrict(self):
@@ -58,6 +76,7 @@ class LockSystem:
                 face_encodings = fr.face_encodings(rgb_frame, face_locations)
 
                 self.showLockScreen = True
+                self.isUnlocked = False
 
                 for face_encodings in face_encodings:
                     matches = fr.compare_faces(known_face_encodings, face_encodings)
@@ -69,6 +88,7 @@ class LockSystem:
                         self.name = known_face_names[best_match_index]
                         self.showLockScreen = False
                         print(self.name)
+                        self.isUnlocked = True
 
                     else:
                         self.showLockScreen = True
@@ -80,11 +100,24 @@ class LockSystem:
                     print("lock")
                     self.lock()
 
+                if self.isUnlocked:
+                    if self.isLocked:
+                        self.noOfLocksAdmin += 1
+                        self.totalLocks += 1
+                        self.settings.setValue('noOfLocksAdmin', self.noOfLocksAdmin)
+                        self.settings.setValue('totalLocks', self.totalLocks)
+                        print("noOfLocks: ", self.noOfLocksAdmin)
+                        print("TotalLocks: ", self.totalLocks)
+                        self.isLocked = False
+
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
                 time.sleep(self.captureTime)
+                # time.sleep(1)
                 print("time")
+                print("isLocked: ", self.isLocked)
+                print("isUnlocked: ", self.isUnlocked)
 
         video_capture.release()
         cv2.destroyAllWindows()
@@ -301,7 +334,6 @@ class LockSystem:
 
         video_capture.release()
         cv2.destroyAllWindows()
-
 
 # lock = LockSystem()
 # lock.onlyAdminStrict()

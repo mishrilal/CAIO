@@ -23,7 +23,7 @@ Item {
     property color bgStrokeColor: "#7e7e7e"
     property int strokeBgWidth: 16
     // Progress Circle
-    property color progressColor: "#55aaff"
+    property color progressColor: "#1842d1"
     property int progressWidth: 16
     // Text
     property string text: "%"

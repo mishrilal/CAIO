@@ -68,6 +68,9 @@ Item {
                             text: " "
                             anchors.fill: parent
                             infoText: "Locks When Admin is Not present"
+                            opacity: 0
+                            value: 0
+                            startAngle: 90
                         }
 
                     }
@@ -231,6 +234,20 @@ Item {
 
     Connections {
         target: dashboardBackend
+
+        function onSetMaxValue(value) {
+            circularProgressLeft.maxValue = value
+            circularProgressCenter.maxValue = value
+            circularProgressRight.maxValue = value
+            cicrularProgressLeftKeyFrameMaxValue.value = value
+            cicrularProgressCenterKeyFrameMaxValue.value = value
+            cicrularProgressRightKeyFrameMaxValue.value = value
+        }
+
+        function onSetAdminLocks(value) {
+            circularProgressLeft.value = value
+            cicrularProgressLeftKeyFrameValue.value = value
+        }
     }
 
 
@@ -263,11 +280,12 @@ Item {
                 value: 0
             }
         }
+
         KeyframeGroup {
             target: circularProgressCenter
             property: "opacity"
             Keyframe {
-                frame: 800
+                frame: 1000
                 value: 1
             }
 
@@ -276,6 +294,7 @@ Item {
                 value: 0
             }
         }
+
         KeyframeGroup {
             target: circularProgressRight
             property: "opacity"
@@ -295,6 +314,7 @@ Item {
             target: circularProgressLeft
             property: "value"
             Keyframe {
+                id: cicrularProgressLeftKeyFrameMaxValue
                 easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
                 frame: 1100
                 value: 100
@@ -306,8 +326,9 @@ Item {
             }
 
             Keyframe {
+                id: cicrularProgressLeftKeyFrameValue
                 frame: 1600
-                value: 70
+                value: 0
             }
         }
 
@@ -315,6 +336,7 @@ Item {
             target: circularProgressCenter
             property: "value"
             Keyframe {
+                id: cicrularProgressCenterKeyFrameMaxValue
                 easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
                 frame: 1100
                 value: 100
@@ -326,8 +348,9 @@ Item {
             }
 
             Keyframe {
+                id: cicrularProgressCenterKeyFrameValue
                 frame: 1600
-                value: 55
+                value: 0
             }
         }
 
@@ -335,6 +358,7 @@ Item {
             target: circularProgressRight
             property: "value"
             Keyframe {
+                id: cicrularProgressRightKeyFrameMaxValue
                 easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
                 frame: 1100
                 value: 100
@@ -346,8 +370,9 @@ Item {
             }
 
             Keyframe {
+                id: cicrularProgressRightKeyFrameValue
                 frame: 1600
-                value: 30
+                value: 0
             }
         }
 
