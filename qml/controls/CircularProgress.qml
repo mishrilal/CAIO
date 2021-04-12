@@ -10,9 +10,9 @@ Item {
     // Properties
     // General
     property bool roundCap: true
-    property int startAngle: -90
+    property int startAngle: 90
     property real maxValue: 100
-    property real value: 50
+    property real value: 55
     property int samples: 12
     // Drop Shadow
     property bool enableDropShadow: false

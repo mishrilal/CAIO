@@ -1,6 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
+import QtQuick.Layouts 1.0
+import QtGraphicalEffects 1.15
+import QtQuick.Timeline 1.0
+
 import "../controls/"
 
 Item {
@@ -98,6 +102,15 @@ Item {
                             text: " "
                             anchors.fill: parent
                             infoText: "Locks When nobody is there"
+//                            opacity: 0
+//                            value: 0
+//                            startAngle: 90
+//                            progressColor: "#bfdd04"
+//                            progressWidth: 6
+//                            textSize: 14
+//                            roundCap: false
+//                            strokeBgWidth: 6
+//                            bgStrokeColor: "#101010"
                         }
 
                     }
@@ -220,10 +233,132 @@ Item {
         target: dashboardBackend
     }
 
+
+    Timeline {
+        id: timeline
+        animations: [
+            TimelineAnimation {
+                id: timelineAnimation
+                running: true
+                loops: 1
+                duration: 3000
+                to: 3000
+                from: 0
+            }
+        ]
+        endFrame: 3000
+        enabled: true
+        startFrame: 0
+
+        KeyframeGroup {
+            target: circularProgressLeft
+            property: "opacity"
+            Keyframe {
+                frame: 800
+                value: 1
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+        }
+        KeyframeGroup {
+            target: circularProgressCenter
+            property: "opacity"
+            Keyframe {
+                frame: 800
+                value: 1
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+        }
+        KeyframeGroup {
+            target: circularProgressRight
+            property: "opacity"
+            Keyframe {
+                frame: 800
+                value: 1
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+        }
+
+
+        KeyframeGroup {
+            target: circularProgressLeft
+            property: "value"
+            Keyframe {
+                easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
+                frame: 1100
+                value: 100
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 1600
+                value: 70
+            }
+        }
+
+        KeyframeGroup {
+            target: circularProgressCenter
+            property: "value"
+            Keyframe {
+                easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
+                frame: 1100
+                value: 100
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 1600
+                value: 55
+            }
+        }
+
+        KeyframeGroup {
+            target: circularProgressRight
+            property: "value"
+            Keyframe {
+                easing.bezierCurve: [0.664,0.0036,0.334,1,1,1]
+                frame: 1100
+                value: 100
+            }
+
+            Keyframe {
+                frame: 0
+                value: 0
+            }
+
+            Keyframe {
+                frame: 1600
+                value: 30
+            }
+        }
+
+
+    }
+
+
 }
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:6}D{i:8}D{i:10}D{i:5}
+    D{i:0;autoSize:true;height:480;width:640}D{i:18}
 }
 ##^##*/
