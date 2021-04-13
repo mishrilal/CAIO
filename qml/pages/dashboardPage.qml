@@ -82,8 +82,8 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: rectangleLeft.right
                         anchors.right: rectangleRight.left
-                        anchors.rightMargin: 5
-                        anchors.leftMargin: 5
+                        anchors.rightMargin: 10
+                        anchors.leftMargin: 10
                         CircularProgress {
                             id: circularProgressCenter
                             text: " "
@@ -242,11 +242,22 @@ Item {
             cicrularProgressLeftKeyFrameMaxValue.value = value
             cicrularProgressCenterKeyFrameMaxValue.value = value
             cicrularProgressRightKeyFrameMaxValue.value = value
+            print("Total Locks", value)
         }
 
         function onSetAdminLocks(value) {
             circularProgressLeft.value = value
             cicrularProgressLeftKeyFrameValue.value = value
+        }
+
+        function onSetSomeoneElseLocks(value) {
+            circularProgressCenter.value = value
+            cicrularProgressCenterKeyFrameValue.value = value
+        }
+
+        function onSetNobodyLocks(value) {
+            circularProgressRight.value = value
+            cicrularProgressRightKeyFrameValue.value = value
         }
     }
 
