@@ -88,6 +88,7 @@ Item {
                             id: circularProgressCenter
                             text: " "
                             anchors.fill: parent
+                            value: 0.01
                             infoText: "Locks When SomeOne came"
                         }
 
