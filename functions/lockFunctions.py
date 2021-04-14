@@ -426,6 +426,8 @@ class LockSystem:
                             self.isUnlocked = True
                         else:
                             self.showLockScreen = True
+                            if self.countFace != 0:
+                                self.someoneElseLocked = True
                             self.lock()
 
                 if self.showLockScreen:
@@ -444,18 +446,23 @@ class LockSystem:
 
                         if self.isNobody:
                             self.noOfNobodyLocks += 1
-                            self.noOfSomeoneElseLocks += 1
+                            # self.noOfSomeoneElseLocks += 1
                             self.settings.setValue('noOfNobodyLocks', self.noOfNobodyLocks)
-                            self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
-
+                            # self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
+                            print("isNobody", self.isNobody, self.someoneElseLocked)
+                            self.isNobody = False
                         else:
-                            self.noOfSomeoneElseLocks += 1
-                            self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
+                            if self.someoneElseLocked:
+                                if not self.isNobody:
+                                    self.noOfSomeoneElseLocks += 1
+                                    print("someoneElseLocked", self.isNobody, self.someoneElseLocked)
+                                    self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
+                                    self.someoneElseLocked = False
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
-                # time.sleep(self.captureTime)
+                time.sleep(self.captureTime)
                 print("time")
 
         video_capture.release()
