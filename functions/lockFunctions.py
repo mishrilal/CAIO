@@ -24,6 +24,12 @@ class LockSystem:
         self.userName = self.userName.capitalize()
 
         self.settings = QSettings('CAIO', 'Preferences')
+
+        # self.settings.setValue('noOfLocksAdmin', 0)
+        # self.settings.setValue('noOfSomeoneElseLocks', 0)
+        # self.settings.setValue('noOfNobodyLocks', 0)
+        # self.settings.setValue('totalLocks', 0)
+
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
@@ -280,6 +286,7 @@ class LockSystem:
                 # faces = len(face_encodings)
 
                 checkSelf = False
+                self.isUnlocked = False
 
                 for face_encodings in face_encodings:
                     matches = fr.compare_faces(known_face_encodings, face_encodings)
@@ -313,6 +320,7 @@ class LockSystem:
                         self.showLockScreen = False
                         print(self.name)
                         checkSelf = True
+                        self.isUnlocked = True
 
                     else:
                         self.name = "unknown"
@@ -320,6 +328,7 @@ class LockSystem:
                         if checkSelf:
                             self.showLockScreen = False
                             print("Admin Found")
+                            self.isUnlocked = True
                         else:
                             self.showLockScreen = True
                             self.lock()
@@ -327,6 +336,15 @@ class LockSystem:
                 if self.showLockScreen:
                     print("lock")
                     self.lock()
+
+                if self.isUnlocked:
+                    if self.isLocked:
+                        print("Someone Came and Now unlocked")
+                        self.isLocked = False
+                        self.noOfSomeoneElseLocks += 1
+                        self.totalLocks += 1
+                        self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
+                        self.settings.setValue('totalLocks', self.totalLocks)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -360,9 +378,10 @@ class LockSystem:
 
                 self.showLockScreen = True
 
-                # faces = len(face_encodings)
+                self.countFace = len(face_encodings)
 
                 checkSelf = False
+                self.isUnlocked = False
 
                 for face_encodings in face_encodings:
                     matches = fr.compare_faces(known_face_encodings, face_encodings)
@@ -396,6 +415,7 @@ class LockSystem:
                         self.showLockScreen = False
                         print(self.name)
                         checkSelf = True
+                        self.isUnlocked = True
 
                     else:
                         self.name = "unknown"
@@ -403,6 +423,7 @@ class LockSystem:
                         if checkSelf:
                             self.showLockScreen = False
                             print("Admin Found")
+                            self.isUnlocked = True
                         else:
                             self.showLockScreen = True
                             self.lock()
@@ -410,6 +431,26 @@ class LockSystem:
                 if self.showLockScreen:
                     print("lock")
                     self.lock()
+
+                if self.countFace == 0:
+                    self.isNobody = True
+
+                if self.isUnlocked:
+                    if self.isLocked:
+                        self.isLocked = False
+
+                        self.totalLocks += 1
+                        self.settings.setValue('totalLocks', self.totalLocks)
+
+                        if self.isNobody:
+                            self.noOfNobodyLocks += 1
+                            self.noOfSomeoneElseLocks += 1
+                            self.settings.setValue('noOfNobodyLocks', self.noOfNobodyLocks)
+                            self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
+
+                        else:
+                            self.noOfSomeoneElseLocks += 1
+                            self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
