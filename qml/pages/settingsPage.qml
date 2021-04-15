@@ -530,6 +530,7 @@ Item {
 
             CheckBox {
                 id: autoUnlock
+                visible: false
                 text: qsTr("CheckBox")
                 anchors.left: parent.left
                 anchors.top: someoneAppears.bottom
@@ -673,6 +674,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:800}D{i:4}D{i:8}D{i:12}D{i:16}D{i:20}
+    D{i:0;autoSize:true;height:480;width:800}
 }
 ##^##*/

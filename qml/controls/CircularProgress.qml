@@ -26,12 +26,12 @@ Item {
     property color progressColor: "#1842d1"
     property int progressWidth: 16
     // Text
-    property string text: "%"
+    property string text: ""
     property bool textShowValue: true
     property string textFontFamily: "Times New Roman"
     property int textSize: 12
     property color textColor: "#ffffff"
-    property string infoText: "%"
+    property string infoText: "Count"
 
     // Internal Properties/Functions
     QtObject{
@@ -91,10 +91,11 @@ Item {
             anchors.top: textProgress.bottom
             font.pixelSize: 16
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+            verticalAlignment: Text.AlignTop
             wrapMode: Text.WordWrap
+            padding: 4
             anchors.horizontalCenterOffset: 0
-            anchors.topMargin: 20
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: "Times New Roman"
         }

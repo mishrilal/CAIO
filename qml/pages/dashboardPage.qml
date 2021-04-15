@@ -297,7 +297,7 @@ Item {
             target: circularProgressCenter
             property: "opacity"
             Keyframe {
-                frame: 1000
+                frame: 800
                 value: 1
             }
 
@@ -396,6 +396,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:18}
+    D{i:0;autoSize:true;height:480;width:640}D{i:7}D{i:9}D{i:18}
 }
 ##^##*/

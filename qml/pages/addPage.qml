@@ -9,11 +9,11 @@ import "../controls"
 Item {
     //Custom properties
     property url btnIconSource: "../../images/svg_images/capture_icon.svg"
-    property color btnColorDefault: "#5e64e5"
+    property color btnColorDefault: "#ffffff"
     property color btnColorMouseOver: "#767BF8"
     property color btnColorClicked: "#00a1f1"
-    property int iconWidth: 18
-    property int iconHeight: 18
+    property int iconWidth: 24
+    property int iconHeight: 24
     property bool isActiveMenu: false
     property int n: 3
 
@@ -110,14 +110,18 @@ Item {
 
             Button{
                 id: captureBtn
+                y: 0
+                width: 50
+                height: 40
                 text: qsTr("Capture")
+                anchors.verticalCenter: parent.verticalCenter
+                display: AbstractButton.TextBesideIcon
+                font.pointSize: 18
                 font.bold: true
                 font.family: "Times New Roman"
                 enabled: true
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 18
 
-                width: 170
 
                 QtObject{
                     id: internal
@@ -136,48 +140,44 @@ Item {
 
                 background: Rectangle{
                     id: bgBtn
-                    color: internal.dynamicColor
+                    color: "#00000000"
                     radius: 10
                 }
 
                 contentItem: Item {
-                    anchors.fill: parent
                     id: content
+                    anchors.fill: parent
                     Image {
                         id: iconBtn
                         source: btnIconSource
-                        anchors.leftMargin: 26
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
                         sourceSize.width: iconWidth
                         sourceSize.height: iconHeight
-                        width: iconWidth
-                        height: iconHeight
                         fillMode: Image.PreserveAspectFit
                         visible: false
+                        anchors.fill: parent
                         antialiasing: true
                     }
 
                     ColorOverlay{
                         anchors.fill: iconBtn
                         source: iconBtn
-                        color: "#000000"
+                        color: internal.dynamicColor
                         anchors.verticalCenter: parent.verticalCenter
                         antialiasing: true
                         width: iconWidth
                         height: iconHeight
                     }
 
-                    Text{
-                        color: "#000000"
-                        text: "Capture"
-                        font: captureBtn.font
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        anchors.leftMargin: 75
-                    }
+//                    Text{
+//                        color: "#000000"
+//                        text: "Capture"
+//                        font: captureBtn.font
+//                        anchors.verticalCenter: parent.verticalCenter
+//                        anchors.left: parent.left
+//                        horizontalAlignment: Text.AlignLeft
+//                        verticalAlignment: Text.AlignVCenter
+//                        anchors.leftMargin: 75
+//                    }
                 }
 
                 onClicked: {
@@ -246,6 +246,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}
+    D{i:0;autoSize:true;height:480;width:640}D{i:13}
 }
 ##^##*/
