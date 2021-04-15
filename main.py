@@ -8,6 +8,8 @@ from os import path
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtGui import QIcon
 from PySide2.QtQml import QQmlApplicationEngine
+from PySide2.QtQuick import QQuickView
+from PySide2.QtSql import QSqlDatabase, QSqlQueryModel
 from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
@@ -104,6 +106,20 @@ if __name__ == "__main__":
     app.setWindowIcon(QIcon("images/svg_images/logo_icon.svg"))
     engine = QQmlApplicationEngine()
 
+    # db = QSqlDatabase.addDatabase("QSQLITE")
+    # db.setDatabaseName("employee.db")
+    # db.open()
+    #
+    # projectModel = QSqlQueryModel()
+    # projectModel.setQuery("select * from employees", db)
+    # db.close()
+
+
+    # print(projectModel)
+
+    # list_model = ['item1', 'item2']
+    # root_context.setContextProperty('listModel', list_model)
+
 
 
     # Get Context
@@ -118,6 +134,7 @@ if __name__ == "__main__":
     engine.rootContext().setContextProperty("settingsBackend", settingsPage)
     engine.rootContext().setContextProperty("dashboardBackend", dashboardPage)
     engine.rootContext().setContextProperty("removeBackend", removePage)
+    engine.rootContext().setContextProperty("tableModel", dashboardPage.projectModel)
 
     engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))
 

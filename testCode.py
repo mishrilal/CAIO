@@ -58,16 +58,40 @@
 #     if not engine.rootObjects():
 #         sys.exit(-1)
 #     sys.exit(app.exec_())
-import sys
+# import sys
+#
+# from PySide2.QtWidgets import QApplication
+#
+#
+# class MainWindow:
+#     pass
+#
+#
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
+#     window = MainWindow()
+#     sys.exit(app.exec_())
 
-from PySide2.QtWidgets import QApplication
+import sqlite3
 
+conn = sqlite3.connect('employee.db')
 
-class MainWindow:
-    pass
+c = conn.cursor()
 
+# Creating table
+# c.execute("""CREATE TABLE employees (
+#             first text,
+#             last text,
+#             pay integer
+#         )""")
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    sys.exit(app.exec_())
+# c.execute("INSERT INTO employees VALUES ('Corey', 'Schafer', 50000)")
+c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
+
+c.execute("SELECT * FROM employees")
+
+print(c.fetchall())
+
+conn.commit()
+
+conn.close()
