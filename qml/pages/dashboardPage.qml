@@ -162,10 +162,16 @@ Item {
                         anchors.fill: parent
 
                         TableView {
-                                anchors.fill: parent
+                                id: tableView
                                 columnSpacing: 1
                                 rowSpacing: 1
                                 boundsBehavior: Flickable.StopAtBounds
+//                                topMargin: columnsHeader.implicitHeight
+//                                columnWidthProvider: function () {
+
+//                                    return tableView.width / tableView.model.columnCount();
+//                                }
+
 
 
 //                                model: TableModel {
@@ -208,15 +214,69 @@ Item {
 
                                 delegate:  Text {
                                     text: model.display
-                                    padding: 12
+                                    font.family: "Times New Roman"
+                                    font.pointSize: 14
+                                    clip: true
+                                    padding: 6
+                                    color: "#ffffff"
 
                                     Rectangle {
+                                        color: "#00000000"
+                                        border.color: "#00000000"
+                                        border.width: 1
                                         anchors.fill: parent
-                                        color: "#efefef"
+                                        transformOrigin: Item.TopLeft
+                                        clip: true
                                         z: -1
+                                    }
+                                    Rectangle{
+                                        height: 1
+                                        border.width: 2
+                                        width: parent.width
                                     }
                                 }
                             }
+
+//                            Row {
+//                                id: columnsHeader
+//                                y: tableView.contentY
+//                                z: -1
+
+//                                Repeater {
+//                                    clip: true
+//                                    model: tableView.columns > 0 ? tableView.columns : 1
+
+//                                    Rectangle {
+//                                        width: tableView.columnWidthProvider()
+//                                        height: 20
+//                                        color: "#00000000"
+//                                        clip: true
+
+//                                        Label {
+//                                            id: headerText
+//                                            width: parent.width
+//                                            color: "#2861f9"
+//                                            text: tableView.model.headerData(modelData, Qt.Horizontal)
+//                                            elide: Text.ElideRight
+//                                            horizontalAlignment: Text.AlignHCenter
+//                                            verticalAlignment: Text.AlignVCenter
+//                                            font.capitalization: Font.AllUppercase
+//                                            font.pointSize: 14
+//                                            font.family: "Times New Roman"
+//                                            font.bold: true
+//                                            clip: true
+
+//                                        }
+//    //                                            Rectangle{
+//    //                                                height: 1
+//    //                                                border.width: 2
+//    //                                                width: parent.width
+//    //                                            }
+//                                    }
+
+//                                }
+
+//                            }
 
 //                        OldControls.TableView {
 //                             x: 0
@@ -240,6 +300,55 @@ Item {
 //                             model: tableModel
 
 //                        }
+
+//                        TableView {
+//                                id: tableView
+//                                clip: true
+//                                anchors.fill: parent
+//                                model: tableModel
+//                                topMargin: columnsHeader.implicitHeight
+//                                columnWidthProvider: function () { return tableView.width / tableView.model.columnCount(); }
+
+//                                delegate: Rectangle {
+//                                    implicitWidth: tableView.columnWidthProvider()
+//                                    implicitHeight: 30
+//                                    color: "#00000000"
+//                                    clip: true
+
+//                                    Text {
+//                                        color: "#ffffff"
+//                                        text: display
+//                                        padding: 5
+
+//                                    }
+//                                }
+
+//                                Row {
+//                                    id: columnsHeader
+//                                    y: tableView.contentY
+//                                    z: -1
+
+//                                    Repeater {
+//                                        model: tableView.columns > 0 ? tableView.columns : 1
+
+//                                        Rectangle {
+//                                            width: tableView.columnWidthProvider()
+//                                            height: 20
+//                                            color: "#00000000"
+//                                            clip: true
+
+//                                            Label {
+//                                                id: headerText
+//                                                width: parent.width
+//                                                color: "#ffffff"
+//                                                text: tableView.model.headerData(modelData, Qt.Horizontal)
+//                                                elide: Text.ElideRight
+//                                                clip: true
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
 
 
                     }
@@ -425,6 +534,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:16}D{i:22}
+    D{i:0;autoSize:true;height:480;width:640}D{i:22}
 }
 ##^##*/

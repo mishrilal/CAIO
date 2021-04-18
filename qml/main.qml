@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
 import "controls"
 
-Window {
+ApplicationWindow {
     id: mainWindow
     width: 1000
     height: 580
@@ -585,8 +585,4 @@ Window {
 
 }
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.66}D{i:6;invisible:true}
-}
-##^##*/
+

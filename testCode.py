@@ -30,7 +30,6 @@
 # app.exec_()  # Execute the App
 
 
-
 # import os
 # import sys
 #
@@ -74,7 +73,7 @@
 
 import sqlite3
 
-conn = sqlite3.connect('employee.db')
+conn = sqlite3.connect('caio.db')
 
 c = conn.cursor()
 
@@ -86,11 +85,63 @@ c = conn.cursor()
 #         )""")
 
 # c.execute("INSERT INTO employees VALUES ('Corey', 'Schafer', 50000)")
-c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
+# c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
 
-c.execute("SELECT * FROM employees")
+# c.execute("SELECT * FROM employees")
 
+# # Creating table
+# c.execute("""CREATE TABLE allLogs (
+#             Sr.No. number(5) PRIMARY KEY AUTOINCREMENT,
+#             Date text,
+#             pay integer
+#         )""")
+#
+# c.execute("INSERT INTO employees VALUES ('Corey', 'Schafer', 50000)")
+# c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
+#
+# c.execute("SELECT * FROM employees")
+
+# c.execute("""CREATE TABLE allLogs('Sr.No.' INTEGER PRIMARY KEY AUTOINCREMENT,
+#                     date DATE,
+#                     time DATETIME,
+#                     'Locked When' varchar(20)
+#                     )""")
+# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
+# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
+# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
+# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
+
+
+# c.execute("""CREATE TABLE allLogs(id integer primary key autoincrement,
+#                                     date DATE,
+#                                     time TIME,
+#                                     lockedBy varchar2(30),
+#                                     lockedTo varchar2(20));
+#     """)
+
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
+                'Admin Left', 'Locked to Lock Screen')""")
+
+
+c.execute("select * from allLogs order by id desc")
 print(c.fetchall())
+
+c.execute("SELECT * FROM allLogs")
+print(c.fetchall())
+
+# c.execute("drop table allLogs")
 
 conn.commit()
 

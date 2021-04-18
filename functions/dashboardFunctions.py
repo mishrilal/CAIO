@@ -11,26 +11,25 @@ class DashboardPage(QObject):
 
     def __init__(self):
         super().__init__()
+        self.projectModel = QSqlQueryModel()
         self.settings = QSettings('CAIO', 'Preferences')
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
         self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
+        self.counter = 0
+
+        self.db = QSqlDatabase.addDatabase("QSQLITE")
+        self.db.setDatabaseName("caio.db")
+        self.db.open()
 
         # AUTO REFRESH
         timer = QTimer(self)
         timer.start(1000)
-        timer.timeout.connect(lambda: self.setDashboard())
+        timer.timeout.connect(lambda: self.setWidget())
+        timer.timeout.connect(lambda: self.setLogs())
 
-        self.db = QSqlDatabase.addDatabase("QSQLITE")
-        self.db.setDatabaseName("employee.db")
-        self.db.open()
-
-        self.projectModel = QSqlQueryModel()
-        self.projectModel.setQuery("select * from employees", self.db)
-        self.db.close()
-
-    def setDashboard(self):
+    def setWidget(self):
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
@@ -41,7 +40,15 @@ class DashboardPage(QObject):
         self.setSomeoneElseLocks.emit(self.noOfSomeoneElseLocks)
         self.setNobodyLocks.emit(self.noOfNobodyLocks)
 
-        self.db.open()
-        self.projectModel.setQuery("select * from employees", self.db)
-        self.db.close()
+        # self.db.open()
+        # self.projectModel.setQuery("select * from allLogs order by 'Sr.No.' asc", self.db)
+        # self.db.close()
 
+    def setLogs(self):
+        # Auto update for logs gets Application Crashed
+        # using counter to setup UI properly
+        if self.counter < 3:
+            self.projectModel.setQuery("select * from allLogs order by id desc limit 20 ", self.db)
+            self.counter += 1
+        if self.counter == 3:
+            self.db.close()
