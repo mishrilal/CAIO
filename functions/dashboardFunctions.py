@@ -1,4 +1,4 @@
-from PySide2.QtCore import QObject, Slot, Signal, QAbstractListModel, QModelIndex, Qt, QSettings, QTimer
+from PySide2.QtCore import QObject, Signal, QSettings, QTimer
 from PySide2.QtSql import QSqlDatabase, QSqlQueryModel
 
 
@@ -17,11 +17,9 @@ class DashboardPage(QObject):
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
         self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
-        self.counter = 0
-
+        self.initialRun = True
         self.db = QSqlDatabase.addDatabase("QSQLITE")
         self.db.setDatabaseName("caio.db")
-        self.db.open()
 
         # AUTO REFRESH
         timer = QTimer(self)
@@ -40,15 +38,11 @@ class DashboardPage(QObject):
         self.setSomeoneElseLocks.emit(self.noOfSomeoneElseLocks)
         self.setNobodyLocks.emit(self.noOfNobodyLocks)
 
-        # self.db.open()
-        # self.projectModel.setQuery("select * from allLogs order by 'Sr.No.' asc", self.db)
-        # self.db.close()
-
     def setLogs(self):
-        # Auto update for logs gets Application Crashed
-        # using counter to setup UI properly
-        if self.counter < 3:
-            self.projectModel.setQuery("select * from allLogs order by id desc limit 20 ", self.db)
-            self.counter += 1
-        if self.counter == 3:
+        isLogChanged = self.settings.value('logChanged')
+        if isLogChanged == 1 or self.initialRun:
+            self.db.open()
+            self.projectModel.setQuery("select ID, Date, Time, LockedBy from allLogs order by id desc limit 20 ", self.db)
             self.db.close()
+            self.settings.setValue('logChanged', 0)
+            self.initialRun = False

@@ -1,16 +1,15 @@
+import datetime
+import getpass
 import platform
 import re
+import sqlite3
 import time
-from pathlib import Path
 from os import path
-import ctypes
-import getpass
+from pathlib import Path
 
-import numpy as np
-import face_recognition as fr
 import cv2
-from ctypes import CDLL
-
+import face_recognition as fr
+import numpy as np
 from PySide2.QtCore import QSettings
 
 
@@ -21,7 +20,7 @@ class LockSystem:
         self.captureTime = 3  # in seconds
 
         self.userName = getpass.getuser()
-        self.userName = self.userName.capitalize()
+        self.userName = self.userName.title()
 
         self.settings = QSettings('CAIO', 'Preferences')
 
@@ -34,6 +33,7 @@ class LockSystem:
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
         self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
+        self.isLogChanged = self.settings.value('logChanged')
 
         if self.noOfLocksAdmin is None:
             self.noOfLocksAdmin = 0
@@ -50,6 +50,10 @@ class LockSystem:
         if self.totalLocks is None:
             self.totalLocks = 0
             self.settings.setValue('totalLocks', self.totalLocks)
+
+        if self.isLogChanged is None:
+            self.isLogChanged = 1
+            self.settings.setValue('logChanged', self.isLogChanged)
 
         # Checking OS for Lock() function
         self.osName = platform.platform()
@@ -75,6 +79,39 @@ class LockSystem:
         #     ctypes.windll.user32.LockWorkStation()
         # else:
         #     pass
+
+    def logs(self, who):
+        lockedBy = "Locked when "
+        eventLock = "Locked to System Lock Screen"
+
+        unix = int(time.time())
+        dateLog = str(datetime.datetime.fromtimestamp(unix).strftime('%d-%m-%Y'))
+        timeLog = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
+
+        conn = sqlite3.connect('caio.db')
+        c = conn.cursor()
+
+        if who == "admin":
+            lockedBy = lockedBy + self.userName + " Left"
+            c.execute("insert into adminLogs(Date, Time, lockedBy, Event) values(?, ?, ?, ?)",
+                      (dateLog, timeLog, lockedBy, eventLock))
+        elif who == "someone":
+            lockedBy = lockedBy + "Someone came"
+            c.execute("insert into someoneLogs(Date, Time, lockedBy, Event) values(?, ?, ?, ?)",
+                      (dateLog, timeLog, lockedBy, eventLock))
+        elif who == "nobody":
+            lockedBy = lockedBy + "No One there"
+            c.execute("insert into nobodyLogs(Date, Time, lockedBy, Event) values(?, ?, ?, ?)",
+                      (dateLog, timeLog, lockedBy, eventLock))
+
+        c.execute("insert into allLogs(Date, Time, lockedBy, Event) values(?, ?, ?, ?)",
+                  (dateLog, timeLog, lockedBy, eventLock))
+
+        conn.commit()
+        conn.close()
+
+        self.isLogChanged = 1
+        self.settings.setValue('logChanged', self.isLogChanged)
 
     # keeps unlock until you in frame
     def onlyAdminStrict(self):
@@ -149,9 +186,12 @@ class LockSystem:
                                     self.noOfLocksAdmin += 1
                                     self.settings.setValue('noOfLocksAdmin', self.noOfLocksAdmin)
                                     self.isNobody = False
+                                    self.logs("admin")
+                                    self.logs("nobody")
                                 else:
                                     self.noOfLocksAdmin += 1
                                     self.settings.setValue('noOfLocksAdmin', self.noOfLocksAdmin)
+                                    self.logs("admin")
                                 # print("noOfLocks: ", self.noOfLocksAdmin)
                                 # print("TotalLocks: ", self.totalLocks)
                                 self.isLocked = False
@@ -166,6 +206,7 @@ class LockSystem:
                                 # print("In last Else isSomeone ", self.isSomeoneElse)
                                 self.someoneElseLocked = False
                                 self.isLocked = False
+                                self.logs("someone")
                                 # print("In last Else someoneElseLocked ", self.someoneElseLocked)
 
                         # print("****************")
@@ -252,6 +293,7 @@ class LockSystem:
                             # print("In last Else isSomeone ", self.isSomeoneElse)
                             self.someoneElseLocked = False
                             self.isLocked = False
+                            self.logs("someone")
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -345,6 +387,7 @@ class LockSystem:
                         self.totalLocks += 1
                         self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
                         self.settings.setValue('totalLocks', self.totalLocks)
+                        self.logs("someone")
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -451,6 +494,7 @@ class LockSystem:
                             # self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
                             print("isNobody", self.isNobody, self.someoneElseLocked)
                             self.isNobody = False
+                            self.logs("nobody")
                         else:
                             if self.someoneElseLocked:
                                 if not self.isNobody:
@@ -458,6 +502,7 @@ class LockSystem:
                                     print("someoneElseLocked", self.isNobody, self.someoneElseLocked)
                                     self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
                                     self.someoneElseLocked = False
+                                    self.logs("someone")
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break

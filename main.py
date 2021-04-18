@@ -1,15 +1,11 @@
 import os
 import sys
-
-# MAIN WINDOW
-from pathlib import Path
 from os import path
+from pathlib import Path
 
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtGui import QIcon
 from PySide2.QtQml import QQmlApplicationEngine
-from PySide2.QtQuick import QQuickView
-from PySide2.QtSql import QSqlDatabase, QSqlQueryModel
 from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
@@ -47,6 +43,9 @@ class MainWindow(QObject):
     @Slot()
     def dashboardClicked(self):
         print("DashBoardClicked")
+        dashboard = DashboardPage()
+        engine.rootContext().setContextProperty("tableModel", dashboard.projectModel)
+
 
     @Slot()
     def viewClicked(self):

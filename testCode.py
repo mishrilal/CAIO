@@ -72,77 +72,99 @@
 #     sys.exit(app.exec_())
 
 import sqlite3
+import time
+import datetime
+import random
 
 conn = sqlite3.connect('caio.db')
 
 c = conn.cursor()
 
-# Creating table
-# c.execute("""CREATE TABLE employees (
-#             first text,
-#             last text,
-#             pay integer
-#         )""")
-
-# c.execute("INSERT INTO employees VALUES ('Corey', 'Schafer', 50000)")
-# c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
-
-# c.execute("SELECT * FROM employees")
-
-# # Creating table
-# c.execute("""CREATE TABLE allLogs (
-#             Sr.No. number(5) PRIMARY KEY AUTOINCREMENT,
-#             Date text,
-#             pay integer
-#         )""")
+c.execute("""CREATE TABLE allLogs(ID integer primary key autoincrement,
+                                    Date TEXT,
+                                    Time TEXT,
+                                    lockedBy TEXT,
+                                    Event TEXT);
+    """)
+c.execute("""CREATE TABLE adminLogs(ID integer primary key autoincrement,
+                                    Date TEXT,
+                                    Time TEXT,
+                                    lockedBy TEXT,
+                                    Event TEXT);
+    """)
+c.execute("""CREATE TABLE someoneLogs(ID integer primary key autoincrement,
+                                    Date TEXT,
+                                    Time TEXT,
+                                    lockedBy TEXT,
+                                    Event TEXT);
+    """)
+c.execute("""CREATE TABLE nobodyLogs(ID integer primary key autoincrement,
+                                    Date TEXT,
+                                    Time TEXT,
+                                    lockedBy TEXT,
+                                    Event TEXT);
+    """)
+# name = "Known" + " Left"
+# eventlock = "Locked to main screen"
 #
-# c.execute("INSERT INTO employees VALUES ('Corey', 'Schafer', 50000)")
-# c.execute("INSERT INTO employees VALUES ('sedrftgyhu', '12mnjhbgftdr32131', 9876543)")
+# unix = int(time.time())
+# date = str(datetime.datetime.fromtimestamp(unix).strftime('%d-%m-%Y'))
+# time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
 #
-# c.execute("SELECT * FROM employees")
+# c.execute("insert into allLogs(Date, Time, lockedBy, Event) values(?, ?, ?, ?)",
+#           (date, time, name, eventlock))
 
-# c.execute("""CREATE TABLE allLogs('Sr.No.' INTEGER PRIMARY KEY AUTOINCREMENT,
-#                     date DATE,
-#                     time DATETIME,
-#                     'Locked When' varchar(20)
-#                     )""")
-# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
-# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
-# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
-# c.execute("insert into allLogs(date, time, 'locked when') values(Date('now'), Time('now'), 'Mishri Left')")
-
-
-# c.execute("""CREATE TABLE allLogs(id integer primary key autoincrement,
-#                                     date DATE,
-#                                     time TIME,
-#                                     lockedBy varchar2(30),
-#                                     lockedTo varchar2(20));
-#     """)
-
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-c.execute("""insert into allLogs(date, time, lockedBy, lockedTo) values(Date('now'), Time('now'), 
-                'Admin Left', 'Locked to Lock Screen')""")
-
-
-c.execute("select * from allLogs order by id desc")
-print(c.fetchall())
-
+# c.execute("select * from allLogs order by id desc")
+# print(c.fetchall())
+#
 c.execute("SELECT * FROM allLogs")
 print(c.fetchall())
 
 # c.execute("drop table allLogs")
+# c.execute("drop table adminLogs")
+# c.execute("drop table someoneLogs")
+# c.execute("drop table nobodyLogs")
+
 
 conn.commit()
 
 conn.close()
+
+# conn = sqlite3.connect('tutorial.db')
+# c = conn.cursor()
+#
+#
+# def create_table():
+#     c.execute("CREATE TABLE IF NOT EXISTS stuffToPlot(unix REAL, datestamp TEXT, keyword TEXT, value REAL)")
+#
+#
+# def data_entry():
+#     c.execute("INSERT INTO stuffToPlot VALUES(1452549219,'2016-01-11 13:53:39','Python',6)")
+#
+#     conn.commit()
+#     c.close()
+#     conn.close()
+#
+#
+# def dynamic_data_entry():
+#     unix = int(time.time())
+#     date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+#     keyword = 'Python'
+#     value = random.randrange(0, 10)
+#
+#     c.execute("INSERT INTO stuffToPlot (unix, datestamp, keyword, value) VALUES (?, ?, ?, ?)",
+#               (unix, date, keyword, value))
+#
+#     conn.commit()
+#
+#
+# # create_table()
+# # # for i in range(10):
+# # #     dynamic_data_entry()
+# # #     time.sleep(1)
+# #
+# # c.execute("SELECT * FROM stuffToPlot")
+# # print(c.fetchall())
+#
+# c.close
+# conn.close()
