@@ -13,7 +13,7 @@ Item {
             x: 128
             y: 111
             color: "#ffffff"
-            text: qsTr("About Page")
+            text: qsTr("Someone Page")
             anchors.verticalCenter: parent.verticalCenter
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter

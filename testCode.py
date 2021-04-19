@@ -80,30 +80,30 @@ conn = sqlite3.connect('caio.db')
 
 c = conn.cursor()
 
-c.execute("""CREATE TABLE allLogs(ID integer primary key autoincrement,
-                                    Date TEXT,
-                                    Time TEXT,
-                                    lockedBy TEXT,
-                                    Event TEXT);
-    """)
-c.execute("""CREATE TABLE adminLogs(ID integer primary key autoincrement,
-                                    Date TEXT,
-                                    Time TEXT,
-                                    lockedBy TEXT,
-                                    Event TEXT);
-    """)
-c.execute("""CREATE TABLE someoneLogs(ID integer primary key autoincrement,
-                                    Date TEXT,
-                                    Time TEXT,
-                                    lockedBy TEXT,
-                                    Event TEXT);
-    """)
-c.execute("""CREATE TABLE nobodyLogs(ID integer primary key autoincrement,
-                                    Date TEXT,
-                                    Time TEXT,
-                                    lockedBy TEXT,
-                                    Event TEXT);
-    """)
+# c.execute("""CREATE TABLE allLogs(ID integer primary key autoincrement,
+#                                     Date TEXT,
+#                                     Time TEXT,
+#                                     lockedBy TEXT,
+#                                     Event TEXT);
+#     """)
+# c.execute("""CREATE TABLE adminLogs(ID integer primary key autoincrement,
+#                                     Date TEXT,
+#                                     Time TEXT,
+#                                     lockedBy TEXT,
+#                                     Event TEXT);
+#     """)
+# c.execute("""CREATE TABLE someoneLogs(ID integer primary key autoincrement,
+#                                     Date TEXT,
+#                                     Time TEXT,
+#                                     lockedBy TEXT,
+#                                     Event TEXT);
+#     """)
+# c.execute("""CREATE TABLE nobodyLogs(ID integer primary key autoincrement,
+#                                     Date TEXT,
+#                                     Time TEXT,
+#                                     lockedBy TEXT,
+#                                     Event TEXT);
+#     """)
 # name = "Known" + " Left"
 # eventlock = "Locked to main screen"
 #
@@ -117,7 +117,7 @@ c.execute("""CREATE TABLE nobodyLogs(ID integer primary key autoincrement,
 # c.execute("select * from allLogs order by id desc")
 # print(c.fetchall())
 #
-c.execute("SELECT * FROM allLogs")
+c.execute("SELECT * FROM adminLogs")
 print(c.fetchall())
 
 # c.execute("drop table allLogs")
@@ -168,3 +168,19 @@ conn.close()
 #
 # c.close
 # conn.close()
+
+# functions
+#     6 Python Files
+# images
+#     svg_images
+#         13 svg files
+# qml
+#     controls
+#         8 qml files
+#     pages
+#         6 qml files
+#     3 more qml files
+#
+# sqlite3 database - caio.db
+# main.py
+# lockMain.py

@@ -44,8 +44,10 @@ class MainWindow(QObject):
     def dashboardClicked(self):
         print("DashBoardClicked")
         dashboard = DashboardPage()
+        # dashboard.initialRunCircular = True
+        # dashboard.counter = 0
+        # print(dashboard.initialRunCircular)
         engine.rootContext().setContextProperty("tableModel", dashboard.projectModel)
-
 
     @Slot()
     def viewClicked(self):

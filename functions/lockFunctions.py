@@ -34,6 +34,7 @@ class LockSystem:
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
         self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
         self.isLogChanged = self.settings.value('logChanged')
+        self.updateCircle = self.settings.value('updateCircle')
 
         if self.noOfLocksAdmin is None:
             self.noOfLocksAdmin = 0
@@ -54,6 +55,10 @@ class LockSystem:
         if self.isLogChanged is None:
             self.isLogChanged = 1
             self.settings.setValue('logChanged', self.isLogChanged)
+
+        if self.updateCircle is None:
+            self.updateCircle = 1
+            self.settings.setValue('updateCircle', self.updateCircle)
 
         # Checking OS for Lock() function
         self.osName = platform.platform()
@@ -111,7 +116,9 @@ class LockSystem:
         conn.close()
 
         self.isLogChanged = 1
+        self.updateCircle = 1
         self.settings.setValue('logChanged', self.isLogChanged)
+        self.settings.setValue('updateCircle', self.updateCircle)
 
     # keeps unlock until you in frame
     def onlyAdminStrict(self):

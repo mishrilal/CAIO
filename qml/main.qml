@@ -317,12 +317,14 @@ ApplicationWindow {
                                 pageRemove.active = false
                                 pageSettings.active = false
                                 pageAbout.active = false
+                                pageLog.active = false
 
                                 btnDashboard.isActiveMenu = true
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = false
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
+                                btnLogs.isActiveMenu = false
 
                                 pageDashboard.visible = true
                                 pageView.visible = false
@@ -330,6 +332,7 @@ ApplicationWindow {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
                                 pageAbout.visible = false
+                                pageLog.visible = false
 
                                 backend.dashboardClicked()
                             }
@@ -350,12 +353,14 @@ ApplicationWindow {
                                 pageRemove.active = false
                                 pageSettings.active = false
                                 pageAbout.active = false
+                                pageLog.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = true
                                 btnAdd.isActiveMenu = false
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
+                                btnLogs.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = true
@@ -363,6 +368,7 @@ ApplicationWindow {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
                                 pageAbout.visible = false
+                                pageLog.visible = false
 
                                 backend.viewClicked()
                             }
@@ -383,12 +389,14 @@ ApplicationWindow {
                                 pageRemove.active = false
                                 pageSettings.active = false
                                 pageAbout.active = false
+                                pageLog.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = true
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
+                                btnLogs.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = false
@@ -396,6 +404,7 @@ ApplicationWindow {
                                 pageRemove.visible = false
                                 pageSettings.visible = false
                                 pageAbout.visible = false
+                                pageLog.visible = false
 
                                 backend.addClicked()
 
@@ -415,12 +424,14 @@ ApplicationWindow {
                                 pageRemove.active = true
                                 pageSettings.active = false
                                 pageAbout.active = false
+                                pageLog.active = false
 
                                 btnDashboard.isActiveMenu = false
                                 btnView.isActiveMenu = false
                                 btnAdd.isActiveMenu = false
                                 btnRemove.isActiveMenu = true
                                 btnSettings.isActiveMenu = false
+                                btnLogs.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = false
@@ -428,9 +439,45 @@ ApplicationWindow {
                                 pageRemove.visible = true
                                 pageSettings.visible = false
                                 pageAbout.visible = false
+                                pageLog.visible = false
 
                                 backend.removeClicked()
 
+                            }
+                        }
+                        LeftMenuBtn {
+                            id: btnLogs
+                            width: leftMenu.width
+                            text: qsTr("Logs")
+                            iconWidth: 20
+                            iconHeight: 20
+                            btnIconSource: "../images/svg_images/view_icon.svg"
+                            isActiveMenu: false
+                            onClicked: {
+                                pageDashboard.active = false
+                                pageView.active = false
+                                pageAdd.active = false
+                                pageRemove.active = false
+                                pageSettings.active = false
+                                pageAbout.active = false
+                                pageLog.active = true
+
+                                btnDashboard.isActiveMenu = false
+                                btnView.isActiveMenu = false
+                                btnAdd.isActiveMenu = false
+                                btnRemove.isActiveMenu = false
+                                btnSettings.isActiveMenu = false
+                                btnLogs.isActiveMenu = true
+
+                                pageDashboard.visible = false
+                                pageView.visible = false
+                                pageAdd.visible = false
+                                pageRemove.visible = false
+                                pageSettings.visible = false
+                                pageAbout.visible = false
+                                pageLog.visible = true
+
+                                backend.viewClicked()
                             }
                         }
                     }
@@ -450,12 +497,14 @@ ApplicationWindow {
                             pageRemove.active = false
                             pageSettings.active = true
                             pageAbout.active = false
+                            pageLog.active = false
 
                             btnDashboard.isActiveMenu = false
                             btnView.isActiveMenu = false
                             btnAdd.isActiveMenu = false
                             btnRemove.isActiveMenu = false
                             btnSettings.isActiveMenu = true
+                            btnLogs.isActiveMenu = false
 
                             pageDashboard.visible = false
                             pageView.visible = false
@@ -463,6 +512,7 @@ ApplicationWindow {
                             pageRemove.visible = false
                             pageSettings.visible = true
                             pageAbout.visible = false
+                            pageLog.visible = false
 
                             backend.settingsClicked()
                         }
@@ -568,6 +618,13 @@ ApplicationWindow {
                         id: pageAbout
                         anchors.fill: parent
                         source: Qt.resolvedUrl("pages/aboutPage.qml")
+                        active: false
+                        visible: false
+                    }
+                    Loader{
+                        id: pageLog
+                        anchors.fill: parent
+                        source: Qt.resolvedUrl("pages/logsPage.qml")
                         active: false
                         visible: false
                     }
