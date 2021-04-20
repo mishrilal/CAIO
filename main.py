@@ -102,13 +102,13 @@ class MainWindow(QObject):
         print("SettingsClicked")
         setSettingsValue(self)
 
-    @Slot()
-    def allLogsClicked(self):
-        print("Logs Clicked")
-        allLogs = AllLogsPage()
-        allLogs.initialRun = True
-        engine.rootContext().setContextProperty("allLogsBackend", allLogs)
-        engine.rootContext().setContextProperty("allLogsModel", allLogs.allLogsModel)
+    # @Slot()
+    # def allLogsClicked(self):
+    #     print("Logs Clicked")
+    #     allLogs = AllLogsPage()
+    #     allLogs.initialRun = True
+    #     engine.rootContext().setContextProperty("allLogsBackend", allLogs)
+    #     engine.rootContext().setContextProperty("allLogsModel", allLogs.allLogsModel)
 
 
 if __name__ == "__main__":
@@ -138,14 +138,14 @@ if __name__ == "__main__":
     settingsPage = SettingsPage()
     dashboardPage = DashboardPage()
     removePage = RemoveFace()
-    allLogs = AllLogsPage()
+    # allLogs = AllLogsPage()
 
     engine.rootContext().setContextProperty("backend", main)
     engine.rootContext().setContextProperty("addFaceBackend", addFace)
     engine.rootContext().setContextProperty("settingsBackend", settingsPage)
     engine.rootContext().setContextProperty("dashboardBackend", dashboardPage)
     engine.rootContext().setContextProperty("removeBackend", removePage)
-    engine.rootContext().setContextProperty("allLogsBackend", allLogs)
+    # engine.rootContext().setContextProperty("allLogsBackend", allLogs)
     engine.rootContext().setContextProperty("tableModel", dashboardPage.projectModel)
 
     engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))

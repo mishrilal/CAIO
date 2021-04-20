@@ -448,6 +448,7 @@ ApplicationWindow {
                         LeftMenuBtn {
                             id: btnLogs
                             width: leftMenu.width
+                            visible: false
                             text: qsTr("Logs")
                             iconWidth: 20
                             iconHeight: 20

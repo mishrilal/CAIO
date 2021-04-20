@@ -63,7 +63,7 @@ class DashboardPage(QObject):
         isLogChanged = self.settings.value('logChanged')
         if isLogChanged == 1 or self.initialRun:
             self.db.open()
-            self.projectModel.setQuery("select ID, Date, Time, LockedBy from allLogs order by id desc limit 20 ",
+            self.projectModel.setQuery("select ID, Date, Time, LockedBy from allLogs order by id desc",
                                        self.db)
             self.db.close()
             QSqlDatabase.removeDatabase("QSQLITE")
