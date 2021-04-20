@@ -477,7 +477,7 @@ ApplicationWindow {
                                 pageAbout.visible = false
                                 pageLog.visible = true
 
-                                backend.viewClicked()
+                                backend.allLogsClicked()
                             }
                         }
                     }
@@ -520,11 +520,7 @@ ApplicationWindow {
 
                     Connections {
                         target: addFaceBackend;
-
-
                     }
-
-
                 }
 
 

@@ -9,6 +9,7 @@ from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
+from functions.allLogsFunction import AllLogsPage
 from functions.dashboardFunctions import DashboardPage
 from functions.removeFaceFunctions import RemoveFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
@@ -101,6 +102,14 @@ class MainWindow(QObject):
         print("SettingsClicked")
         setSettingsValue(self)
 
+    @Slot()
+    def allLogsClicked(self):
+        print("Logs Clicked")
+        allLogs = AllLogsPage()
+        allLogs.initialRun = True
+        engine.rootContext().setContextProperty("allLogsBackend", allLogs)
+        engine.rootContext().setContextProperty("allLogsModel", allLogs.allLogsModel)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -129,12 +138,14 @@ if __name__ == "__main__":
     settingsPage = SettingsPage()
     dashboardPage = DashboardPage()
     removePage = RemoveFace()
+    allLogs = AllLogsPage()
 
     engine.rootContext().setContextProperty("backend", main)
     engine.rootContext().setContextProperty("addFaceBackend", addFace)
     engine.rootContext().setContextProperty("settingsBackend", settingsPage)
     engine.rootContext().setContextProperty("dashboardBackend", dashboardPage)
     engine.rootContext().setContextProperty("removeBackend", removePage)
+    engine.rootContext().setContextProperty("allLogsBackend", allLogs)
     engine.rootContext().setContextProperty("tableModel", dashboardPage.projectModel)
 
     engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))

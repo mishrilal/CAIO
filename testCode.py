@@ -117,7 +117,7 @@ c = conn.cursor()
 # c.execute("select * from allLogs order by id desc")
 # print(c.fetchall())
 #
-c.execute("SELECT * FROM adminLogs")
+c.execute("select * from allLogs order by id desc")
 print(c.fetchall())
 
 # c.execute("drop table allLogs")
