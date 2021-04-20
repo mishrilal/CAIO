@@ -18,6 +18,7 @@ Item {
 
         Label {
             id: label
+            visible: false
             color: "#ffffff"
             text: qsTr("DashBoard Page")
             anchors.left: parent.left
@@ -35,7 +36,7 @@ Item {
             id: rectangle1
             color: "#00000000"
             anchors.fill: parent
-            anchors.topMargin: 40
+            anchors.topMargin: 10
 
             Rectangle {
                 id: leftSide
@@ -153,13 +154,14 @@ Item {
                     anchors.bottom: parent.bottom
                     anchors.rightMargin: 10
                     anchors.leftMargin: 10
-                    anchors.bottomMargin: 0
+                    anchors.bottomMargin: 10
                     clip: true
                     anchors.topMargin: 10
 
                     ScrollView {
                         id: scrollView
                         anchors.fill: parent
+                        anchors.bottomMargin: 0
 
                         TableView {
                                 id: tableView
