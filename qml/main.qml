@@ -272,6 +272,7 @@ ApplicationWindow {
                         id: version
                         y: 457
                         height: 25
+                        visible: false
                         color: "#ffffff"
                         text: qsTr("v0.0.65")
                         anchors.left: parent.left
@@ -487,7 +488,7 @@ ApplicationWindow {
                         id: btnSettings
                         width: leftMenu.width
                         text: qsTr("Preferences")
-                        anchors.bottom: version.top
+                        anchors.bottom: parent.bottom
                         anchors.bottomMargin: 0
                         btnIconSource: "../images/svg_images/settings_icon.svg"
                         isActiveMenu: false
@@ -540,6 +541,7 @@ ApplicationWindow {
 
                     Label {
                         id: labelTopInfo1
+                        visible: false
                         color: "#5e64e5"
                         text: qsTr("Developed By - THE PYTHONS")
                         anchors.left: parent.left
@@ -565,7 +567,7 @@ ApplicationWindow {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.topMargin: 0
-                    anchors.bottomMargin: 25
+                    anchors.bottomMargin: 0
                     anchors.leftMargin: 0
                     anchors.rightMargin: 0
 
