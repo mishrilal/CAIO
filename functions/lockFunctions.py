@@ -1,9 +1,11 @@
+import ctypes
 import datetime
 import getpass
 import platform
 import re
 import sqlite3
 import time
+from ctypes import CDLL
 from os import path
 from pathlib import Path
 
@@ -77,13 +79,13 @@ class LockSystem:
     # Lock Function for MacOS and Windows
     def lock(self):
         self.isLocked = True
-        # if self.osName == "macOS":
-        #     loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
-        #     loginPF.SACLockScreenImmediate()
-        # elif self.osName == "Windows":
-        #     ctypes.windll.user32.LockWorkStation()
-        # else:
-        #     pass
+        if self.osName == "macOS":
+            loginPF = CDLL('/System/Library/PrivateFrameworks/login.framework/Versions/Current/login')
+            loginPF.SACLockScreenImmediate()
+        elif self.osName == "Windows":
+            ctypes.windll.user32.LockWorkStation()
+        else:
+            pass
 
     def logs(self, who):
         lockedBy = "Locked when "

@@ -9,7 +9,6 @@ from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtWidgets import QApplication
 
 from functions.addFaceFunctions import AddFace
-from functions.allLogsFunction import AllLogsPage
 from functions.dashboardFunctions import DashboardPage
 from functions.removeFaceFunctions import RemoveFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
@@ -62,7 +61,7 @@ class MainWindow(QObject):
         print("Check ", person)
         if path.isfile(pathImage):
             print("Image Found")
-        # if person == 1:
+            # if person == 1:
             self.checkImage.emit("true")
             self.setImagePath.emit(pathImage)
         else:
@@ -124,13 +123,10 @@ if __name__ == "__main__":
     # projectModel.setQuery("select * from employees", db)
     # db.close()
 
-
     # print(projectModel)
 
     # list_model = ['item1', 'item2']
     # root_context.setContextProperty('listModel', list_model)
-
-
 
     # Get Context
     main = MainWindow()

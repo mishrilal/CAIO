@@ -1,6 +1,0 @@
-build/
-venv/
-dist/
-images/captured/*.jpg
-images/captured/*.png
-images/faces/*.jpg

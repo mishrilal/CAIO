@@ -3,7 +3,6 @@ from PySide2.QtSql import QSqlDatabase, QSqlQueryModel
 
 
 class DashboardPage(QObject):
-    # setRows = Signal(str)
     setMaxValue = Signal(int)
     setAdminLocks = Signal(int)
     setSomeoneElseLocks = Signal(int)
@@ -30,25 +29,6 @@ class DashboardPage(QObject):
         timer.timeout.connect(lambda: self.setLogs())
 
     def setWidget(self):
-        # updateCircle = self.settings.value('updateCircle')
-        # print("setWidget", self.initialRunCircular, updateCircle)
-        # if self.initialRunCircular or updateCircle == 1 or self.counter < 4:
-        #     self.totalLocks = self.settings.value('totalLocks')
-        #     self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
-        #     self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
-        #     self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
-        #
-        #     self.setMaxValue.emit(self.totalLocks)
-        #     self.setAdminLocks.emit(self.noOfLocksAdmin)
-        #     self.setSomeoneElseLocks.emit(self.noOfSomeoneElseLocks)
-        #     self.setNobodyLocks.emit(self.noOfNobodyLocks)
-        #
-        #     if self.counter == 3:
-        #         self.initialRunCircular = False
-        #         print("Intial ", self.initialRunCircular)
-        #     self.settings.setValue('updateCircle', 0)
-        #     self.counter += 1
-        #     print("counter", self.counter)
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
