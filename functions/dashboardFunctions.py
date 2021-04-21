@@ -1,5 +1,6 @@
 from PySide2.QtCore import QObject, Signal, QSettings, QTimer
 from PySide2.QtSql import QSqlDatabase, QSqlQueryModel
+from pathlib import Path
 
 
 class DashboardPage(QObject):
@@ -20,7 +21,8 @@ class DashboardPage(QObject):
         self.initialRunCircular = True
         self.counter = 0
         self.db = QSqlDatabase.addDatabase("QSQLITE")
-        self.db.setDatabaseName("caio.db")
+        dbLocation = str(Path.home()) + '/CAIO/caio.db'
+        self.db.setDatabaseName(dbLocation)
 
         # AUTO REFRESH
         timer = QTimer(self)

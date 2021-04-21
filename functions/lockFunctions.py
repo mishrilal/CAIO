@@ -95,7 +95,8 @@ class LockSystem:
         dateLog = str(datetime.datetime.fromtimestamp(unix).strftime('%d-%m-%Y'))
         timeLog = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
 
-        conn = sqlite3.connect('caio.db')
+        dbLocation = str(Path.home()) + '/CAIO/caio.db'
+        conn = sqlite3.connect(dbLocation)
         c = conn.cursor()
 
         if who == "admin":

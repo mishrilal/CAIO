@@ -112,7 +112,7 @@ class MainWindow(QObject):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("images/svg_images/logo_icon.svg"))
+    app.setWindowIcon(QIcon("logo_icon.svg"))
     engine = QQmlApplicationEngine()
 
     # db = QSqlDatabase.addDatabase("QSQLITE")
