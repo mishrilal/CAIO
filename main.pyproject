@@ -1,0 +1,10 @@
+{
+    "files": [
+            "functions/addFaceFunctions.py","functions/allLogsFunction.py","functions/dashboardFunctions.py","functions/lockFunctions.py","functions/removeFaceFunctions.py","functions/settingsFunctions.py","functions/viewFaceFunctions.py",
+            "images/svg_images/about_icon.svg","images/svg_images/add_icon.svg","images/svg_images/capture_icon.svg","images/svg_images/close_icon.svg","images/svg_images/dashboard_icon.svg","images/svg_images/logo_icon.svg","images/svg_images/maximize_icon.svg","images/svg_images/menu_icon.svg","images/svg_images/minimize_icon.svg","images/svg_images/remove_icon.svg","images/svg_images/resize_icon.svg","images/svg_images/restore_icon.svg","images/svg_images/settings_icon.svg","images/svg_images/trash_icon.svg","images/svg_images/view_icon.svg",
+            "qml/controls/AboutButton.qml","qml/controls/CameraLive.qml","qml/controls/CaptureBtn.qml","qml/controls/CircularProgress.qml","qml/controls/DescriptionButton.qml","qml/controls/LeftMenuBtn.qml","qml/controls/LogsBtn.qml","qml/controls/ToggleButton.qml","qml/controls/TopBarButton.qml",
+            "qml/pages/addPage.qml","qml/pages/addPageAlternative.ui","qml/pages/adminLogsPage.qml","qml/pages/allLogsPage.qml","qml/pages/dashboardPage.qml","qml/pages/logsPage.qml","qml/pages/nobodyLogsPage.qml","qml/pages/removePage.qml","qml/pages/settingsPage.qml","qml/pages/someoneLogsPage.qml","qml/pages/viewPage.qml",
+            "qml/lockMain.qml","qml/main.qml","qml/splashScreen.qml",
+            "caio.db","lockMain.py"
+              ]
+}

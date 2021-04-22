@@ -42,6 +42,43 @@ def createDB():
         conn.commit()
         conn.close()
 
+    else:
+        conn = sqlite3.connect(dbLocation)
+
+        c = conn.cursor()
+        c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name='allLogs' ''')
+
+        if c.fetchone()[0] == 1:
+            print('Table exists.')
+        else:
+            c.execute("""CREATE TABLE allLogs(ID integer primary key autoincrement,
+                                                        Date TEXT,
+                                                        Time TEXT,
+                                                        lockedBy TEXT,
+                                                        Event TEXT);
+                        """)
+            c.execute("""CREATE TABLE adminLogs(ID integer primary key autoincrement,
+                                                        Date TEXT,
+                                                        Time TEXT,
+                                                        lockedBy TEXT,
+                                                        Event TEXT);
+                        """)
+            c.execute("""CREATE TABLE someoneLogs(ID integer primary key autoincrement,
+                                                        Date TEXT,
+                                                        Time TEXT,
+                                                        lockedBy TEXT,
+                                                        Event TEXT);
+                        """)
+            c.execute("""CREATE TABLE nobodyLogs(ID integer primary key autoincrement,
+                                                        Date TEXT,
+                                                        Time TEXT,
+                                                        lockedBy TEXT,
+                                                        Event TEXT);
+                        """)
+
+        conn.commit()
+        conn.close()
+
 
 class LockMain:
 
@@ -51,14 +88,15 @@ class LockMain:
         self.settings = QSettings('CAIO', 'Preferences')
         self.firstRun = self.settings.value('firstRun')
 
-        if self.firstRun is None:
-            self.firstRun = 1
-            self.settings.setValue('firstRun', self.firstRun)
-
-        if self.firstRun == 1:
-            createDB()
-            self.firstRun = 0
-            self.settings.setValue('firstRun', self.firstRun)
+        # if self.firstRun is None:
+        #     self.firstRun = 1
+        #     self.settings.setValue('firstRun', self.firstRun)
+        #
+        # if self.firstRun == 1:
+        #     createDB()
+        #     self.firstRun = 0
+        #     self.settings.setValue('firstRun', self.firstRun)
+        createDB()
         self.lock = LockSystem()
 
     def runLock(self):
