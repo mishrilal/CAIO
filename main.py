@@ -2,6 +2,8 @@ import os
 import sys
 from os import path
 from pathlib import Path
+import platform
+import re
 
 from PySide2.QtCore import QObject, Slot, Signal, QSettings
 from PySide2.QtGui import QIcon
@@ -27,6 +29,11 @@ class MainWindow(QObject):
 
     def __init__(self):
         super().__init__()
+        self.osName = platform.platform()
+        if re.search("macOS", self.osName):
+            self.osName = "macOS"
+        elif re.search("Windows", self.osName):
+            self.osName = "Windows"
 
     #     try:
     #         print("load")
@@ -56,7 +63,10 @@ class MainWindow(QObject):
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
 
-        pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+        if self.osName == "macOS":
+            pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+        elif self.osName == "Windows":
+            pathImage = str(Path.home()) + '\\CAIO\\img_%s.jpg' % str(person)
 
         print("Check ", person)
         if path.isfile(pathImage):
@@ -113,7 +123,7 @@ class MainWindow(QObject):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     if getattr(sys, "frozen", False):
-        app.setWindowIcon(QIcon(os.path.join(os.path.dirname(sys.executable),"logo_icon.svg")))
+        app.setWindowIcon(QIcon(os.path.join(os.path.dirname(sys.executable), "logo_icon.svg")))
     else:
         app.setWindowIcon(QIcon("logo_icon.svg"))
     engine = QQmlApplicationEngine()
