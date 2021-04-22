@@ -112,7 +112,10 @@ class MainWindow(QObject):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("logo_icon.svg"))
+    if getattr(sys, "frozen", False):
+        app.setWindowIcon(QIcon(os.path.join(os.path.dirname(sys.executable),"logo_icon.svg")))
+    else:
+        app.setWindowIcon(QIcon("logo_icon.svg"))
     engine = QQmlApplicationEngine()
 
     # db = QSqlDatabase.addDatabase("QSQLITE")
@@ -144,7 +147,10 @@ if __name__ == "__main__":
     # engine.rootContext().setContextProperty("allLogsBackend", allLogs)
     engine.rootContext().setContextProperty("tableModel", dashboardPage.projectModel)
 
-    engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))
+    if getattr(sys, "frozen", False):
+        engine.load(os.path.join(os.path.dirname(sys.executable), "qml/splashScreen.qml"))
+    else:
+        engine.load(os.path.join(os.path.dirname(__file__), "qml/splashScreen.qml"))
 
     if not engine.rootObjects():
         sys.exit(-1)
