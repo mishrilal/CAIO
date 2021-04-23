@@ -23,7 +23,7 @@ class DashboardPage(QObject):
         self.db = QSqlDatabase.addDatabase("QSQLITE")
         dbLocation = str(Path.home()) + '/CAIO/caio.db'
         self.db.setDatabaseName(dbLocation)
-
+        self.setLogs()
         # AUTO REFRESH
         timer = QTimer(self)
         timer.start(1000)

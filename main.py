@@ -15,6 +15,15 @@ from functions.dashboardFunctions import DashboardPage
 from functions.removeFaceFunctions import RemoveFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
 
+from multiprocessing import Process
+
+
+def invokeLock():
+    from lockMain import LockMain
+    print("In invokeLock")
+    lock = LockMain()
+    lock.runLock()
+
 
 class MainWindow(QObject):
     setAutoUnlock = Signal(str)
@@ -66,7 +75,7 @@ class MainWindow(QObject):
         if self.osName == "macOS":
             pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
         elif self.osName == "Windows":
-            pathImage = str(Path.home()) + '\\CAIO\\img_%s.jpg' % str(person)
+            pathImage = 'file:\\\\\\' + str(Path.home()) + '\\CAIO\\img_%s.jpg' % str(person)
 
         print("Check ", person)
         if path.isfile(pathImage):
@@ -118,6 +127,12 @@ class MainWindow(QObject):
     #     allLogs.initialRun = True
     #     engine.rootContext().setContextProperty("allLogsBackend", allLogs)
     #     engine.rootContext().setContextProperty("allLogsModel", allLogs.allLogsModel)
+
+    @Slot()
+    def runLock(self):
+        print("runLock Clicked")
+        proc = Process(target=invokeLock,args=())
+        proc.start()
 
 
 if __name__ == "__main__":

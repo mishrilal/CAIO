@@ -96,26 +96,25 @@ class LockMain:
         #     createDB()
         #     self.firstRun = 0
         #     self.settings.setValue('firstRun', self.firstRun)
-        createDB()
-        self.lock = LockSystem()
 
     def runLock(self):
-
+        createDB()
+        lock = LockSystem()
         if self.settings.value('onlyAdmin') == 'true':
             print("onlyAdmin()")
-            self.lock.onlyAdmin()
+            lock.onlyAdmin()
 
         elif self.settings.value('onlyAdminStrict') == 'true':
             print("onlyAdminStrict()")
-            self.lock.onlyAdminStrict()
+            lock.onlyAdminStrict()
 
         elif self.settings.value('someoneAppears') == 'true':
             print("someoneAppears()")
-            self.lock.someoneAppears()
+            lock.someoneAppears()
 
         elif self.settings.value('someoneAppearsStrict') == 'true':
             print("someoneAppearsStrict()")
-            self.lock.someoneAppearsStrict()
+            lock.someoneAppearsStrict()
 
 
 lock = LockMain()

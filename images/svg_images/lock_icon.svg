@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Created with Vectornator for iOS (http://vectornator.io/) --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="100%" xmlns:vectornator="http://vectornator.io" version="1.1" viewBox="0 0 50 50">
+<metadata>
+<vectornator:setting key="DisplayWhiteBackground" value="0"/>
+<vectornator:setting key="RulersVisible" value="1"/>
+<vectornator:setting key="Units" value="Pixels"/>
+<vectornator:setting key="New" value="1"/>
+<vectornator:setting key="DynamicGuides" value="0"/>
+<vectornator:setting key="GuidesVisible" value="1"/>
+<vectornator:setting key="SnapToPoints" value="0"/>
+<vectornator:setting key="SnapToGrid" value="0"/>
+<vectornator:setting key="SnapToGuides" value="1"/>
+<vectornator:setting key="DimensionsVisible" value="1"/>
+<vectornator:setting key="SnapToEdges" value="0"/>
+</metadata>
+<defs/>
+<g id="Layer 1" vectornator:layerName="Layer 1">
+<g opacity="1">
+<path d="M93.469+53.202C93.469+49.93+96.128+47.2675+99.3975+47.2675C102.668+47.2675+105.332+49.93+105.332+53.202L105.332+56.399L108.827+56.399L108.827+53.202C108.827+48.0025+104.596+43.775+99.3975+43.775C94.2035+43.775+89.9695+48.0025+89.9695+53.202L89.9695+56.399L93.4695+56.399L93.4695+53.202L93.469+53.202Z" opacity="1" fill="#000000"/>
+<path d="M110.757+57.273L88.0515+57.273C87.0895+57.273+86.3005+58.06+86.3005+59.0185L86.3005+76.484C86.3005+77.444+87.0895+78.232+88.0515+78.232L110.758+78.232C111.715+78.232+112.498+77.444+112.498+76.484L112.498+59.019C112.498+58.06+111.715+57.273+110.757+57.273Z" opacity="1" fill="#000000"/>
+</g>
+<g opacity="1">
+<path d="M19.07+17.1985C19.07+13.9265+21.729+11.264+24.9985+11.264C28.269+11.264+30.933+13.9265+30.933+17.1985L30.933+20.3955L34.4275+20.3955L34.4275+17.1985C34.4275+11.999+30.197+7.7715+24.9985+7.7715C19.8045+7.7715+15.5705+11.999+15.5705+17.1985L15.5705+20.3955L19.0705+20.3955L19.0705+17.1985L19.07+17.1985Z" opacity="1" fill="#000000"/>
+<path d="M36.358+21.2695L13.6525+21.2695C12.6905+21.2695+11.9015+22.0565+11.9015+23.015L11.9015+40.4805C11.9015+41.4405+12.6905+42.2285+13.6525+42.2285L36.3585+42.2285C37.316+42.2285+38.0985+41.4405+38.0985+40.4805L38.0985+23.0155C38.0985+22.0565+37.3155+21.2695+36.358+21.2695Z" opacity="1" fill="#000000"/>
+</g>
+</g>
+</svg>

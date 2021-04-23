@@ -214,6 +214,21 @@ ApplicationWindow {
 
                 }
 
+                LockBtn{
+                    width: 100
+                    anchors.right: btnAbout.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    anchors.rightMargin: 30
+                    anchors.bottomMargin: 10
+                    anchors.topMargin: 10
+
+                    onClicked: {
+                        backend.runLock()
+                    }
+
+                }
+
                 AboutButton {
                     id: btnAbout
                     anchors.verticalCenter: parent.verticalCenter
