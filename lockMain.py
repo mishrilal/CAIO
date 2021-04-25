@@ -117,5 +117,5 @@ class LockMain:
             lock.someoneAppearsStrict()
 
 
-lock = LockMain()
-lock.runLock()
+# lock = LockMain()
+# lock.runLock()

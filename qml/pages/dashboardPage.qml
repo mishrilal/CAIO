@@ -225,7 +225,7 @@ Item {
             cicrularProgressLeftKeyFrameMaxValue.value = value
             cicrularProgressCenterKeyFrameMaxValue.value = value
             cicrularProgressRightKeyFrameMaxValue.value = value
-            print("Total Locks", value)
+//            print("Total Locks", value)
         }
 
         function onSetAdminLocks(value) {

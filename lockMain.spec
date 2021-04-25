@@ -2,14 +2,10 @@
 
 block_cipher = None
 
-includefiles = [('functions/', 'functions/'),
-                ('images/', 'images/'),
-                ('qml/', 'qml/'),
-                ('logo_icon.svg', '.'),
-                ('lockMain.py', '.')
+includefiles = [('functions/lockFunctions.py', 'functions/lockFunctions.py')
                 ]
 
-a = Analysis(['main.py'],
+a = Analysis(['lockMain.py'],
              pathex=['/Users/mishrilal/Projects/CAIO_MAIN'],
              binaries=[],
              datas=includefiles,
@@ -27,7 +23,7 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='main',
+          name='lockMain',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -40,8 +36,8 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='main')
+               name='lockMain')
 app = BUNDLE(coll,
-             name='main.app',
+             name='lockMain.app',
              icon=None,
              bundle_identifier=None)

@@ -215,11 +215,13 @@ ApplicationWindow {
                 }
 
                 LockBtn{
-                    width: 100
-                    anchors.right: btnAbout.left
+                    id: btnLock
+                    text: "START"
+                    width: 120
+                    anchors.right: parent.right
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    anchors.rightMargin: 30
+                    anchors.rightMargin: 20
                     anchors.bottomMargin: 10
                     anchors.topMargin: 10
 
@@ -229,34 +231,34 @@ ApplicationWindow {
 
                 }
 
-                AboutButton {
-                    id: btnAbout
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    anchors.verticalCenterOffset: 0
-                    anchors.rightMargin: 5
-                    onClicked: {
-                        pageDashboard.active = false
-                        pageView.active = false
-                        pageAdd.active = false
-                        pageRemove.active = false
-                        pageSettings.active = false
-                        pageAbout.active = true
+//                AboutButton {
+//                    id: btnAbout
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    anchors.right: parent.right
+//                    anchors.verticalCenterOffset: 0
+//                    anchors.rightMargin: 5
+//                    onClicked: {
+//                        pageDashboard.active = false
+//                        pageView.active = false
+//                        pageAdd.active = false
+//                        pageRemove.active = false
+//                        pageSettings.active = false
+//                        pageAbout.active = true
 
-                        btnDashboard.isActiveMenu = false
-                        btnView.isActiveMenu = false
-                        btnAdd.isActiveMenu = false
-                        btnRemove.isActiveMenu = false
-                        btnSettings.isActiveMenu = false
+//                        btnDashboard.isActiveMenu = false
+//                        btnView.isActiveMenu = false
+//                        btnAdd.isActiveMenu = false
+//                        btnRemove.isActiveMenu = false
+//                        btnSettings.isActiveMenu = false
 
-                        pageDashboard.visible = false
-                        pageView.visible = false
-                        pageAdd.visible = false
-                        pageRemove.visible = false
-                        pageSettings.visible = false
-                        pageAbout.visible = true
-                    }
-                }
+//                        pageDashboard.visible = false
+//                        pageView.visible = false
+//                        pageAdd.visible = false
+//                        pageRemove.visible = false
+//                        pageSettings.visible = false
+//                        pageAbout.visible = true
+//                    }
+//                }
             }
 
             Rectangle {
@@ -341,6 +343,7 @@ ApplicationWindow {
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
                                 btnLogs.isActiveMenu = false
+                                btnAbout.isActiveMenu = false
 
                                 pageDashboard.visible = true
                                 pageView.visible = false
@@ -377,6 +380,7 @@ ApplicationWindow {
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
                                 btnLogs.isActiveMenu = false
+                                btnAbout.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = true
@@ -413,6 +417,7 @@ ApplicationWindow {
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
                                 btnLogs.isActiveMenu = false
+                                btnAbout.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = false
@@ -448,6 +453,7 @@ ApplicationWindow {
                                 btnRemove.isActiveMenu = true
                                 btnSettings.isActiveMenu = false
                                 btnLogs.isActiveMenu = false
+                                btnAbout.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = false
@@ -485,6 +491,7 @@ ApplicationWindow {
                                 btnRemove.isActiveMenu = false
                                 btnSettings.isActiveMenu = false
                                 btnLogs.isActiveMenu = true
+                                btnAbout.isActiveMenu = false
 
                                 pageDashboard.visible = false
                                 pageView.visible = false
@@ -496,6 +503,38 @@ ApplicationWindow {
 
                                 backend.allLogsClicked()
                             }
+                        }
+                    }
+
+                    LeftMenuBtn {
+                        id: btnAbout
+                        width: leftMenu.width
+                        text: qsTr("About Us")
+                        anchors.bottom: btnSettings.top
+                        anchors.bottomMargin: 0
+                        btnIconSource: "../images/svg_images/about_icon.svg"
+                        isActiveMenu: false
+                        onClicked: {
+                            pageDashboard.active = false
+                            pageView.active = false
+                            pageAdd.active = false
+                            pageRemove.active = false
+                            pageSettings.active = false
+                            pageAbout.active = true
+
+                            btnDashboard.isActiveMenu = false
+                            btnView.isActiveMenu = false
+                            btnAdd.isActiveMenu = false
+                            btnRemove.isActiveMenu = false
+                            btnSettings.isActiveMenu = false
+                            btnAbout.isActiveMenu = true
+
+                            pageDashboard.visible = false
+                            pageView.visible = false
+                            pageAdd.visible = false
+                            pageRemove.visible = false
+                            pageSettings.visible = false
+                            pageAbout.visible = true
                         }
                     }
 
@@ -522,6 +561,7 @@ ApplicationWindow {
                             btnRemove.isActiveMenu = false
                             btnSettings.isActiveMenu = true
                             btnLogs.isActiveMenu = false
+                            btnAbout.isActiveMenu = false
 
                             pageDashboard.visible = false
                             pageView.visible = false
@@ -652,6 +692,24 @@ ApplicationWindow {
 
     Connections {
         target: backend;
+
+        function onSetLockBtn(value) {
+            if(value === 1) {
+//                print("Change to Red")
+                btnLock.btnColorDefault = "#f44336"
+                btnLock.btnColorMouseOver = "#ff7961"
+                btnLock.btnColorClicked = "#ba000d"
+                btnLock.text = "STOP"
+
+            }
+            else {
+//                print("Change to Green")
+                btnLock.btnColorDefault = "#1b5e20"
+                btnLock.btnColorMouseOver = "#4c8c4a"
+                btnLock.btnColorClicked = "#003300"
+                btnLock.text = "START"
+            }
+        }
     }
 
 }

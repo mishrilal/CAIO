@@ -20,4 +20,4 @@ class RemoveFace(QObject):
         self.person = 0
         self.removeImage.emit("true")
         self.settings.setValue('person', self.person)
-        print("Delete: ", self.person)
+        # print("Delete: ", self.person)

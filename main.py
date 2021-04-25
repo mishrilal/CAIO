@@ -1,11 +1,10 @@
 import os
 import sys
-from os import path
 from pathlib import Path
 import platform
 import re
 
-from PySide2.QtCore import QObject, Slot, Signal, QSettings
+from PySide2.QtCore import QObject, Slot, Signal, QSettings, QTimer
 from PySide2.QtGui import QIcon
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtWidgets import QApplication
@@ -14,15 +13,22 @@ from functions.addFaceFunctions import AddFace
 from functions.dashboardFunctions import DashboardPage
 from functions.removeFaceFunctions import RemoveFace
 from functions.settingsFunctions import SettingsPage, setSettingsValue
+from lockMain import LockMain
 
 from multiprocessing import Process
 
 
 def invokeLock():
-    from lockMain import LockMain
-    print("In invokeLock")
-    lock = LockMain()
-    lock.runLock()
+    if getattr(sys, "frozen", False):
+        # print("FROM-> build")
+        os.popen((os.path.join(os.path.dirname(sys.executable), "lockMain")))
+    else:
+        # print("In invokeLock")
+        lock = LockMain()
+        lock.runLock()
+
+    # lock = LockMain()
+    # lock.runLock()
 
 
 class MainWindow(QObject):
@@ -35,6 +41,7 @@ class MainWindow(QObject):
     removeImage = Signal(str)
     checkImage = Signal(str)
     setImagePath = Signal(str)
+    setLockBtn = Signal(int)
 
     def __init__(self):
         super().__init__()
@@ -43,6 +50,22 @@ class MainWindow(QObject):
             self.osName = "macOS"
         elif re.search("Windows", self.osName):
             self.osName = "Windows"
+        self.settings = QSettings('CAIO', 'Preferences')
+
+        self.changeLockBtn = self.settings.value('changeLockBtn')
+        if self.changeLockBtn is None:
+            self.changeLockBtn = 0
+            self.settings.setValue('changeLockBtn', self.changeLockBtn)
+
+        # Remove below code when independent lockMain is Created
+        self.changeLockBtn = 0
+        self.settings.setValue('changeLockBtn', self.changeLockBtn)
+
+        # and uncomment this code
+        # self.counter = 0
+        # timer = QTimer(self)
+        # timer.start(500)
+        # timer.timeout.connect(lambda: self.setLockBtnInitial())
 
     #     try:
     #         print("load")
@@ -58,7 +81,7 @@ class MainWindow(QObject):
 
     @Slot()
     def dashboardClicked(self):
-        print("DashBoardClicked")
+        # print("DashBoardClicked")
         dashboard = DashboardPage()
         # dashboard.initialRunCircular = True
         # dashboard.counter = 0
@@ -67,7 +90,7 @@ class MainWindow(QObject):
 
     @Slot()
     def viewClicked(self):
-        print("ViewClicked")
+        # print("ViewClicked")
 
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
@@ -77,9 +100,9 @@ class MainWindow(QObject):
         elif self.osName == "Windows":
             pathImage = 'file:\\\\\\' + str(Path.home()) + '\\CAIO\\img_%s.jpg' % str(person)
 
-        print("Check ", person)
-        if path.isfile(pathImage):
-            print("Image Found")
+        # print("Check ", person)
+        if os.path.isfile(pathImage):
+            # print("Image Found")
             # if person == 1:
             self.checkImage.emit("true")
             self.setImagePath.emit(pathImage)
@@ -89,27 +112,27 @@ class MainWindow(QObject):
 
     @Slot()
     def addClicked(self):
-        print("AddClicked")
+        # print("AddClicked")
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
-        print("ads", person)
+        # print("ads", person)
         if person == 0:
             self.setCaptureBtn.emit("true")
-            print("true")
+            # print("true")
         else:
             self.setCaptureBtn.emit("false")
-            print("false")
+            # print("false")
 
     @Slot()
     def removeClicked(self):
-        print("RemoveClicked")
+        # print("RemoveClicked")
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
 
         pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
-        print("Rm ", person)
+        # print("Rm ", person)
         # if person == 0:
-        if not path.isfile(pathImage):
+        if not os.path.isfile(pathImage):
             settings.setValue('person', 0)
             self.removeImage.emit("true")
         else:
@@ -117,7 +140,7 @@ class MainWindow(QObject):
 
     @Slot()
     def settingsClicked(self):
-        print("SettingsClicked")
+        # print("SettingsClicked")
         setSettingsValue(self)
 
     # @Slot()
@@ -130,9 +153,37 @@ class MainWindow(QObject):
 
     @Slot()
     def runLock(self):
-        print("runLock Clicked")
-        proc = Process(target=invokeLock,args=())
-        proc.start()
+        if self.changeLockBtn == 0:
+            # print("runLock Clicked")
+            if getattr(sys, "frozen", False):
+                invokeLock()
+            else:
+                # print("in runLock --> process")
+                proc = Process(target=invokeLock, args=())
+                # proc.daemon = True
+                proc.start()
+
+            self.changeLockBtn = 1
+            self.settings.setValue('changeLockBtn', self.changeLockBtn)
+            self.setLockBtn.emit(1)
+        # import subprocess
+        # subprocess.run(os.path.join(os.path.dirname(__file__), 'lockMain.py'))
+        # subprocess.Popen([sys.executable, 'lockMain.py'])
+
+        else:
+            self.changeLockBtn = 0
+            self.settings.setValue('changeLockBtn', self.changeLockBtn)
+            self.setLockBtn.emit(0)
+
+    def setLockBtnInitial(self):
+        # print("counter: ", self.counter)
+        if self.counter < 3:
+            # print("setBTN")
+            if self.changeLockBtn == 0:
+                self.setLockBtn.emit(0)
+            else:
+                self.setLockBtn.emit(1)
+            self.counter += 1
 
 
 if __name__ == "__main__":

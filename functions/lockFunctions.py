@@ -31,12 +31,19 @@ class LockSystem:
         # self.settings.setValue('noOfNobodyLocks', 0)
         # self.settings.setValue('totalLocks', 0)
 
+        self.stopLock = 1
+
         self.noOfLocksAdmin = self.settings.value('noOfLocksAdmin')
         self.totalLocks = self.settings.value('totalLocks')
         self.noOfSomeoneElseLocks = self.settings.value('noOfSomeoneElseLocks')
         self.noOfNobodyLocks = self.settings.value('noOfNobodyLocks')
         self.isLogChanged = self.settings.value('logChanged')
         self.updateCircle = self.settings.value('updateCircle')
+        self.changeLockBtn = self.settings.value('changeLockBtn')
+
+        if self.changeLockBtn is None:
+            self.changeLockBtn = 0
+            self.settings.setValue('changeLockBtn', self.changeLockBtn)
 
         if self.noOfLocksAdmin is None:
             self.noOfLocksAdmin = 0
@@ -135,6 +142,9 @@ class LockSystem:
             known_face_names = [self.userName]
 
             while True:
+                self.stopLock = self.settings.value('changeLockBtn')
+                # print("stopLock: ", self.stopLock)
+
                 ret, frame = video_capture.read()
 
                 rgb_frame = frame[:, :, ::-1]
@@ -156,7 +166,7 @@ class LockSystem:
                     if matches[best_match_index]:
                         self.name = known_face_names[best_match_index]
                         self.showLockScreen = False
-                        print(self.name)
+                        # print(self.name)
                         if self.countFace == 1:
                             self.isUnlocked = True
 
@@ -168,17 +178,17 @@ class LockSystem:
                         self.lock()
 
                 if self.showLockScreen:
-                    print("lock")
+                    # print("lock")
                     self.lock()
 
-                print("FaceCount: ", self.countFace)
+                # print("FaceCount: ", self.countFace)
                 if self.countFace == 0:
                     self.isNobody = True
 
                 if self.isUnlocked:
                     if self.isLocked:
                         # print("In is Locked")
-                        print("isNobody: ", self.isNobody)
+                        # print("isNobody: ", self.isNobody)
                         if self.countFace <= 1:
                             self.isSomeoneElse = False
                             # print("isSomeElse", self.isSomeoneElse)
@@ -226,14 +236,14 @@ class LockSystem:
                         # print("someoneElseLocked: ", self.someoneElseLocked)
                         # print("****************")
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
                     break
 
-                # time.sleep(self.captureTime)
-                time.sleep(1)
-                print("time")
-                print("isLocked: ", self.isLocked)
-                print("isUnlocked: ", self.isUnlocked)
+                time.sleep(self.captureTime)
+                # time.sleep(1)
+                # print("time")
+                # print("isLocked: ", self.isLocked)
+                # print("isUnlocked: ", self.isUnlocked)
 
         video_capture.release()
         cv2.destroyAllWindows()
@@ -250,6 +260,7 @@ class LockSystem:
             known_face_names = [self.userName]
 
             while True:
+                self.stopLock = self.settings.value('changeLockBtn')
                 ret, frame = video_capture.read()
 
                 rgb_frame = frame[:, :, ::-1]
@@ -269,7 +280,7 @@ class LockSystem:
                     if matches[best_match_index]:
                         self.name = known_face_names[best_match_index]
                         self.showLockScreen = False
-                        print(self.name)
+                        # print(self.name)
                         if self.countFace == 1:
                             self.isUnlocked = True
 
@@ -281,10 +292,10 @@ class LockSystem:
                         self.lock()
 
                 if self.showLockScreen:
-                    print("lock")
+                    # print("lock")
                     self.lock()
 
-                print("FaceCount: ", self.countFace)
+                # print("FaceCount: ", self.countFace)
                 if self.isUnlocked:
                     if self.isLocked:
                         # print("In is Locked")
@@ -305,17 +316,18 @@ class LockSystem:
                             self.isLocked = False
                             self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
                     break
 
                 time.sleep(self.captureTime)
-                print("time")
+                # print("time")
 
         video_capture.release()
         cv2.destroyAllWindows()
 
     # keep Unlocked when someone else appears in the frame with admin
     def someoneAppears(self):
+        self.stopLock = self.settings.value('changeLockBtn')
         video_capture = cv2.VideoCapture(0)
 
         if path.isfile(self.imgPath):
@@ -333,7 +345,7 @@ class LockSystem:
                 face_locations = fr.face_locations(rgb_frame)
                 face_encodings = fr.face_encodings(rgb_frame, face_locations)
 
-                print("FaceEncodings ", len(face_encodings))
+                # print("FaceEncodings ", len(face_encodings))
 
                 # faces = len(face_encodings)
 
@@ -376,7 +388,7 @@ class LockSystem:
 
                     else:
                         self.name = "unknown"
-                        print(self.name)
+                        # print(self.name)
                         if checkSelf:
                             self.showLockScreen = False
                             print("Admin Found")
@@ -386,12 +398,12 @@ class LockSystem:
                             self.lock()
 
                 if self.showLockScreen:
-                    print("lock")
+                    # print("lock")
                     self.lock()
 
                 if self.isUnlocked:
                     if self.isLocked:
-                        print("Someone Came and Now unlocked")
+                        # print("Someone Came and Now unlocked")
                         self.isLocked = False
                         self.noOfSomeoneElseLocks += 1
                         self.totalLocks += 1
@@ -399,17 +411,18 @@ class LockSystem:
                         self.settings.setValue('totalLocks', self.totalLocks)
                         self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
                     break
 
-                # time.sleep(self.captureTime)
-                print("time")
+                time.sleep(self.captureTime)
+                # print("time")
 
         video_capture.release()
         cv2.destroyAllWindows()
 
     # Lock when no one is there also keep unlocked till admin is there with others
     def someoneAppearsStrict(self):
+        self.stopLock = self.settings.value('changeLockBtn')
         video_capture = cv2.VideoCapture(0)
 
         if path.isfile(self.imgPath):
@@ -420,6 +433,7 @@ class LockSystem:
             known_face_names = [self.userName]
 
             while True:
+                self.stopLock = self.settings.value('changeLockBtn')
                 ret, frame = video_capture.read()
 
                 rgb_frame = frame[:, :, ::-1]
@@ -427,7 +441,7 @@ class LockSystem:
                 face_locations = fr.face_locations(rgb_frame)
                 face_encodings = fr.face_encodings(rgb_frame, face_locations)
 
-                print("FaceEncodings ", len(face_encodings))
+                # print("FaceEncodings ", len(face_encodings))
 
                 self.showLockScreen = True
 
@@ -466,16 +480,16 @@ class LockSystem:
                     if matches[best_match_index]:
                         self.name = known_face_names[best_match_index]
                         self.showLockScreen = False
-                        print(self.name)
+                        # print(self.name)
                         checkSelf = True
                         self.isUnlocked = True
 
                     else:
                         self.name = "unknown"
-                        print(self.name)
+                        # print(self.name)
                         if checkSelf:
                             self.showLockScreen = False
-                            print("Admin Found")
+                            # print("Admin Found")
                             self.isUnlocked = True
                         else:
                             self.showLockScreen = True
@@ -484,7 +498,7 @@ class LockSystem:
                             self.lock()
 
                 if self.showLockScreen:
-                    print("lock")
+                    # print("lock")
                     self.lock()
 
                 if self.countFace == 0:
@@ -502,23 +516,23 @@ class LockSystem:
                             # self.noOfSomeoneElseLocks += 1
                             self.settings.setValue('noOfNobodyLocks', self.noOfNobodyLocks)
                             # self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
-                            print("isNobody", self.isNobody, self.someoneElseLocked)
+                            # print("isNobody", self.isNobody, self.someoneElseLocked)
                             self.isNobody = False
                             self.logs("nobody")
                         else:
                             if self.someoneElseLocked:
                                 if not self.isNobody:
                                     self.noOfSomeoneElseLocks += 1
-                                    print("someoneElseLocked", self.isNobody, self.someoneElseLocked)
+                                    # print("someoneElseLocked", self.isNobody, self.someoneElseLocked)
                                     self.settings.setValue('noOfSomeoneElseLocks', self.noOfSomeoneElseLocks)
                                     self.someoneElseLocked = False
                                     self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
                     break
 
                 time.sleep(self.captureTime)
-                print("time")
+                # print("time")
 
         video_capture.release()
         cv2.destroyAllWindows()

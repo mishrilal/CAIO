@@ -42,7 +42,7 @@ class AddFace(QObject):
     @Slot()
     def captureClicked(self):
         # Capture Function here
-        print("Capture Btn Clicked")
+        # print("Capture Btn Clicked")
         # Initialize Webcam
         cap = cv2.VideoCapture(0)
         count = 0
@@ -57,7 +57,8 @@ class AddFace(QObject):
                 count += 1
                 cv2.imwrite(os.path.join(self.save_path2, "img_%s.jpg" % (str(self.person))), frame)
             else:
-                print("Face not found")
+                # print("Face not found")
+                pass
 
             if cv2.waitKey(1) == 13 or count == 1:  # 13 is the Enter Key
                 break
