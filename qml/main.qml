@@ -8,7 +8,7 @@ ApplicationWindow {
     id: mainWindow
     width: 1000
     height: 580
-    minimumWidth: 1000
+    minimumWidth: 600
     minimumHeight: 500
     visible: true
     color: "#00000000"

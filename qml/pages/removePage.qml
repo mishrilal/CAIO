@@ -147,7 +147,7 @@ Item {
         }
         function onSetImagePath(value){
             image.source = value
-            print("path ", value)
+//            print("path ", value)
         }
     }
 

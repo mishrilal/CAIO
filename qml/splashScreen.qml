@@ -16,7 +16,7 @@ Window {
     flags: Qt.Window | Qt.FramelessWindowHint
 
     // Properties
-    property int timeInterval: 300
+    property int timeInterval: 3000
 
     Timer{
         id: timer
