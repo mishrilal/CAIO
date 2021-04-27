@@ -21,7 +21,7 @@ from multiprocessing import Process
 def invokeLock():
     if getattr(sys, "frozen", False):
         # print("FROM-> build")
-        os.popen((os.path.join(os.path.dirname(sys.executable), "lockMain")))
+        os.popen((os.path.join(os.path.dirname(sys.executable), "lock")))
     else:
         # print("In invokeLock")
         lock = LockMain()
@@ -51,11 +51,19 @@ class MainWindow(QObject):
         elif re.search("Windows", self.osName):
             self.osName = "Windows"
         self.settings = QSettings('CAIO', 'Preferences')
-
         self.changeLockBtn = self.settings.value('changeLockBtn')
+        self.lock = self.settings.value("lockFile")
+
         if self.changeLockBtn is None:
             self.changeLockBtn = 0
             self.settings.setValue('changeLockBtn', self.changeLockBtn)
+
+        if self.lock is None:
+            self.lock = 0
+            self.settings.setValue('lockFile', self.lock)
+
+        self.lock = 0
+        self.settings.setValue('lockFile', self.lock)
 
         # Remove below code when independent lockMain is Created
         self.changeLockBtn = 0
@@ -98,7 +106,7 @@ class MainWindow(QObject):
         if self.osName == "macOS":
             pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
         elif self.osName == "Windows":
-            pathImage = 'file:\\\\\\' + str(Path.home()) + '\\CAIO\\img_%s.jpg' % str(person)
+            pathImage = 'file:///' + str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
 
         # print("Check ", person)
         if os.path.isfile(pathImage):

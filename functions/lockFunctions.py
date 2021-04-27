@@ -40,6 +40,7 @@ class LockSystem:
         self.isLogChanged = self.settings.value('logChanged')
         self.updateCircle = self.settings.value('updateCircle')
         self.changeLockBtn = self.settings.value('changeLockBtn')
+        self.lockFile = self.settings.value('lockFile')
 
         if self.changeLockBtn is None:
             self.changeLockBtn = 0
@@ -236,8 +237,9 @@ class LockSystem:
                         # print("someoneElseLocked: ", self.someoneElseLocked)
                         # print("****************")
 
-                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
-                    break
+                if self.lockFile == 0:
+                    if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
+                        break
 
                 time.sleep(self.captureTime)
                 # time.sleep(1)
@@ -316,8 +318,9 @@ class LockSystem:
                             self.isLocked = False
                             self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
-                    break
+                if self.lockFile == 0:
+                    if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
+                        break
 
                 time.sleep(self.captureTime)
                 # print("time")
@@ -411,8 +414,9 @@ class LockSystem:
                         self.settings.setValue('totalLocks', self.totalLocks)
                         self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
-                    break
+                if self.lockFile == 0:
+                    if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
+                        break
 
                 time.sleep(self.captureTime)
                 # print("time")
@@ -528,8 +532,9 @@ class LockSystem:
                                     self.someoneElseLocked = False
                                     self.logs("someone")
 
-                if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
-                    break
+                if self.lockFile == 0:
+                    if cv2.waitKey(1) & 0xFF == ord('q') or self.stopLock == 0:
+                        break
 
                 time.sleep(self.captureTime)
                 # print("time")

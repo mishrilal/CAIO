@@ -45,6 +45,8 @@ class AddFace(QObject):
         # print("Capture Btn Clicked")
         # Initialize Webcam
         cap = cv2.VideoCapture(0)
+        # for window
+        # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         count = 0
 
         self.person = 1
