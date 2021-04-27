@@ -103,17 +103,18 @@ class MainWindow(QObject):
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
 
-        if self.osName == "macOS":
-            pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
-        elif self.osName == "Windows":
-            pathImage = 'file:///' + str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
+        pathImage = str(Path.home()) + '/CAIO/img_%s.jpg' % str(person)
 
         # print("Check ", person)
         if os.path.isfile(pathImage):
             # print("Image Found")
             # if person == 1:
             self.checkImage.emit("true")
-            self.setImagePath.emit(pathImage)
+            if self.osName == 'macOS':
+                self.setImagePath.emit(pathImage)
+            elif self.osName == 'Windows':
+                newPath = 'file:///' + pathImage
+                self.setImagePath.emit(newPath)
         else:
             settings.setValue('person', 0)
             self.checkImage.emit("false")
@@ -144,7 +145,13 @@ class MainWindow(QObject):
             settings.setValue('person', 0)
             self.removeImage.emit("true")
         else:
-            self.setImagePath.emit(pathImage)
+            if self.osName == "macOS":
+                self.setImagePath.emit(pathImage)
+                print("image found")
+            elif self.osName == "Windows":
+                newPath = 'file:///' + pathImage
+                self.setImagePath.emit(newPath)
+                print("image found", newPath)
 
     @Slot()
     def settingsClicked(self):

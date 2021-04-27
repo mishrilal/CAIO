@@ -5,6 +5,6 @@
             "qml/controls/AboutButton.qml","qml/controls/CameraLive.qml","qml/controls/CaptureBtn.qml","qml/controls/CircularProgress.qml","qml/controls/DescriptionButton.qml","qml/controls/LeftMenuBtn.qml","qml/controls/LogsBtn.qml","qml/controls/ToggleButton.qml","qml/controls/TopBarButton.qml",
             "qml/pages/addPage.qml","qml/pages/addPageAlternative.ui","qml/pages/adminLogsPage.qml","qml/pages/allLogsPage.qml","qml/pages/dashboardPage.qml","qml/pages/logsPage.qml","qml/pages/nobodyLogsPage.qml","qml/pages/removePage.qml","qml/pages/settingsPage.qml","qml/pages/someoneLogsPage.qml","qml/pages/viewPage.qml",
             "qml/lockMain.qml","qml/main.qml","qml/splashScreen.qml",
-            "caio.db","lockMain.py"
+            "caio.db","lockMain.py","main.py"
               ]
 }
