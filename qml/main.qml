@@ -360,6 +360,7 @@ ApplicationWindow {
                         LeftMenuBtn {
                             id: btnView
                             width: leftMenu.width
+                            visible: false
                             text: qsTr("View Faces")
                             iconWidth: 20
                             iconHeight: 20
