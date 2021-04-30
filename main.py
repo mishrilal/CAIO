@@ -16,11 +16,44 @@ from functions.settingsFunctions import SettingsPage, setSettingsValue
 from lockMain import LockMain
 
 from multiprocessing import Process
+import psutil
+
+
+def checkLock():
+    processName = 'lock.exe'
+
+    for proc in psutil.process_iter():
+        try:
+            pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+            # Check if process name contains the given name string.
+            if processName.lower() in pinfo['name'].lower():
+                return True
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+    return False
+
+
+def findProcessId():
+    processName = 'lock.exe'
+
+    for proc in psutil.process_iter():
+        try:
+            pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+            # Check if process name contains the given name string.
+            if processName.lower() in pinfo['name'].lower():
+                os.system("taskkill /f /im  Your_Process_Name.exe")
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
 
 
 def invokeLock():
-    lock = LockMain()
-    lock.runLock()
+    if getattr(sys, "frozen", False):
+        # print("FROM-> build")
+        os.popen((os.path.join(os.path.dirname(sys.executable), "lock")))
+    else:
+        # print("In invokeLock")
+        lock = LockMain()
+        lock.runLock()
 
     # lock = LockMain()
     # lock.runLock()
@@ -166,10 +199,7 @@ class MainWindow(QObject):
         if self.changeLockBtn == 0:
             # print("runLock Clicked")
             if getattr(sys, "frozen", False):
-                # invokeLock()
-                proc = Process(target=invokeLock, args=())
-                # proc.daemon = True
-                proc.start()
+                invokeLock()
             else:
                 # print("in runLock --> process")
                 proc = Process(target=invokeLock, args=())
@@ -184,6 +214,8 @@ class MainWindow(QObject):
         # subprocess.Popen([sys.executable, 'lockMain.py'])
 
         else:
+            if self.osName == 'Windows':
+                findProcessId()
             self.changeLockBtn = 0
             self.settings.setValue('changeLockBtn', self.changeLockBtn)
             self.setLockBtn.emit(0)
@@ -197,6 +229,12 @@ class MainWindow(QObject):
             else:
                 self.setLockBtn.emit(1)
             self.counter += 1
+
+            if self.osName == 'Windows':
+                if checkLock():
+                    self.changeLockBtn = 1
+                    self.settings.setValue('changeLockBtn', self.changeLockBtn)
+                    self.setLockBtn.emit(1)
 
 
 if __name__ == "__main__":

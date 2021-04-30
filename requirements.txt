@@ -7,3 +7,5 @@ opencv-python==4.5.1.48
 Pillow==8.2.0
 PySide2==5.15.2
 shiboken2==5.15.2
+
+psutil~=5.8.0
