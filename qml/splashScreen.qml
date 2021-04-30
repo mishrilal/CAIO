@@ -53,7 +53,8 @@ Window {
         }
 
         Text {
-             id: text1
+            id: text1
+            visible: false
              color: "#d5d5d5"
              text: qsTr("CAIO")
              elide: Text.ElideMiddle
@@ -68,6 +69,22 @@ Window {
              font.underline: false
              font.bold: true
              minimumPixelSize: 12
+        }
+
+         Image {
+             id: image
+             x: 225
+             y: 159
+             width: 225
+             anchors.verticalCenter: parent.verticalCenter
+             source: "../images/svg_images/logo_icon.svg"
+             anchors.horizontalCenter: parent.horizontalCenter
+             fillMode: Image.PreserveAspectFit
+         }
+         ColorOverlay{
+             anchors.fill: image
+             source: image
+             color: "#ffffff"
          }
      }
 
@@ -76,6 +93,6 @@ Window {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}
+    D{i:0;formeditorZoom:0.75}D{i:8}
 }
 ##^##*/
