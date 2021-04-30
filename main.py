@@ -21,7 +21,9 @@ from multiprocessing import Process
 def invokeLock():
     if getattr(sys, "frozen", False):
         # print("FROM-> build")
-        os.popen((os.path.join(os.path.dirname(sys.executable), "lock")))
+        # os.popen((os.path.join(os.path.dirname(sys.executable), "lock")))
+        lock = LockMain()
+        lock.runLock()
     else:
         # print("In invokeLock")
         lock = LockMain()
