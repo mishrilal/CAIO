@@ -42,6 +42,7 @@ def checkLock(self):
             print("Error Encountered while running script")
             return False
         return False
+
     elif self.osName == 'Windows':
         processName = 'CAIO Lock'
         for proc in psutil.process_iter():
@@ -276,21 +277,15 @@ class MainWindow(QObject):
 
         else:
             # findProcessId(self)
-            process(self)
+            if getattr(sys, "frozen", False):
+                process(self)
             self.changeLockBtn = 0
             self.settings.setValue('changeLockBtn', self.changeLockBtn)
             self.setLockBtn.emit(0)
 
     def setLockBtnInitial(self):
         # print("counter: ", self.counter)
-        if self.counter < 3:
-            # print("setBTN")
-            # if self.changeLockBtn == 0:
-            #     self.setLockBtn.emit(0)
-            # else:
-            #     self.setLockBtn.emit(1)
-            # self.counter += 1
-            #
+        if getattr(sys, "frozen", False):
             if checkLock(self):
                 print("Checking lock")
                 self.changeLockBtn = 1
@@ -300,6 +295,14 @@ class MainWindow(QObject):
                 self.changeLockBtn = 0
                 self.settings.setValue('changeLockBtn', self.changeLockBtn)
                 self.setLockBtn.emit(0)
+        else:
+            if self.counter < 3:
+                print("setBTN")
+                if self.changeLockBtn == 0:
+                    self.setLockBtn.emit(0)
+                else:
+                    self.setLockBtn.emit(1)
+                self.counter += 1
 
 
 if __name__ == "__main__":
