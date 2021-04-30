@@ -13,12 +13,12 @@ if sys.platform == "win32":
     base = "Win32GUI"
 
 target = [Executable(
-    script="main.py",
+    script="CAIO.py",
     base=base,
     icon="logo_icon.ico"
 ),
     Executable(
-        script="lock.py",
+        script="CAIO Lock.py",
         base=base,
         icon="lockMain.ico"
     )
@@ -26,7 +26,7 @@ target = [Executable(
 
 setup(
     name="CAIO",
-    version="0.1",
+    version="0.1.45",
     description="Smart Lock",
     options={"build_exe": build_exe_options},
     executables=target

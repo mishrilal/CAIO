@@ -36,7 +36,7 @@ Item {
                 width: 169
                 color: "#ffffff"
                 text: {
-                    "<i>Version </i><b>0.0.65</b>"
+                    "<i>Version </i><b>0.1.45</b>"
                 }
                 anchors.top: label.bottom
                 anchors.bottom: parent.bottom
