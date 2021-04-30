@@ -20,66 +20,91 @@ from multiprocessing import Process
 import psutil
 
 
-def checkLock():
-    # Ask user for the name of process
-    name = 'CAIO\ Lock'
-    try:
-        # iterating through each instance of the process
-        for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
-            print("Line: ", line)
-            fields = line.split()
-            print("Fields ", fields)
-            print("Filed 0 ", fields[0])
-            # extracting Process ID from the output
-            pid = fields[0]
-            print("Pid: ", pid)
-
-            # terminating process
-            return True
-        print("Process Successfully terminated")
-    except:
-        return False
-        print("Error Encountered while running script")
-    return False
-
-
-def process():
-    # Ask user for the name of process
-    name = 'CAIO\ Lock'
-    try:
-        # iterating through each instance of the process
-        for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
-            print("Line: ", line)
-            fields = line.split()
-            print("Fields ", fields)
-            print("Filed 0 ", fields[0])
-            # extracting Process ID from the output
-            pid = fields[0]
-            print("Pid: ", pid)
-
-            # terminating process
-            os.kill(int(pid), signal.SIGKILL)
-        print("Process Successfully terminated")
-    except:
-        print("Error Encountered while running script")
-
-
-def findProcessId(self):
-    processName = 'CAIO\ Lock'
-    for proc in psutil.process_iter():
+def checkLock(self):
+    if self.osName == 'macOS':
+        # Ask user for the name of process
+        name = 'CAIO\ Lock'
         try:
-            pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
-            # Check if process name contains the given name string.
-            if processName.lower() in pinfo['name'].lower():
-                print("Check Killing")
-                if self.osName == 'Windows':
-                    os.system("taskkill /f /im  lock.exe")
-                elif self.osName:
-                    print("kill for mac")
-                print("Check Killed")
-        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-            print("Some Error while killing")
-            pass
+            # iterating through each instance of the process
+            for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
+                print("Line: ", line)
+                fields = line.split()
+                print("Fields ", fields)
+                print("Filed 0 ", fields[0])
+                # extracting Process ID from the output
+                pid = fields[0]
+                print("Pid: ", pid)
+
+                # terminating process
+                return True
+            print("Process Successfully terminated")
+        except:
+            print("Error Encountered while running script")
+            return False
+        return False
+    elif self.osName == 'Windows':
+        processName = 'CAIO Lock'
+        for proc in psutil.process_iter():
+            try:
+                pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+                # Check if process name contains the given name string.
+                if processName.lower() in pinfo['name'].lower():
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                print("Some Error while killing")
+                return False
+        return False
+
+
+def process(self):
+    if self.osName == 'macOS':
+        # Ask user for the name of process
+        name = 'CAIO\ Lock'
+        try:
+            # iterating through each instance of the process
+            for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
+                print("Line: ", line)
+                fields = line.split()
+                print("Fields ", fields)
+                print("Filed 0 ", fields[0])
+                # extracting Process ID from the output
+                pid = fields[0]
+                print("Pid: ", pid)
+
+                # terminating process
+                os.kill(int(pid), signal.SIGKILL)
+            print("Process Successfully terminated")
+        except:
+            print("Error Encountered while running script")
+
+    elif self.osName == 'Windows':
+        processName = 'CAIO Lock'
+        for proc in psutil.process_iter():
+            try:
+                pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+                # Check if process name contains the given name string.
+                if processName.lower() in pinfo['name'].lower():
+                    print("Check Killing")
+                    os.system("taskkill /f /im  CAIO\ Lock.exe")
+                    print("Check Killed")
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                print("Some Error while killing")
+                pass
+
+
+# def findProcessId():
+#     processName = 'CAIO Lock'
+#     for proc in psutil.process_iter():
+#         try:
+#             pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
+#             # Check if process name contains the given name string.
+#             if processName.lower() in pinfo['name'].lower():
+#                 print("Check Killing")
+#                 os.system("taskkill /f /im  CAIO\ Lock.exe")
+#                 print("Check Killed")
+#         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+#             print("Some Error while killing")
+#             pass
 
 
 def invokeLock():
@@ -251,7 +276,7 @@ class MainWindow(QObject):
 
         else:
             # findProcessId(self)
-            process()
+            process(self)
             self.changeLockBtn = 0
             self.settings.setValue('changeLockBtn', self.changeLockBtn)
             self.setLockBtn.emit(0)
@@ -266,7 +291,7 @@ class MainWindow(QObject):
             #     self.setLockBtn.emit(1)
             # self.counter += 1
             #
-            if checkLock():
+            if checkLock(self):
                 print("Checking lock")
                 self.changeLockBtn = 1
                 self.settings.setValue('changeLockBtn', self.changeLockBtn)
