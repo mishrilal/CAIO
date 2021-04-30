@@ -19,15 +19,8 @@ from multiprocessing import Process
 
 
 def invokeLock():
-    if getattr(sys, "frozen", False):
-        # print("FROM-> build")
-        # os.popen((os.path.join(os.path.dirname(sys.executable), "lock")))
-        lock = LockMain()
-        lock.runLock()
-    else:
-        # print("In invokeLock")
-        lock = LockMain()
-        lock.runLock()
+    lock = LockMain()
+    lock.runLock()
 
     # lock = LockMain()
     # lock.runLock()
@@ -173,7 +166,10 @@ class MainWindow(QObject):
         if self.changeLockBtn == 0:
             # print("runLock Clicked")
             if getattr(sys, "frozen", False):
-                invokeLock()
+                # invokeLock()
+                proc = Process(target=invokeLock, args=())
+                # proc.daemon = True
+                proc.start()
             else:
                 # print("in runLock --> process")
                 proc = Process(target=invokeLock, args=())
