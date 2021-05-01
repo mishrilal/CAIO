@@ -23,7 +23,7 @@ import psutil
 def checkLock(self):
     if self.osName == 'macOS':
         # Ask user for the name of process
-        name = 'CAIO\ Lock'
+        name = 'CAIOLock'
         try:
             # iterating through each instance of the process
             for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
@@ -44,7 +44,7 @@ def checkLock(self):
         return False
 
     elif self.osName == 'Windows':
-        processName = 'CAIO Lock'
+        processName = 'CAIOLock'
         for proc in psutil.process_iter():
             try:
                 pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
@@ -60,7 +60,7 @@ def checkLock(self):
 def process(self):
     if self.osName == 'macOS':
         # Ask user for the name of process
-        name = 'CAIO\ Lock'
+        name = 'CAIOLock'
         try:
             # iterating through each instance of the process
             for line in os.popen("ps ax | grep " + name + " | grep -v grep"):
@@ -79,14 +79,14 @@ def process(self):
             print("Error Encountered while running script")
 
     elif self.osName == 'Windows':
-        processName = 'CAIO Lock'
+        processName = 'CAIOLock'
         for proc in psutil.process_iter():
             try:
                 pinfo = proc.as_dict(attrs=['pid', 'name', 'create_time'])
                 # Check if process name contains the given name string.
                 if processName.lower() in pinfo['name'].lower():
                     print("Check Killing")
-                    os.system("taskkill /f /im  CAIO\ Lock.exe")
+                    os.system("taskkill /f /im  CAIOLock.exe")
                     print("Check Killed")
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 print("Some Error while killing")
@@ -111,7 +111,7 @@ def process(self):
 def invokeLock():
     if getattr(sys, "frozen", False):
         # print("FROM-> build")
-        os.popen((os.path.join(os.path.dirname(sys.executable), "CAIO\ Lock")))
+        os.popen((os.path.join(os.path.dirname(sys.executable), "CAIOLock")))
     else:
         # print("In invokeLock")
         lock = LockMain()

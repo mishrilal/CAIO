@@ -18,7 +18,7 @@ target = [Executable(
     icon="logo_icon.ico"
 ),
     Executable(
-        script="CAIO Lock.py",
+        script="CAIOLock.py",
         base=base,
         icon="lockMain.ico"
     )
