@@ -1,4 +1,5 @@
 import os
+import pathlib
 import signal
 import sys
 from pathlib import Path
@@ -7,6 +8,7 @@ import re
 
 from PySide2.QtCore import QObject, Slot, Signal, QSettings, QTimer
 from PySide2.QtGui import QIcon
+from PySide2.QtMultimedia import QCameraInfo, QCamera, QCameraImageCapture
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtWidgets import QApplication
 
@@ -132,6 +134,9 @@ class MainWindow(QObject):
     checkImage = Signal(str)
     setImagePath = Signal(str)
     setLockBtn = Signal(int)
+    setCaptureDetails = Signal(str)
+    setCaptureBtn2 = Signal(str)
+
 
     def __init__(self):
         super().__init__()
@@ -179,6 +184,7 @@ class MainWindow(QObject):
 
     @Slot()
     def dashboardClicked(self):
+        self.camera.stop()
         # print("DashBoardClicked")
         dashboard = DashboardPage()
         # dashboard.initialRunCircular = True
@@ -188,6 +194,7 @@ class MainWindow(QObject):
 
     @Slot()
     def viewClicked(self):
+        self.camera.stop()
         # print("ViewClicked")
 
         settings = QSettings('CAIO', 'Preferences')
@@ -222,8 +229,34 @@ class MainWindow(QObject):
             self.setCaptureBtn.emit("false")
             # print("false")
 
+        # path to save
+        self.createCAIOdir = str(Path.home()) + '/CAIO'
+        pathlib.Path(self.createCAIOdir).mkdir(parents=True, exist_ok=True)
+        self.save_path2 = self.createCAIOdir + "/"
+        self.save_path = "images/captured/"
+
+        # getting available cameras
+        self.available_cameras = QCameraInfo.availableCameras()
+
+        # if no camera found
+        if not self.available_cameras:
+            # exit the code
+            sys.exit()
+
+        # Set the default camera.
+        self.select_camera(0)
+
+    @Slot()
+    def captureClicked(self):
+        self.person = 1
+        self.settings.setValue('person', self.person)
+        self.click_photo()
+        self.setCaptureDetails.emit("Captured Successfully")
+        self.setCaptureBtn2.emit("false")
+
     @Slot()
     def removeClicked(self):
+        self.camera.stop()
         # print("RemoveClicked")
         settings = QSettings('CAIO', 'Preferences')
         person = settings.value('person')
@@ -245,6 +278,7 @@ class MainWindow(QObject):
 
     @Slot()
     def settingsClicked(self):
+        self.camera.stop()
         # print("SettingsClicked")
         setSettingsValue(self)
 
@@ -255,6 +289,10 @@ class MainWindow(QObject):
     #     allLogs.initialRun = True
     #     engine.rootContext().setContextProperty("allLogsBackend", allLogs)
     #     engine.rootContext().setContextProperty("allLogsModel", allLogs.allLogsModel)
+
+    @Slot()
+    def aboutClicked(self):
+        self.camera.stop()
 
     @Slot()
     def runLock(self):
@@ -303,6 +341,45 @@ class MainWindow(QObject):
                 else:
                     self.setLockBtn.emit(1)
                 self.counter += 1
+
+    # method to take photo
+    def click_photo(self):
+        # time stamp
+        # timestamp = time.strftime("%d-%b-%Y-%H_%M_%S")
+
+        # capture the image and save it on the save path
+        self.capture.capture(os.path.join(self.save_path2,
+                                          "img_%s.jpg" % (
+                                              str(self.person)
+                                          )))
+        print()
+        # increment the sequence
+        self.save_seq += 1
+
+    # method to select camera
+    def select_camera(self, i):
+        # getting the selected camera
+        self.camera = QCamera(self.available_cameras[i])
+
+        # setting capture mode to the camera
+        self.camera.setCaptureMode(QCamera.CaptureStillImage)
+
+        # start the camera
+        self.camera.start()
+
+        # creating a QCameraImageCapture object
+        self.capture = QCameraImageCapture(self.camera)
+
+        # when image captured showing message
+        self.capture.imageCaptured.connect(lambda d,
+                                                  i: self.status.showMessage("Image captured : "
+                                                                             + str(self.save_seq)))
+
+        # getting current camera name
+        self.current_camera_name = self.available_cameras[i].description()
+
+        # inital save sequence
+        self.save_seq = 0
 
 
 if __name__ == "__main__":

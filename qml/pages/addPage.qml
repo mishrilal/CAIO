@@ -182,7 +182,7 @@ Item {
 
                 onClicked: {
 
-                    addFaceBackend.captureClicked()
+                    backend.captureClicked()
 
                 }
 
@@ -236,6 +236,19 @@ Item {
                 captureBtn.enabled = false
                 cameraLabel.text = "Remove Face first to Capture New Face"
                 cameraLabel.visible = true
+            }
+        }
+
+        function onSetCaptureDetails(value) {
+            cameraLabel.text = value
+        }
+
+        function onSetCaptureBtn2(value) {
+            if (value === "true") {
+                captureBtn.enabled = true
+            }
+            else {
+                captureBtn.enabled = false
             }
         }
     }

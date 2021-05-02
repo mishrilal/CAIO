@@ -536,6 +536,8 @@ ApplicationWindow {
                             pageRemove.visible = false
                             pageSettings.visible = false
                             pageAbout.visible = true
+
+                            backend.aboutClicked()
                         }
                     }
 
